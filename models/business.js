@@ -8,4 +8,4 @@ var BusinessSchema = new Schema({
   menu: []
 });
 
-module.exports = mongoose.model("Business", BusinessSchema, "Business");
+module.exports = mongoose.model("Business", BusinessSchema);
