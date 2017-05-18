@@ -136,9 +136,13 @@ function createBusiness(userId, message){
 
 // Find Business
 function findBusiness(userId, message){
-    Business.find(function (err, businesses){
-        if (err) return console.error(err);
-        sendMessage(userId, {text: "Found business: " + businesses});
+    // Business.find(function (err, businesses){
+    //     if (err) return console.error(err);
+    //     sendMessage(userId, {text: "Found business: " + businesses});
+    // });
+    Business.findOne({'name': 'fb cafe'}, 'name ABN menu', function (err, business) {
+      if (err) return console.error(err);
+      sendMessage(userId, {text: '%s %s is a %s.',business.name,business.ABN,business.menu });
     });
 }
 
