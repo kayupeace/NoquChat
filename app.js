@@ -121,7 +121,15 @@ function processMessage(event) {
       //   default:
       //     findBusiness(senderId, formattedMsg);
       // }
-      sendMessage(senderId, {text: "Sidney is awesome"})
+      switch (formattedMsg){
+        case "create":
+            sendMessage(senderId, {text: "You are trying to create a Business object"});
+            break;
+        case "find":
+            sendMessage(senderId, {text: "You are trying to find a business."});
+            break;
+      }
+      
     } else if (message.attachments) {
       sendMessage(senderId, {text: "Sorry, I don't understand your request."});
     }
