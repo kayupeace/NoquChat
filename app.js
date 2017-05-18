@@ -140,9 +140,14 @@ function findBusiness(userId, message){
     //     if (err) return console.error(err);
     //     sendMessage(userId, {text: "Found business: " + businesses});
     // });
-    Business.findOne({'name': 'fb cafe'}, 'name ABN menu', function (err, business) {
-      if (err) return console.error(err);
-      sendMessage(userId, {text: "blablablabal this is a message" + business["name"] });
+    Business.findOne({'name': message}, 'name ABN menu', function (err, business) {
+      if (err){
+        sendMessage(userId, {text: "Something went wrong. Try again"});
+      }
+      else{
+        sendMessage(userId, {text: "blablablabal this is a message" + business["name"] });
+      }
+      
     });
 }
 
