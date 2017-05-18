@@ -142,7 +142,7 @@ function findBusiness(userId, message){
     // });
     Business.findOne({'name': 'fb cafe'}, 'name ABN menu', function (err, business) {
       if (err) return console.error(err);
-      sendMessage(userId, {text: '%s %s is a %s.',business.name,business.ABN,business.menu });
+      sendMessage(userId, {text: ('%s %s is a %s.', business.name, business.ABN, business.menu) });
     });
 }
 
