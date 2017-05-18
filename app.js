@@ -111,8 +111,7 @@ function processMessage(event) {
       // If we receive a text message, check to see if it matches any special
       // keywords and send back the corresponding business detail.
       // Otherwise, search for new business.
-      // findBusiness(senderId, formattedMsg);
-      sendMessage(userId, {text: "blablabla"});
+      findBusiness(senderId, formattedMsg);
       
     } else if (message.attachments) {
       sendMessage(senderId, {text: "Sorry, I don't understand your request."});
@@ -122,14 +121,7 @@ function processMessage(event) {
 
 // Find Business
 function findBusiness(userId, message){
-    // Business.findOne({name: message}, function(err, business) {
-    //     if(err) {
-    //       sendMessage(userId, {text: "Cannot find the business you entered. Try again"});
-    //     } else {
-    //       sendMessage(userId, {text: business["ABN"]});
-    //     }
-    // });
-    // sendMessage(userId, {text: "Trying to find: " + message});
+    sendMessage(userId, {text: "Trying to find: " + message});
 }
 
 
