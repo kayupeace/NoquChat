@@ -121,7 +121,8 @@ function processMessage(event) {
 
 // Find Business
 function findBusiness(userId, message){
-    sendMessage(userId, {text: "Trying to find: " + message});
+    var businessID = parseInt(Math.random() * 10000000)
+    sendMessage(userId, {text: "Trying to find: " + businessID +  message});
 }
 
 
