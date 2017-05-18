@@ -122,7 +122,16 @@ function processMessage(event) {
 // Find Business
 function findBusiness(userId, message){
     var businessID = parseInt(Math.random() * 10000000)
-    sendMessage(userId, {text: "Trying to find: " + businessID +  message});
+    var business = new Business({
+        business_id: businessID, 
+        name: message,
+        ABN: businessID + 10000000,
+        menu: []
+    });
+    business.save(function (err, business) {
+      if (err) return console.error(err);
+    });
+    sendMessage(userId, {text: "Created business: " + businessID +  " " + message});
 }
 
 
