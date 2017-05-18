@@ -136,8 +136,10 @@ function createBusiness(userId, message){
 
 // Find Business
 function findBusiness(userId, message){
-    Business.find({ name: message }, callback);
-    sendMessage(userId, {text: "Found business: " + message});
+    Business.find(function (err, businesses){
+        if (err) return console.error(err);
+        sendMessage(userId, {text: "Found business: " + businesses});
+    });
 }
 
 
