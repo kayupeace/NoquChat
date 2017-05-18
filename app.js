@@ -146,7 +146,8 @@ function findBusiness(userId, message){
       }
       else{
         if(business){
-          sendMessage(userId, {text: "Found business: " + business["name"] });  
+          var strMessage = "Found business: " + business["name"] + "\nMenu: " + business["menu"];
+          sendMessage(userId, {text: strMessage});  
         }
         else{
           sendMessage(userId, {text: "Cannot find business. Try again"});
