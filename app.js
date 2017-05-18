@@ -111,24 +111,7 @@ function processMessage(event) {
       // If we receive a text message, check to see if it matches any special
       // keywords and send back the corresponding business detail.
       // Otherwise, search for new business.
-
-      // switch (formattedMsg) {
-      //   case "name":
-      //   case "ABN":
-      //     getBusinessDetail(senderId, formattedMsg);
-      //     break;
-
-      //   default:
-      //     findBusiness(senderId, formattedMsg);
-      // }
-      switch (formattedMsg){
-        case "create":
-            sendMessage(senderId, {text: "You are trying to create a Business object"});
-            break;
-        case "find":
-            sendMessage(senderId, {text: "You are trying to find a business."});
-            break;
-      }
+      findBusiness(senderId, formattedMsg);
       
     } else if (message.attachments) {
       sendMessage(senderId, {text: "Sorry, I don't understand your request."});
@@ -136,15 +119,9 @@ function processMessage(event) {
   }
 }
 
-// get business detail
-// function getBusinessDetail(userId, field) {
-//   Business.findOne({user_id: userId}, function(err, business) {
-//     if(err) {
-//       sendMessage(userId, {text: "Something went wrong. Try again"});
-//     } else {
-//       sendMessage(userId, {text: business[field]});
-//     }
-//   });
-// }
+// Find Business
+function findBusiness(userId, message){
+    sendMessage(userId, {text: "Trying to find: " + message});
+}
 
 
