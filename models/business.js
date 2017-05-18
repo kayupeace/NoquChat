@@ -6,6 +6,6 @@ var BusinessSchema = new Schema({
   name: {type: String},
   ABN: {type: String},
   menu: []
-}, { collection : 'Business' });
+});
 
-module.exports = mongoose.model("Business", BusinessSchema);
+module.exports = mongoose.model("Business", BusinessSchema, "Business");
