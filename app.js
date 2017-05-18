@@ -1,6 +1,10 @@
 var express = require("express");
 var request = require("request");
 var bodyParser = require("body-parser");
+var mongoose = require("mongoose");
+
+var db = mongoose.connect(process.env.MONGODB_URI);
+var Business = require("./models/business");
 
 var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
@@ -35,6 +39,8 @@ app.post("/webhook", function (req, res) {
       entry.messaging.forEach(function(event) {
         if (event.postback) {
           processPostback(event);
+        } else if (event.message) {
+          processMessage(event);
         }
       });
     });
@@ -88,3 +94,49 @@ function sendMessage(recipientId, message) {
     }
   });
 }
+
+//process message
+function processMessage(event) {
+  if (!event.message.is_echo) {
+    var message = event.message;
+    var senderId = event.sender.id;
+
+    console.log("Received message from senderId: " + senderId);
+    console.log("Message is: " + JSON.stringify(message));
+
+    // You may get a text or attachment but not both
+    if (message.text) {
+      var formattedMsg = message.text.toLowerCase().trim();
+
+      // If we receive a text message, check to see if it matches any special
+      // keywords and send back the corresponding business detail.
+      // Otherwise, search for new business.
+
+      // switch (formattedMsg) {
+      //   case "name":
+      //   case "ABN":
+      //     getBusinessDetail(senderId, formattedMsg);
+      //     break;
+
+      //   default:
+      //     findBusiness(senderId, formattedMsg);
+      // }
+      sendMessage(senderId, {text: "Sidney is awesome"})
+    } else if (message.attachments) {
+      sendMessage(senderId, {text: "Sorry, I don't understand your request."});
+    }
+  }
+}
+
+// get business detail
+// function getBusinessDetail(userId, field) {
+//   Business.findOne({user_id: userId}, function(err, business) {
+//     if(err) {
+//       sendMessage(userId, {text: "Something went wrong. Try again"});
+//     } else {
+//       sendMessage(userId, {text: business[field]});
+//     }
+//   });
+// }
+
+
