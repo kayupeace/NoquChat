@@ -121,14 +121,7 @@ function processMessage(event) {
 
 // Find Business
 function findBusiness(userId, message){
-    Business.findOne({business_id: message}, function(err, business) {
-        if(err) {
-          sendMessage(userId, {text: "Something went wrong. Try again"});
-        } else {
-          sendMessage(userId, {text: business["name"]});
-        }
-    });
-    // sendMessage(userId, {text: "Trying to find: " + message});
+    sendMessage(userId, {text: "Trying to find: " + message});
 }
 
 
