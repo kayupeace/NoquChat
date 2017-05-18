@@ -119,8 +119,8 @@ function processMessage(event) {
   }
 }
 
-// Find Business
-function findBusiness(userId, message){
+// Create Business
+function createBusiness(userId, message){
     var businessID = parseInt(Math.random() * 10000000)
     var business = new Business({
         business_id: businessID, 
@@ -132,6 +132,21 @@ function findBusiness(userId, message){
       if (err) return console.error(err);
     });
     sendMessage(userId, {text: "Created business: " + businessID +  " " + message});
+}
+
+// Find Business
+function findBusiness(userId, message){
+    Business.findOne({name: message}, function(err, business) {
+    if(err) {
+      sendMessage(userId, {text: "Something went wrong. Try again"});
+    } else {
+      sendMessage(userId, {
+        text: "Business ID: " + business["business_id"] + "\n" 
+        + "Name: " + business["name"] + "\n" 
+        + "ABN: " + business["ABN"]
+        });
+    }
+  });
 }
 
 
