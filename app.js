@@ -136,17 +136,8 @@ function createBusiness(userId, message){
 
 // Find Business
 function findBusiness(userId, message){
-    Business.findOne({name: message}, function(err, business) {
-    if(err) {
-      sendMessage(userId, {text: "Something went wrong. Try again"});
-    } else {
-      sendMessage(userId, {
-        text: "Business ID: " + business["business_id"] + "\n" 
-        + "Name: " + business["name"] + "\n" 
-        + "ABN: " + business["ABN"]
-        });
-    }
-  });
+    Business.find({ name: message }, callback);
+    sendMessage(userId, {text: "Found business: " + message});
 }
 
 
