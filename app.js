@@ -73,7 +73,7 @@ function processPostback(event) {
       if (error) {
         console.log("Error getting user's name: " +  error);
       } else {
-        // Create session object
+        // Create session object or clear business on session object
         var business = new Business({
             business_id: 0, 
             name: "",
