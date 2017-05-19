@@ -220,7 +220,7 @@ function findBusiness(userId, message){
           // for(business in businesses){
           //   strMessage += "\n" + business.name + "\nMenu: " + business.menu
           // }
-          strMessage += businesses ;
+          strMessage += businesses.toString() ;
           sendMessage(userId, {text: strMessage});  
         }
         else{
