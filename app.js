@@ -216,9 +216,10 @@ function findBusiness(userId, message){
       else{
         if(businesses.length){
           var strMessage = "Found businesses: ";
-          for(business in businesses){
-            strMessage += "\n" + business["name"] + "\nMenu: " + business["menu"]
-          }
+          // for(business in businesses){
+          //   strMessage += "\n" + business["name"] + "\nMenu: " + business["menu"]
+          // }
+          strMessage += businesses;
           sendMessage(userId, {text: strMessage});  
         }
         else{
