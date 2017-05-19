@@ -209,7 +209,7 @@ function findBusiness(userId, message){
     //   }
       
     // });
-    Business.find({'name': message}, 'name ABN menu', function (err, businesses) {
+    Business.find({'name': message}, 'name ABN menu -_id', function (err, businesses) {
       if (err){
         sendMessage(userId, {text: "Something went wrong. Try again"});
       }
