@@ -217,11 +217,10 @@ function findBusiness(userId, message){
         if(businesses.length){
           var strMessage = "Found " + businesses.length + " businesses: ";
           // var parsedBusiness = JSON.parse(businesses);
-          // for(business in businesses){
-          //   var busObject = business.toObject();
-          //   strMessage += "\n" + busObject.name + "\nMenu: " + busObject.menu;
-          // }
-          strMessage += businesses[0].toObject().name ;
+          for(business in businesses){
+            strMessage += "\n" + business.toObject().name + "\nMenu: " + business.toObject().menu
+          }
+          strMessage += businesses ;
           sendMessage(userId, {text: strMessage});  
         }
         else{
