@@ -73,6 +73,15 @@ function processPostback(event) {
       if (error) {
         console.log("Error getting user's name: " +  error);
       } else {
+        // Create session object
+        var business = new Business({
+            business_id: 0, 
+            name: "",
+            ABN: 0,
+            menu: []
+        });
+        createSession(senderId, business);
+
         var bodyObj = JSON.parse(body);
         name = bodyObj.first_name;
         greeting = "Hi " + name + ". ";
@@ -137,6 +146,44 @@ function createBusiness(userId, message){
       if (err) return console.error(err);
     });
     sendMessage(userId, {text: "Created business: " + businessID +  " " + message});
+}
+
+// Create or update session
+function createSession(userId, business){
+    Session.findOne({'user_id': userId}, 'user_id business', function (err, session){
+      if(err){
+        sendMessage(userId, {text: "Something went wrong. Try again"});
+      }
+      else{
+        // if session found
+        if(session){
+          session.business = {
+            'business_id': business.business_id,
+            'name': business.name,
+            'ABN': business.ABN,
+            'menu': business.menu
+          };
+          session.save(function(err, session){
+            if (err) return console.error(err)
+          });
+        }
+        // else create session
+        else{
+          var sesh = new Session({
+            user_id: userId,
+            business:{
+              'business_id': business.business_id,
+              'name': business.name,
+              'ABN': business.ABN,
+              'menu': business.menu
+            }
+          });
+          sesh.save(function(err, session){
+            if (err) return console.error(err)
+          })
+        }
+      }
+    });
 }
 
 // Find Business
