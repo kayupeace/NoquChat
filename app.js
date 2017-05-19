@@ -229,7 +229,7 @@ function findBusiness(userId, message){
         
       }
       
-    });
+    }, {'_id': False});
 }
 
 
