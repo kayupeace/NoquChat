@@ -139,36 +139,6 @@ function createBusiness(userId, message){
     sendMessage(userId, {text: "Created business: " + businessID +  " " + message});
 }
 
-// Create or update session
-// function createSession(userId, business){
-//     Session.findOne({'user_id': userId}, 'user_id business', function (err, session){
-//       if(err){
-//         sendMessage(userId, {text: "Something went wrong. Try again"});
-//       }
-//       else{
-//         // if session found
-//         if(session){
-//           session.business = {
-//             'business_id': business.business_id,
-//             'name': business.name,
-//             'ABN': business.ABN,
-//             'menu': business.menu
-//           };
-//           session.save();
-//         }
-//         // else create session
-//         else{
-//           var sesh = new Session({
-//             user_id: userId
-//           });
-//           sesh.save(function(err, session){
-//             if (err) return console.error(err)
-//           })
-//         }
-//       }
-//     });
-// }
-
 // Find Business
 function findBusiness(userId, message){
     // Business.find(function (err, businesses){
