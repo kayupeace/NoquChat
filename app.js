@@ -209,7 +209,7 @@ function findBusiness(userId, message){
     //   }
       
     // });
-    Business.find({'name': message}, 'name ABN menu -_id', function (err, businesses) {
+    Business.find({'name': { "$regex": message, "$options": "i" }}, 'name ABN menu -_id', function (err, businesses) {
       if (err){
         sendMessage(userId, {text: "Something went wrong. Try again"});
       }
@@ -217,9 +217,9 @@ function findBusiness(userId, message){
         if(businesses.length){
           var strMessage = "Found " + businesses.length + " businesses: ";
           // var parsedBusiness = JSON.parse(businesses);
-          for(business in businesses){
-            strMessage += "\n" + business.name + "\nMenu: " + business.menu
-          }
+          // for(business in businesses){
+          //   strMessage += "\n" + business.name + "\nMenu: " + business.menu
+          // }
           strMessage += businesses ;
           sendMessage(userId, {text: strMessage});  
         }
