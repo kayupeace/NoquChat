@@ -216,12 +216,11 @@ function findBusiness(userId, message){
       else{
         if(businesses.length){
           var strMessage = "Found businesses: ";
-          // var parsedBusiness = JSON.parse(businesses);
-          // for(business in businesses){
-          //   strMessage += "\n" + business["name"] + "\nMenu: " + business["menu"]
-          // }
-          // strMessage += parsedBusiness;
-          strMessage += businesses;
+          var parsedBusiness = JSON.parse(businesses);
+          for(business in businesses){
+            strMessage += "\n" + business["name"] + "\nMenu: " + business["menu"]
+          }
+          strMessage += parsedBusiness;
           sendMessage(userId, {text: strMessage});  
         }
         else{
