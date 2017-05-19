@@ -5,6 +5,7 @@ var mongoose = require("mongoose");
 
 var db = mongoose.connect(process.env.MONGODB_URI);
 var Business = require("./models/business");
+var Session = require("./models/session")
 
 var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
@@ -37,6 +38,10 @@ app.post("/webhook", function (req, res) {
     req.body.entry.forEach(function(entry) {
       // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
+        /* 
+         * TODO store search session details, 
+         * i.e. when a user successfully finds and selects a business, save it for current session use
+         */
         if (event.postback) {
           processPostback(event);
         } else if (event.message) {
@@ -132,6 +137,37 @@ function createBusiness(userId, message){
       if (err) return console.error(err);
     });
     sendMessage(userId, {text: "Created business: " + businessID +  " " + message});
+}
+
+// Create or update session
+function createSession(userId, business){
+    Session.findOne({'user_id': userId}, 'user_id business', function (err, session){
+      if(err){
+        sendMessage(userId, {text: "Something went wrong. Try again"});
+      }
+      else{
+        // if session found
+        if(session){
+          Session.update({'user_id': userId}, {
+            'business': {
+              'business_id': business.business_id,
+              'name': business.name,
+              'ABN': business.ABN,
+              'menu': business.menu
+            }
+          });
+        }
+        // else create session
+        else{
+          var sesh = new Session({
+            user_id: userId
+          });
+          sesh.save(function(err, session){
+            if (err) return console.error(err)
+          })
+        }
+      }
+    });
 }
 
 // Find Business
