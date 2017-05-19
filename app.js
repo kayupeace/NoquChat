@@ -192,13 +192,33 @@ function findBusiness(userId, message){
     //     if (err) return console.error(err);
     //     sendMessage(userId, {text: "Found business: " + businesses});
     // });
-    Business.findOne({'name': message}, 'name ABN menu', function (err, business) {
+
+    // Business.findOne({'name': message}, 'name ABN menu', function (err, business) {
+    //   if (err){
+    //     sendMessage(userId, {text: "Something went wrong. Try again"});
+    //   }
+    //   else{
+    //     if(business){
+    //       var strMessage = "Found business: " + business["name"] + "\nMenu: " + business["menu"];
+    //       sendMessage(userId, {text: strMessage});  
+    //     }
+    //     else{
+    //       sendMessage(userId, {text: "Cannot find business. Try again"});
+    //     }
+        
+    //   }
+      
+    // });
+    Business.find({'name': message}, 'name ABN menu', function (err, businesses) {
       if (err){
         sendMessage(userId, {text: "Something went wrong. Try again"});
       }
       else{
-        if(business){
-          var strMessage = "Found business: " + business["name"] + "\nMenu: " + business["menu"];
+        if(businesses.length){
+          var strMessage = "Found businesses: ";
+          for(business in businesses){
+            strMessage += "\n" + business["name"] + "\nMenu: " + business["menu"]
+          }
           sendMessage(userId, {text: strMessage});  
         }
         else{
