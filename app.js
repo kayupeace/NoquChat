@@ -218,7 +218,7 @@ function findBusiness(userId, message){
           var strMessage = "Found " + businesses.length + " businesses: ";
           // var parsedBusiness = JSON.parse(businesses);
           for(business in businesses){
-            strMessage += "\n" + business["name"] + "\nMenu: " + business["menu"]
+            strMessage += "\n" + business.name + "\nMenu: " + business.menu
           }
           strMessage += businesses ;
           sendMessage(userId, {text: strMessage});  
