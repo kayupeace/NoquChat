@@ -148,14 +148,13 @@ function createSession(userId, business){
       else{
         // if session found
         if(session){
-          Session.update({'user_id': userId}, {
-            'business': {
-              'business_id': business.business_id,
-              'name': business.name,
-              'ABN': business.ABN,
-              'menu': business.menu
-            }
-          });
+          session.business = {
+            'business_id': business.business_id,
+            'name': business.name,
+            'ABN': business.ABN,
+            'menu': business.menu
+          };
+          session.save();
         }
         // else create session
         else{
