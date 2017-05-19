@@ -80,7 +80,7 @@ function processPostback(event) {
             ABN: 0,
             menu: []
         });
-        createSession(senderId, business);
+        updateSession(senderId, business);
 
         var bodyObj = JSON.parse(body);
         name = bodyObj.first_name;
@@ -149,7 +149,7 @@ function createBusiness(userId, message){
 }
 
 // Create or update session
-function createSession(userId, business){
+function updateSession(userId, business){
     Session.findOne({'user_id': userId}, 'user_id business', function (err, session){
       if(err){
         sendMessage(userId, {text: "Something went wrong. Try again"});
