@@ -92,6 +92,7 @@ function processPostback(event) {
   }
   else if (payload.search(/select_business/i) == 0) {
     var businessID = payload.replace("select_business=", "");
+    findBusinessByID(senderId, businessID);
     sendMessage(senderId, {text: "You have selected a business: " + businessID});
     // console.log("User has selected a business" + payload)
   }
@@ -131,7 +132,7 @@ function processMessage(event) {
       // If we receive a text message, check to see if it matches any special
       // keywords and send back the corresponding business detail.
       // Otherwise, search for new business.
-      findBusiness(senderId, formattedMsg);
+      findBusinessByName(senderId, formattedMsg);
       
     } else if (message.attachments) {
       sendMessage(senderId, {text: "Sorry, I don't understand your request."});
@@ -192,8 +193,8 @@ function updateSession(userId, business){
     });
 }
 
-// Find Business
-function findBusiness(userId, message){
+// Find Business by Name
+function findBusinessByName(userId, message){
     Business.find({'name': { "$regex": message, "$options": "i" }}, 'name business_id ABN menu -_id', function (err, businesses) {
       if (err){
         sendMessage(userId, {text: "Something went wrong. Try again"});
@@ -228,6 +229,23 @@ function findBusiness(userId, message){
         
       }
       
+    });
+}
+
+// find business by ID
+function findBusinessByID(userId, businessID){
+    Business.findOne({'business_id': businessID}, 'name business_id ABN menu -_id', function(err,business){
+        if(err){
+            sendMessage(userId, {text: "Something went wrong. Try again"});
+        }
+        else{
+            if(business){
+                sendMessage(userId, {text: "Selected business: " + business.toObject().name });
+            }
+            else{
+                sendMessage(userId, {text: "Cannot find business. Try again"});
+            }
+        }
     });
 }
 
