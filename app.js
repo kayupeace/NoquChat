@@ -194,7 +194,7 @@ function updateSession(userId, business){
 
 // Find Business
 function findBusiness(userId, message){
-    Business.find({'name': { "$regex": message, "$options": "i" }}, 'name ABN menu -_id', function (err, businesses) {
+    Business.find({'name': { "$regex": message, "$options": "i" }}, 'name business_id ABN menu -_id', function (err, businesses) {
       if (err){
         sendMessage(userId, {text: "Something went wrong. Try again"});
       }
