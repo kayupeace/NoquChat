@@ -258,14 +258,33 @@ function findBusiness(userId, message){
             }
             // strMessage += businesses ;
             sendMessage(userId, {text: strMessage});  
+            // attachMessage = {
+            //   attachment: {
+            //     type: "template",
+            //     payload: {
+            //       template_type: "generic",
+            //       elements: [{
+            //         title: "blablablabla",
+            //         subtitle: "Is this the movie you are looking for?",
+            //         buttons: [{
+            //           type: "postback",
+            //           title: "Yes",
+            //           payload: "Correct"
+            //         }, {
+            //           type: "postback",
+            //           title: "No",
+            //           payload: "Incorrect"
+            //         }]
+            //       }]
+            //     }
+            //   }
+            // };
             attachMessage = {
               attachment: {
                 type: "template",
                 payload: {
-                  template_type: "generic",
-                  elements: [{
-                    title: "blablablabla",
-                    subtitle: "Is this the movie you are looking for?",
+                    template_type: "button",
+                    text: "What do you want to do next?",
                     buttons: [{
                       type: "postback",
                       title: "Yes",
@@ -275,7 +294,6 @@ function findBusiness(userId, message){
                       title: "No",
                       payload: "Incorrect"
                     }]
-                  }]
                 }
               }
             };
