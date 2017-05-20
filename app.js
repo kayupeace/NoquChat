@@ -255,7 +255,6 @@ function findBusiness(userId, message){
             var strMessage = "Found " + businesses.length + " businesses: ";
             var businessArray = []
             for(i = 0; i < businesses.length; i ++){
-                // strMessage += "\n" + businesses[i].toObject().name;
                 var businessButton = {
                     type: "postback",
                     title: businesses[i].toObject().name,
@@ -263,15 +262,12 @@ function findBusiness(userId, message){
                 };
                 businessArray.push(businessButton);
             }
-            strMessage += "\n" + JSON.stringify(businessArray);
-            sendMessage(userId, {text: strMessage});  
-
             attachMessage = {
               attachment: {
                 type: "template",
                 payload: {
                     template_type: "button",
-                    text: "What do you want to do next?",
+                    text: strMessage,
                     buttons: businessArray
                 }
               }
