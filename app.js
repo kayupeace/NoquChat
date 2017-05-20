@@ -169,7 +169,6 @@ function updateSession(userId, business){
             'ABN': business.ABN,
             'menu': business.menu
           };
-          console.log("Updating session to: " + session.business);
           session.save(function(err, session){
             if (err) return console.error(err)
           });
@@ -241,7 +240,14 @@ function findBusinessByID(userId, businessID){
         else{
             if(business){
                 sendMessage(userId, {text: "Selected business: " + JSON.stringify(business.toObject()) });
-                updateSession(senderId, business);
+
+                var businessDB = new Business({
+                    business_id: business.toObject().business_id, 
+                    name: business.toObject().name,
+                    ABN: business.toObject().ABN,
+                    menu: business.toObject().menu
+                });
+                updateSession(senderId, businessDB);
             }
             else{
                 sendMessage(userId, {text: "Cannot find business. Try again"});
