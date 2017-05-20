@@ -166,7 +166,6 @@ function updateSession(userId, business){
             'business_id': business.business_id,
             'name': business.name,
             'ABN': business.ABN,
-            'menu': business.menu
           };
           session.save(function(err, session){
             if (err) return console.error(err)
@@ -180,7 +179,6 @@ function updateSession(userId, business){
               'business_id': business.business_id,
               'name': business.name,
               'ABN': business.ABN,
-              'menu': business.menu
             }
           });
           sesh.save(function(err, session){
