@@ -246,7 +246,7 @@ function findBusinessByID(userId, businessID){
                     ABN: business.ABN,
                     menu: business.menu
                 });
-                updateSession(senderId, businessDB);
+                updateSession(userId, businessDB);
             }
             else{
                 sendMessage(userId, {text: "Cannot find business. Try again"});
