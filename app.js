@@ -90,6 +90,9 @@ function processPostback(event) {
       sendMessage(senderId, {text: message});
     });
   }
+  else if payload.search(/select_business/i) != -1 {
+    sendMessage(senderId, {text: "You have selected a business"});
+  }
 }
 
 // sends message to user
@@ -195,10 +198,6 @@ function findBusiness(userId, message){
       else{
         if(businesses.length){
             var strMessage = "Found " + businesses.length + " businesses: ";
-            var payLoad = "select_business=123123123";
-            var isSelect = payLoad.search(/select_business/i);
-            strMessage += isSelect;
-            
             var businessArray = []
             for(i = 0; i < businesses.length; i ++){
                 var businessButton = {
