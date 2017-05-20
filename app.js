@@ -238,7 +238,7 @@ function findBusinessByID(userId, businessID){
         }
         else{
             if(business){
-                sendMessage(userId, {text: "Selected business: " + JSON.stringify(business.toObject()) });
+                sendMessage(userId, {text: "Selected business: " + business.business_id + " " + business.name + " " + business.ABN });
 
                 // var businessDB = new Business({
                 //     business_id: business.toObject().business_id, 
