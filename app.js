@@ -240,13 +240,13 @@ function findBusinessByID(userId, businessID){
             if(business){
                 sendMessage(userId, {text: "Selected business: " + business.business_id + " " + business.name + " " + business.ABN });
 
-                // var businessDB = new Business({
-                //     business_id: business.toObject().business_id, 
-                //     name: business.toObject().name,
-                //     ABN: business.toObject().ABN,
-                //     menu: business.toObject().menu
-                // });
-                // updateSession(senderId, businessDB);
+                var businessDB = new Business({
+                    business_id: business.business_id, 
+                    name: business.name,
+                    ABN: business.ABN,
+                    menu: business.menu
+                });
+                updateSession(senderId, businessDB);
             }
             else{
                 sendMessage(userId, {text: "Cannot find business. Try again"});
