@@ -243,7 +243,7 @@ function findBusinessByID(userId, businessID){
         else{
             if(business){
                 sendMessage(userId, {text: "Selected business: " + JSON.stringify(business.toObject()) });
-                return business;
+                return business.toObject();
             }
             else{
                 sendMessage(userId, {text: "Cannot find business. Try again"});
