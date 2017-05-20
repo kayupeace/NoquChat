@@ -94,7 +94,7 @@ function processPostback(event) {
     var businessID = payload.replace("select_business=", "");
     var business = findBusinessByID(senderId, businessID);
     console.log("Found: " + business);
-    updateSession(senderId, business);
+    // updateSession(senderId, business);
     // console.log("User has selected a business" + payload)
   }
 
