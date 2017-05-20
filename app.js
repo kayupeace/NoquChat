@@ -91,7 +91,8 @@ function processPostback(event) {
     });
   }
   else if (payload.search(/select_business/i) == 0) {
-    sendMessage(senderId, {text: "You have selected a business"});
+    var businessID = payload.replace("select_business=", "");
+    sendMessage(senderId, {text: "You have selected a business: " + businessID});
     // console.log("User has selected a business" + payload)
   }
 
