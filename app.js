@@ -109,6 +109,43 @@ function sendMessage(recipientId, message) {
   });
 }
 
+//send attachment with buttons
+// function sendButtonAttachment(recipientId, message, buttons){
+//     request({
+//         url: "https://graph.facebook.com/v2.6/me/messages",
+//         qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
+//         method: "POST",
+//         json: {
+//           recipient: {id: recipientId},
+//           message: {
+//             attachment:{
+//                 type: "template",
+//                 payload: {
+//                     template_type: "button",
+//                     text: message,
+//                     buttons: [
+//                     {
+//                         type: "web_url",
+//                         url: "#",
+//                         title: "Sample Button"
+//                     },
+//                     {
+//                         type: "postback",
+//                         title: "Sample Button 2",
+//                         payload: "SOME_PAYLOAD"
+//                     }
+//                     ]
+//                 }
+//             }
+//           }
+//         }
+//     }, function(error, response, body) {
+//         if (error) {
+//           console.log("Error sending message: " + response.error);
+//         }
+//     });
+// }
+
 //process message
 function processMessage(event) {
   if (!event.message.is_echo) {
@@ -215,12 +252,34 @@ function findBusiness(userId, message){
       }
       else{
         if(businesses.length){
-          var strMessage = "Found " + businesses.length + " businesses: ";
-          for(i = 0; i < businesses.length; i ++){
+            var strMessage = "Found " + businesses.length + " businesses: ";
+            for(i = 0; i < businesses.length; i ++){
               strMessage += "\n" + businesses[i].toObject().name;
-          }
+            }
           // strMessage += businesses ;
-          sendMessage(userId, {text: strMessage});  
+          // sendMessage(userId, {text: strMessage});  
+            sendMessage(userId, {
+                attachment:{
+                    type: "template",
+                    payload: {
+                        template_type: "button",
+                        text: strMessage,
+                        buttons: [
+                        {
+                            type: "web_url",
+                            url: "#",
+                            title: "Sample Button"
+                        },
+                        {
+                            type: "postback",
+                            title: "Sample Button 2",
+                            payload: "SOME_PAYLOAD"
+                        }
+                        ]
+                    }
+                }
+              }
+            );
         }
         else{
           sendMessage(userId, {text: "Cannot find business. Try again"});
