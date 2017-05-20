@@ -93,6 +93,7 @@ function processPostback(event) {
   else if (payload.search(/select_business/i) == 0) {
     var businessID = payload.replace("select_business=", "");
     var business = findBusinessByID(senderId, businessID);
+    console.log("Found: " + business);
     updateSession(senderId, business);
     // console.log("User has selected a business" + payload)
   }
@@ -170,6 +171,7 @@ function updateSession(userId, business){
             'ABN': business.ABN,
             'menu': business.menu
           };
+          console.log("Updating session to: " + session.business);
           session.save(function(err, session){
             if (err) return console.error(err)
           });
