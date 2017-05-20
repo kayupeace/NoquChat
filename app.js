@@ -256,30 +256,8 @@ function findBusiness(userId, message){
             for(i = 0; i < businesses.length; i ++){
               strMessage += "\n" + businesses[i].toObject().name;
             }
-          // strMessage += businesses ;
-          // sendMessage(userId, {text: strMessage});  
-            sendMessage(userId, {
-                attachment:{
-                    type: "template",
-                    payload: {
-                        template_type: "button",
-                        text: strMessage,
-                        buttons: [
-                        {
-                            type: "web_url",
-                            url: "#",
-                            title: "Sample Button"
-                        },
-                        {
-                            type: "postback",
-                            title: "Sample Button 2",
-                            payload: "SOME_PAYLOAD"
-                        }
-                        ]
-                    }
-                }
-              }
-            );
+            // strMessage += businesses ;
+            sendMessage(userId, {text: strMessage});  
         }
         else{
           sendMessage(userId, {text: "Cannot find business. Try again"});
