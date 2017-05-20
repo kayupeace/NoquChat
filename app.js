@@ -93,7 +93,6 @@ function processPostback(event) {
   else if (payload.search(/select_business/i) == 0) {
     var businessID = payload.replace("select_business=", "");
     findBusinessByID(senderId, businessID);
-    sendMessage(senderId, {text: "You have selected a business: " + businessID});
     // console.log("User has selected a business" + payload)
   }
 
@@ -240,7 +239,8 @@ function findBusinessByID(userId, businessID){
         }
         else{
             if(business){
-                sendMessage(userId, {text: "Selected business: " + business.toObject().name });
+                sendMessage(userId, {text: "Selected business: " + JSON.stringify(business.toObject()) });
+
             }
             else{
                 sendMessage(userId, {text: "Cannot find business. Try again"});
