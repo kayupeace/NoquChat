@@ -272,15 +272,7 @@ function findBusiness(userId, message){
                 payload: {
                     template_type: "button",
                     text: "What do you want to do next?",
-                    buttons: [{
-                      type: "postback",
-                      title: "Yes",
-                      payload: "Correct"
-                    }, {
-                      type: "postback",
-                      title: "No",
-                      payload: "Incorrect"
-                    }]
+                    buttons: businessArray
                 }
               }
             };
