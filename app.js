@@ -90,9 +90,9 @@ function processPostback(event) {
       sendMessage(senderId, {text: message});
     });
   }
-  else if payload.search(/select_business/i) != -1 {
-    sendMessage(senderId, {text: "You have selected a business"});
-  }
+  // else if payload.search(/select_business/i) != -1 {
+  //   sendMessage(senderId, {text: "You have selected a business"});
+  // }
 }
 
 // sends message to user
