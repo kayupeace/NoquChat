@@ -109,43 +109,6 @@ function sendMessage(recipientId, message) {
   });
 }
 
-//send attachment with buttons
-// function sendButtonAttachment(recipientId, message, buttons){
-//     request({
-//         url: "https://graph.facebook.com/v2.6/me/messages",
-//         qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
-//         method: "POST",
-//         json: {
-//           recipient: {id: recipientId},
-//           message: {
-//             attachment:{
-//                 type: "template",
-//                 payload: {
-//                     template_type: "button",
-//                     text: message,
-//                     buttons: [
-//                     {
-//                         type: "web_url",
-//                         url: "#",
-//                         title: "Sample Button"
-//                     },
-//                     {
-//                         type: "postback",
-//                         title: "Sample Button 2",
-//                         payload: "SOME_PAYLOAD"
-//                     }
-//                     ]
-//                 }
-//             }
-//           }
-//         }
-//     }, function(error, response, body) {
-//         if (error) {
-//           console.log("Error sending message: " + response.error);
-//         }
-//     });
-// }
-
 //process message
 function processMessage(event) {
   if (!event.message.is_echo) {
@@ -225,27 +188,6 @@ function updateSession(userId, business){
 
 // Find Business
 function findBusiness(userId, message){
-    // Business.find(function (err, businesses){
-    //     if (err) return console.error(err);
-    //     sendMessage(userId, {text: "Found business: " + businesses});
-    // });
-
-    // Business.findOne({'name': message}, 'name ABN menu', function (err, business) {
-    //   if (err){
-    //     sendMessage(userId, {text: "Something went wrong. Try again"});
-    //   }
-    //   else{
-    //     if(business){
-    //       var strMessage = "Found business: " + business["name"] + "\nMenu: " + business["menu"];
-    //       sendMessage(userId, {text: strMessage});  
-    //     }
-    //     else{
-    //       sendMessage(userId, {text: "Cannot find business. Try again"});
-    //     }
-        
-    //   }
-      
-    // });
     Business.find({'name': { "$regex": message, "$options": "i" }}, 'name ABN menu -_id', function (err, businesses) {
       if (err){
         sendMessage(userId, {text: "Something went wrong. Try again"});
@@ -253,12 +195,16 @@ function findBusiness(userId, message){
       else{
         if(businesses.length){
             var strMessage = "Found " + businesses.length + " businesses: ";
+            var payLoad = "select_business=123123123";
+            var isSelect = payLoad.search(/select_business/i);
+            strMessage += isSelect;
+            
             var businessArray = []
             for(i = 0; i < businesses.length; i ++){
                 var businessButton = {
                     type: "postback",
                     title: businesses[i].toObject().name,
-                    payload: "biz_button"
+                    payload: "select_business=" + businesses[i].toObject().business_id
                 };
                 businessArray.push(businessButton);
             }
