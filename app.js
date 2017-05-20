@@ -93,7 +93,6 @@ function processPostback(event) {
   else if (payload.search(/select_business/i) == 0) {
     var businessID = payload.replace("select_business=", "");
     findBusinessByID(senderId, businessID);
-    // console.log("User has selected a business" + payload)
   }
 
 }
@@ -241,13 +240,13 @@ function findBusinessByID(userId, businessID){
             if(business){
                 sendMessage(userId, {text: "Selected business: " + JSON.stringify(business.toObject()) });
 
-                var businessDB = new Business({
-                    business_id: business.toObject().business_id, 
-                    name: business.toObject().name,
-                    ABN: business.toObject().ABN,
-                    menu: business.toObject().menu
-                });
-                updateSession(senderId, businessDB);
+                // var businessDB = new Business({
+                //     business_id: business.toObject().business_id, 
+                //     name: business.toObject().name,
+                //     ABN: business.toObject().ABN,
+                //     menu: business.toObject().menu
+                // });
+                // updateSession(senderId, businessDB);
             }
             else{
                 sendMessage(userId, {text: "Cannot find business. Try again"});
