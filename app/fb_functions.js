@@ -1,3 +1,4 @@
+// Facebook Chatbot functions
 var request = require("request");
 var Business = require("../models/business");
 var Session = require("../models/session");
@@ -186,12 +187,7 @@ function findBusinessByID(userId, businessID){
             if(business){
                 sendMessage(userId, {text: "Selected business: " + business.business_id + " " + business.name + " " + business.ABN });
 
-                // var businessDB = new Business({
-                //     business_id: business.business_id, 
-                //     name: business.name,
-                //     ABN: business.ABN,
-                //     menu: business.menu
-                // });
+                // update user session
                 updateSession(userId, business);
             }
             else{
