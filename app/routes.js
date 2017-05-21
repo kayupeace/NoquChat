@@ -1,4 +1,6 @@
 module.exports = function(app) {
+    var Business = require("./models/business");
+    var Session = require("./models/session");
 
     // Server index page
     // app.get("/", function (req, res) {
