@@ -1,5 +1,5 @@
-var Business = require("./models/business");
-var Session = require("./models/session");
+var Business = require("../models/business");
+var Session = require("../models/session");
 
 module.exports = function(app) {
 
