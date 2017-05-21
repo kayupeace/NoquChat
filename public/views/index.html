@@ -21,23 +21,35 @@
             <a href="#" data-activates="mobile-menu" class="button-collapse right"><i class="material-icons">menu</i></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="#">About</a></li>
-                <li><a href="#">Register</a></li>
-                <li><a href="#">Login</a></li>
+                <li><a href="#" data-activates="desktop-menu" class="button-collapse right">Login</a></li>
+                <li><a href="#">Help</a>
             </ul>
-            <ul class="side-nav" id="mobile-menu">
+            <ul class="side-nav hide-on-med-and-down" id="desktop-menu">
                 <li>
                     <div class="userView">
                       <div class="background">
                         <img src="./assets/img/bg.jpg">
                       </div>
-                      <a href="#!user"><img class="circle" src="./assets/img/bart.jpg"></a>
+                      <a href="#!user"><img class="circle" src="./assets/img/user.png"></a>
                       <a href="#!name"><span class="white-text name">John Doe</span></a>
                       <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
                     </div>
                 </li>
-                <li><a href="#">About</a></li>
+            </ul>
+            <ul class="side-nav hide-on-large-only" id="mobile-menu">
+                <li>
+                    <div class="userView">
+                      <div class="background">
+                        <img src="./assets/img/bg.jpg">
+                      </div>
+                      <a href="#!user"><img class="circle" src="./assets/img/user.png"></a>
+                      <a href="#!name"><span class="white-text name">John Doe</span></a>
+                      <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
+                    </div>
+                </li>
                 <li><a href="#">Register</a></li>
                 <li><a href="#">Login</a></li>
+                <li><a href="#">Help</a></li>
             </ul>
         </div>
     </nav>
