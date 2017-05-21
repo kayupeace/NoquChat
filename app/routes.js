@@ -1,3 +1,4 @@
+var request = require("request");
 var Business = require("../models/business");
 var Session = require("../models/session");
 
