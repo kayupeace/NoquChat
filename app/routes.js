@@ -1,7 +1,4 @@
-var request = require("request");
 var func = require("./fb_functions")
-var Business = require("../models/business");
-var Session = require("../models/session");
 
 module.exports = function(app) {
 

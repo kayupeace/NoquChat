@@ -1,3 +1,7 @@
+var request = require("request");
+var Business = require("../models/business");
+var Session = require("../models/session");
+
 function processPostback(event) {
   var senderId = event.sender.id;
   var payload = event.postback.payload;
