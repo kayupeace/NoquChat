@@ -52,6 +52,6 @@
   background-color: black;
 }
 
-.nav-mobile a.button-collapse{
+#nav-mobile a.button-collapse{
   display: initial;
 }
