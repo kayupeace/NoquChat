@@ -15,7 +15,7 @@ app.listen((process.env.PORT || 5000));
 // Routes
 // require('./app/routes')(app);
 
-app.get('*', function(req, res) {
+app.get('/', function(req, res) {
             res.sendfile('./public/views/index.html'); // load our public/index.html file
         });
 
