@@ -1,9 +1,12 @@
 module.exports = function(app) {
-    
+
     // Server index page
-    app.get("/", function (req, res) {
-      res.send("Deployed!");
-    });
+    // app.get("/", function (req, res) {
+    //   res.send("Deployed!");
+    // });
+    app.get('*', function(req, res) {
+            res.sendfile('./public/views/index.html'); // load our public/index.html file
+        });
 
     // Facebook Webhook
     // Used for verification
