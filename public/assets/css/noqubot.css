@@ -1,0 +1,47 @@
+
+@font-face {
+  font-family: "Quicksand";
+  src: local(Quicksand Light), url("../fonts/Quicksand/Quicksand-Light.otf") format("otf");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Quicksand";
+  src: local(Quicksand Light Italic), url("../fonts/Quicksand/Quicksand-LightItalic.otf") format("otf");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Quicksand";
+  src: local(Quicksand Italic), url("../fonts/Quicksand/Quicksand-Italic.otf") format("otf");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Quicksand";
+  src: local(Quicksand Regular), url("../fonts/Quicksand/Quicksand-Regular.otf") format("otf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Quicksand";
+  src: local(Quicksand Dash), url("../fonts/Quicksand/Quicksand-Dash.otf") format("otf");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Quicksand";
+  src: local(Quicksand Bold), url("../fonts/Quicksand/Quicksand-Bold.otf") format("otf");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Quicksand";
+  src: local(Quicksand Bold Italic), url("../fonts/Quicksand/Quicksand-BoldItalic.otf") format("otf");
+  font-weight: 700;
+}
+
+.brand-logo{
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
+}
