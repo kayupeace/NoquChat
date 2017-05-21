@@ -13,7 +13,9 @@
     "angular": "^1.6.4",
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
+    "materialize-css": "^0.98.2",
     "mongoose": "^4.9.10",
     "request": "^2.81.0"
-  }
+  },
+  "devDependencies": {}
 }
