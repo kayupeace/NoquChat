@@ -51,3 +51,7 @@
 .user-logo{
   background-color: black;
 }
+
+.nav-mobile a.button-collapse{
+  display: initial;
+}
