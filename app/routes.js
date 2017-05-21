@@ -2,6 +2,9 @@ var func = require("./fb_functions")
 
 module.exports = function(app) {
 
+    // Serve static files on /public
+    app.use('/public', express.static('./public'))
+
     // Server index page
     app.get('/', function(req, res) {
             res.sendfile('./public/views/index.html'); // load our public/index.html file
