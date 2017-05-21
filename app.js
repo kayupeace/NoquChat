@@ -5,54 +5,57 @@ var mongoose = require("mongoose");
 
 var db = mongoose.connect(process.env.MONGODB_URI);
 var Business = require("./models/business");
-var Session = require("./models/session")
+var Session = require("./models/session");
 
 var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.listen((process.env.PORT || 5000));
 
-// Server index page
-app.get("/", function (req, res) {
-  res.send("Deployed!");
-});
+// Routes
+require('./app/routes')(app);
 
-// Facebook Webhook
-// Used for verification
-app.get("/webhook", function (req, res) {
-  if (req.query["hub.verify_token"] === process.env.VERIFICATION_TOKEN) {
-    console.log("Verified webhook");
-    res.status(200).send(req.query["hub.challenge"]);
-  } else {
-    console.error("Verification failed. The tokens do not match.");
-    res.sendStatus(403);
-  }
-});
+// // Server index page
+// app.get("/", function (req, res) {
+//   res.send("Deployed!");
+// });
 
-// All callbacks for Messenger will be POST-ed here
-app.post("/webhook", function (req, res) {
-  // Make sure this is a page subscription
-  if (req.body.object == "page") {
-    // Iterate over each entry
-    // There may be multiple entries if batched
-    req.body.entry.forEach(function(entry) {
-      // Iterate over each messaging event
-      entry.messaging.forEach(function(event) {
-        /* 
-         * TODO store search session details, 
-         * i.e. when a user successfully finds and selects a business, save it for current session use
-         */
-        if (event.postback) {
-          processPostback(event);
-        } else if (event.message) {
-          processMessage(event);
-        }
-      });
-    });
+// // Facebook Webhook
+// // Used for verification
+// app.get("/webhook", function (req, res) {
+//   if (req.query["hub.verify_token"] === process.env.VERIFICATION_TOKEN) {
+//     console.log("Verified webhook");
+//     res.status(200).send(req.query["hub.challenge"]);
+//   } else {
+//     console.error("Verification failed. The tokens do not match.");
+//     res.sendStatus(403);
+//   }
+// });
 
-    res.sendStatus(200);
-  }
-});
+// // All callbacks for Messenger will be POST-ed here
+// app.post("/webhook", function (req, res) {
+//   // Make sure this is a page subscription
+//   if (req.body.object == "page") {
+//     // Iterate over each entry
+//     // There may be multiple entries if batched
+//     req.body.entry.forEach(function(entry) {
+//       // Iterate over each messaging event
+//       entry.messaging.forEach(function(event) {
+//         /* 
+//          * TODO store search session details, 
+//          * i.e. when a user successfully finds and selects a business, save it for current session use
+//          */
+//         if (event.postback) {
+//           processPostback(event);
+//         } else if (event.message) {
+//           processMessage(event);
+//         }
+//       });
+//     });
+
+//     res.sendStatus(200);
+//   }
+// });
 
 function processPostback(event) {
   var senderId = event.sender.id;
