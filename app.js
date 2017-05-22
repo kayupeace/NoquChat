@@ -12,5 +12,5 @@ app.listen((process.env.PORT || 5000));
 // Serve static files on /public
 app.use('/assets', express.static('./public/assets'));
 
-// Routes
-require('./app/routes')(app);
+// Router
+require('./app/router')(app);

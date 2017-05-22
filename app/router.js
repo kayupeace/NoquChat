@@ -1,4 +1,5 @@
 var func = require("./fb_functions")
+var businesses = require('../routes/business');
 
 module.exports = function(app) {
 
@@ -6,6 +7,9 @@ module.exports = function(app) {
     app.get('/', function(req, res) {
             res.sendfile('./public/views/index.html'); // load our public/index.html file
         });
+
+    // Businesses API
+    app.use('/business', businesses);
 
     // Facebook Webhook
     // Used for verification
