@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+
 var Business = require('../models/business.js');
 /* GET /business listing. */
 router.get('/', function(req, res, next) {
@@ -9,4 +10,5 @@ router.get('/', function(req, res, next) {
     res.json(businesses);
   });
 });
+
 module.exports = router;

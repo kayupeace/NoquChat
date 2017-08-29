@@ -1,15 +1,22 @@
 var func = require("./fb_functions")
 var businesses = require('../routes/business');
+var loginRouter = require('../routes/register');
+
 
 module.exports = function(app) {
 
     // Server index page
     app.get('/', function(req, res) {
-            res.sendfile('./public/views/index.html'); // load our public/index.html file
-        });
+        // sendfile is being deprecagted
+        // res.sendfile('./public/views/index.html'); // load our public/index.html file
+        res.sendFile('/public/views/index.html', { root: process.cwd() });
+    });
 
     // Businesses API
     app.use('/business', businesses);
+
+    // Login
+    app.use('/registration', loginRouter);
 
     // Facebook Webhook
     // Used for verification

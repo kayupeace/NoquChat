@@ -1,0 +1,64 @@
+doctype html
+// public/views/index.html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title Noqu - Why wait when there's Noqu?
+    // Stylesheets
+    link(rel='stylesheet', href='../assets/css/materialize.min.css')
+    link(rel='stylesheet', href='../assets/css/noqubot.css')
+    link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+    // Scripts
+    script(src='../assets/js/jquery.min.js')
+    script(src='../assets/js/materialize.min.js')
+    script(src='../assets/js/noqubot.js')
+  body
+    nav
+      .nav-wrapper.grey.darken-4
+        a.brand-logo(href='/') noQu
+        a.button-collapse.right(href='#', data-activates='mobile-menu')
+          i.material-icons menu
+        ul#nav-mobile.right.hide-on-med-and-down
+          li
+            a(href='#') About
+          li
+            a.button-collapse(href='#', data-activates='desktop-menu') Login
+          li
+            a(href='#') Help
+        ul#desktop-menu.side-nav
+          li
+            .userView
+              .background
+                img(src='../assets/img/bg.jpg')
+              a(href='#!user')
+                img.circle.user-logo(src='../assets/img/user.png')
+              a(href='#!name')
+                span.white-text.name John Doe
+              a(href='#!email')
+                span.white-text.email jdandturk@gmail.com
+        ul#mobile-menu.side-nav.hide-on-med-and-up
+          li
+            .userView
+              .background
+                img(src='../assets/img/bg.jpg')
+              a(href='#!user')
+                img.circle.user-logo(src='../assets/img/user.png')
+              a(href='#!name')
+                span.white-text.name John Doe
+              a(href='#!email')
+                span.white-text.email sample@gmail.com
+          li
+            a(href='#') Register
+          li
+            a(href='#') Login
+          li
+            a(href='#') Help
+
+    .container
+      .row
+        .col-12
+          h1 #{title}
+          p User Name: #{userName}
+          p Email: #{email}
+
