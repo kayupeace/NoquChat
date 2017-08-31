@@ -102,6 +102,50 @@ router.get('/profile', requiresLogin ,function(req, res, next) {
         });
 });
 
+
+router.post('/profile', requiresLogin, function(req, res, next){
+   console.log('Post: Edit User Profile');
+
+    //var email = req.body.email;
+    var username = req.body.username;
+    //var password = req.body.password;
+
+    if (!username){
+        console.error("Error: UserName is required");
+        return res.redirect('/');
+    }
+
+    User.findById(req.session.userId)   //check existing login user
+        .exec(function (error, user) {
+            if (error) {
+                return next(error);   // error, navigate to error page.
+            } else {
+                if (user === null) {
+                    var err = new Error('You are required to login');
+                    err.status = 400;
+                    return next(err);   // error, naviage to error page.
+                } else {
+                    console.log("update now");
+                    User.findOneAndUpdate(
+                        {_id:user._id},
+                        {$set: {
+                            username: username
+                        }},function (err) {
+                            if (err) {
+                                throw err;
+                            } else {
+                                console.log("Updated");
+                            }
+                        }
+                    );
+                    res.redirect('/registration/profile');
+                    return;
+                }
+            }
+        });
+});
+
+
 router.post('/login', function(req, res) {
     var email = req.body.email;
     //var username = req.body.username;

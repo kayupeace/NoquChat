@@ -62,3 +62,11 @@ html(lang='en')
           p User Name: #{userName}
           p Email: #{email}
 
+    .container
+      h1.
+        Edit User Information
+      form(name="addUser",method="post",action="/registration/profile")
+        p User Name:
+          input(type="text", value= userName, name="username")
+        p
+          button(type="submit") submit

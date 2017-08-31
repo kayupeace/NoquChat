@@ -4,9 +4,9 @@ var mongoose = require("mongoose");
 var path = require('path');
 var session = require('express-session');
 
-var db = mongoose.connect(process.env.MONGODB_URI);
+//var db = mongoose.connect(process.env.MONGODB_URI);
 // below is the database connection for local environment, plz keep this
-//mongoose.connect('mongodb://localhost/noqubot');
+var db = mongoose.connect('mongodb://localhost/noqubot');
 
 var app = express();
 
