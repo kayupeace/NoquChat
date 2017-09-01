@@ -65,8 +65,17 @@ html(lang='en')
     .container
       h1.
         Edit User Information
-      form(name="addUser",method="post",action="/registration/profile")
+      form(name="EditProfile",method="post",action="/user/profile")
         p User Name:
           input(type="text", value= userName, name="username")
         p
-          button(type="submit") submit
+          button(type="submit") submit to edit profile page
+
+    .container
+      h1.
+        Change Password
+      form(name="ChangePassword",method="post",action="/user/resetPassword")
+        p User Name:
+          input(type="text", placeholder="Password Length should be >= 5", name="password")
+        p
+          button(type="submit") submit to reset password
