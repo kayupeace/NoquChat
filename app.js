@@ -15,8 +15,12 @@ app.set('views', path.join(__dirname, 'public/views'));
 app.set('view engine', 'pug');
 
 //use sessions for tracking logins
+
+const MongoStore = require('connect-mongo')(session);
 app.use(session({
     secret: 'work hard',
+    //store: new MongoStore({ url:'mongodb://localhost/noqubot'}),
+    store: new MongoStore({ url: process.env.MONGODB_URI }),
     resave: true,
     saveUninitialized: false
 }));

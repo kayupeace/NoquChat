@@ -67,4 +67,14 @@ html(lang='en')
           input(type="text", placeholder="ex. 123456", name="password")
         p
           button(type="submit") submit
-       
+
+    .container
+      h1.
+        #{title}
+      form(name="addUser",method="post",action="/user/sendEmail")
+        //p User Name:
+        //  input(type="text", placeholder="ex. John Smith", name="username")
+        p Send Message to Kevin:
+          input(type="text", name="mailMessager")
+        p
+          button(type="submit") submit
