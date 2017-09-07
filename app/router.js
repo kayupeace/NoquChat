@@ -12,7 +12,8 @@ module.exports = function(app) {
     passport.use(new FacebookStrategy({
             clientID: '308674396274436',
             clientSecret: 'fa25957faf73ae4d94f7605f73ea23f0',
-            callbackURL: "http://localhost:5000/auth/facebook/callback",
+            callbackURL: "https://noqubot.herokuapp.com/auth/facebook/callback",
+            //callbackURL: "http://localhost:5000/auth/facebook/callback",
             profileFields: ['id', 'emails', 'photos','displayName']
         },
         function(accessToken, refreshToken, profile, done) {
