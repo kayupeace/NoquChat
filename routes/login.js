@@ -8,6 +8,9 @@ var express = require('express'),
     session = require('express-session'),
     User = require('../models/user.js');
 
+var passport = require('passport')
+    , FacebookStrategy = require('passport-facebook').Strategy;
+
 var bcrypt = require('bcrypt');
 
 /**

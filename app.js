@@ -3,10 +3,15 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var path = require('path');
 var session = require('express-session');
+var passport = require('passport');
+var Strategy = require('passport-facebook').Strategy;
+var cookieParser = require('cookie-parser');
 
-var db = mongoose.connect(process.env.MONGODB_URI);
+var databaseEnvironment = process.env.MONGODB_URI;
+//var databaseEnvironment = 'mongodb://localhost/noqubot';
+//var db = mongoose.connect(process.env.MONGODB_URI);
 // below is the database connection for local environment, plz keep this
-//var db = mongoose.connect('mongodb://localhost/noqubot');
+var db = mongoose.connect(databaseEnvironment);
 
 var app = express();
 
@@ -19,15 +24,30 @@ app.set('view engine', 'pug');
 const MongoStore = require('connect-mongo')(session);
 app.use(session({
     secret: 'work hard',
-    //store: new MongoStore({ url:'mongodb://localhost/noqubot'}),
-    store: new MongoStore({ url: process.env.MONGODB_URI }),
+    store: new MongoStore({ url:databaseEnvironment}),
+    //store: new MongoStore({ url: process.env.MONGODB_URI }),
     resave: true,
     saveUninitialized: false
 }));
 
+
+passport.serializeUser(function(user, cb) {
+    cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb) {
+    cb(null, obj);
+});
+
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.listen((process.env.PORT || 5000));
+
+app.use(cookieParser());
+app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 // Serve static files on /public
 app.use('/assets', express.static('./public/assets'));
@@ -64,6 +84,7 @@ app.use(function(req, res, next) {
 
 });
 **/
+
 // Router
 require('./app/router')(app);
 

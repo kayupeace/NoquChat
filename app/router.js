@@ -2,10 +2,87 @@ var func = require("./fb_functions")
 var businesses = require('../routes/business');
 var registrationRouter = require('../routes/register');
 var loginRouter = require('../routes/login');
+var User = require('../models/user.js');
+var Facebook_account = require('../models/facebook.js');
+var passport = require('passport')
+    , FacebookStrategy = require('passport-facebook').Strategy;
 
 module.exports = function(app) {
 
-    // User router
+    passport.use(new FacebookStrategy({
+            clientID: '308674396274436',
+            clientSecret: 'fa25957faf73ae4d94f7605f73ea23f0',
+            callbackURL: "http://localhost:5000/auth/facebook/callback",
+            profileFields: ['id', 'emails', 'photos','displayName']
+        },
+        function(accessToken, refreshToken, profile, done) {
+            console.log("\n\n" + profile.id);
+            console.log(profile.displayName);
+            console.log(profile.emails);
+            var name = profile.displayName;
+            var emails = profile.emails[0].value;
+            if(!name){
+                name = 'Anonymous'
+            }
+            if(!emails){
+                emails = 'Anonymous@email.com'
+            }
+
+            var userData = {
+                email: emails,
+                username: name,
+                password: ' '
+            };
+
+            Facebook_account.findOne({
+                facebook_id: profile.id
+            },function(err, facebook_account){
+                //console.log("1");
+                if(err){ return done(err); }
+                if (!facebook_account){
+                    //console.log("2");
+                    User.create(userData, function(err, user){
+                        if(err){
+                            //console.log("3");
+                            return done(err, user);
+                        }else {
+                            //console.log("4");
+                            var facebook_data = {
+                                patron_id: user._id,
+                                facebook_id: profile.id
+                            };
+                            Facebook_account.create(facebook_data,function(err){
+                                if(err){return done(err);}
+                                return done(null, user);
+                            })
+                        }
+                    })
+                }else{
+                    //console.log("5");
+                    User.findOne({ _id : facebook_account.patron_id},
+                        function(err, findmyUser){
+                        if(err){ return done(err); }
+                        return done(null, findmyUser);
+                    })
+                }
+            });
+            //return(done, profile);
+        }
+    ));
+
+
+    app.get('/auth/facebook', passport.authenticate('facebook', {
+        scope: ['email','user_friends']}));
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', { failureRedirect: '/' }),
+        function(req, res) {
+            // Successful authentication, redirect home.
+            req.session.userId = req.user._id;
+            console.log("success with facebook login");
+            res.redirect('/user/profile');
+        });
+
+
     app.use('/registration', registrationRouter);
     app.use('/user', loginRouter);
 

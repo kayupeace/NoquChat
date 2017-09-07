@@ -26,7 +26,8 @@ router.post('/', function(req, res){
         User.create(userData, function(err, user){
             if (err){
                 //return next(err)
-                return res.status(500).send("Unable to Create User Table");
+                return res.status(500).send("Unable to Create User Table, either username, email are exist");
+                //return res.status(500).send(err);
             }else{
                 //res.status(200).send(user);
                 console.log("successful create user\n");

@@ -68,3 +68,15 @@ html(lang='en')
                 p
                     button#btnSubmit(type="submit") submit
 
+        .container
+            h1.
+                #{title}
+            form#formAddBlob(name="addUser",method="post",action="/user/login/facebook")
+                p User Name:
+                    input#inputName(type="text", placeholder="ex. John Smith", name="username")
+                p Password:
+                    input#inputBadge(type="text", placeholder="ex. 123456", name="password")
+                p Email:
+                    input#inputDob(type="text", name="email")
+                p
+                    button#btnSubmit(type="submit") facebook

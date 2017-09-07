@@ -82,7 +82,7 @@ UserSchema.methods.resetPassword = function (user, password) {
     console.log("Reset Password to: " + password);
     user.password = password;
     user.save();
-}
+};
 
 var User = mongoose.model('User', UserSchema);
 
