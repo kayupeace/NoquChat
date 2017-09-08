@@ -4,16 +4,17 @@ var registrationRouter = require('../routes/register');
 var loginRouter = require('../routes/login');
 var User = require('../models/user.js');
 var Facebook_account = require('../models/facebook.js');
+var config = require('../lib/config/config.js').get(process.env.NODE_ENV);
 var passport = require('passport')
     , FacebookStrategy = require('passport-facebook').Strategy;
 
 module.exports = function(app) {
 
+    var facebook_data = config.facebook;
     passport.use(new FacebookStrategy({
-            clientID: '308674396274436',
-            clientSecret: 'fa25957faf73ae4d94f7605f73ea23f0',
-            callbackURL: "https://noqubot.herokuapp.com/auth/facebook/callback",
-            //callbackURL: "http://localhost:5000/auth/facebook/callback",
+            clientID: facebook_data.clientID,
+            clientSecret: facebook_data.clientSecret,
+            callbackURL: facebook_data.callbackURL,
             profileFields: ['id', 'emails', 'photos','displayName']
         },
         function(accessToken, refreshToken, profile, done) {

@@ -6,14 +6,16 @@ var session = require('express-session');
 var passport = require('passport');
 var Strategy = require('passport-facebook').Strategy;
 var cookieParser = require('cookie-parser');
+var config = require('./lib/config/config.js').get(process.env.NODE_ENV);
 
-var databaseEnvironment = process.env.MONGODB_URI;
-//var databaseEnvironment = 'mongodb://localhost/noqubot';
+//var databaseEnvironment = process.env.MONGODB_URI;
 //var db = mongoose.connect(process.env.MONGODB_URI);
 // below is the database connection for local environment, plz keep this
-var db = mongoose.connect(databaseEnvironment);
+var db = mongoose.connect(config.database);
 
 var app = express();
+
+console.log("Current Environment is : " + process.env.NODE_ENV);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'public/views'));
@@ -24,7 +26,7 @@ app.set('view engine', 'pug');
 const MongoStore = require('connect-mongo')(session);
 app.use(session({
     secret: 'work hard',
-    store: new MongoStore({ url:databaseEnvironment}),
+    store: new MongoStore({ url:config.database}),
     //store: new MongoStore({ url: process.env.MONGODB_URI }),
     resave: true,
     saveUninitialized: false
