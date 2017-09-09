@@ -255,6 +255,7 @@ router.post('/resetPassword', function(req, res, next){
 
 
 router.post('/sendEmail', function(req, res, next){
+    console.log("Send email")
     /*
     var mailMessager = req.body.mailMessager;
     var mailSubject = "My Email Title";

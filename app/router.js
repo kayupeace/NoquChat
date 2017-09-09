@@ -92,7 +92,8 @@ module.exports = function(app) {
     app.get('/', function(req, res) {
         // sendfile is being deprecagted
         // res.sendfile('./public/views/index.html'); // load our public/index.html file
-        res.sendFile('/public/views/index.html', { root: process.cwd() });
+        //res.sendFile('/public/views/index.pug', { root: process.cwd() });
+        res.render('index');
     });
 
     // Businesses API
