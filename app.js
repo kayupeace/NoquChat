@@ -11,7 +11,10 @@ var config = require('./lib/config/config.js').get(process.env.NODE_ENV);
 //var databaseEnvironment = process.env.MONGODB_URI;
 //var db = mongoose.connect(process.env.MONGODB_URI);
 // below is the database connection for local environment, plz keep this
-var db = mongoose.connect(config.database);
+var db = mongoose.connect(config.database, {
+    useMongoClient: true,
+    /* other options */
+});
 
 var app = express();
 
