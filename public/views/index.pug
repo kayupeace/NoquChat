@@ -12,3 +12,29 @@ block content
             a(href="/user/logout") Logout
         p
             a(href="/auth/facebook") Facebook Login
+
+    .container
+        h1.
+            Upload File
+        form(enctype="multipart/form-data",method="post",action="/user/files/upload")
+            input(type="txt", name="mytxt")
+            input(type="file", name="file")
+            input(type="submit" value="Upload")
+
+    //-
+        .container
+            h1.
+                Delete File
+            form(method="post",action="/user/files/remove/asd")
+                input(type="txt", name="mytxt")
+                input(type="file", name="file")
+                input(type="submit" value="delete")
+
+        .container
+            h1.
+                Download File
+            form(method="post",action="/user/files/download/asd")
+                input(type="txt", name="mytxt")
+                input(type="file", name="file")
+                input(type="submit" value="download")
+

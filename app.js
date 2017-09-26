@@ -22,6 +22,7 @@ console.log("Current Environment is : " + process.env.NODE_ENV);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'public/views'));
+app.set('controllers', path.join(__dirname, 'lib/controllers'));
 app.set('view engine', 'pug');
 
 //use sessions for tracking logins
@@ -54,8 +55,34 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+// to avoid relative paths in calls
+global.__base = __dirname + '/';
+// var Article = require(__base + 'app/models/article');
+/**
+ *
+ *
+ *
+   global.rootRequire = function(name) {
+    return require(__dirname + '/' + name);
+   }
+   var Article = rootRequire('app/models/article');
+   var Article = require.main.require('app/models/article');
+ *
+ *
+ *
+ */
+
+
+
+
 // Serve static files on /public
 app.use('/assets', express.static('./public/assets'));
+
+var router = require('./lib/router');
+router(app);
+
+
+
 
 //      expires: new Date(Date.now() + 60 * 10000),
 //      maxAge: 60*10000
@@ -92,4 +119,3 @@ app.use(function(req, res, next) {
 
 // Router
 require('./app/router')(app);
-
