@@ -11,6 +11,12 @@ var config = require('./lib/config/config.js').get(process.env.NODE_ENV);
 //var databaseEnvironment = process.env.MONGODB_URI;
 //var db = mongoose.connect(process.env.MONGODB_URI);
 // below is the database connection for local environment, plz keep this
+
+// For Promise:
+// https://stackoverflow.com/questions/38138445/node3341-deprecationwarning-mongoose-mpromise
+// http://mongoosejs.com/docs/promises.html
+mongoose.Promise = global.Promise;
+
 var db = mongoose.connect(config.database, {
     useMongoClient: true,
     /* other options */
@@ -25,6 +31,8 @@ app.set('views', path.join(__dirname, 'public/views'));
 app.set('controllers', path.join(__dirname, 'lib/controllers'));
 app.set('view engine', 'pug');
 
+// serve static file   eg: /assets/css/example.css
+app.use(express.static(path.join(__dirname, '/public')));
 //use sessions for tracking logins
 
 const MongoStore = require('connect-mongo')(session);

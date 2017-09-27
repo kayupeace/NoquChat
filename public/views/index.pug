@@ -21,6 +21,15 @@ block content
             input(type="file", name="file")
             input(type="submit" value="Upload")
 
+    .container
+        h1.
+            Send File
+        form(method="post",action="/user/sendEmail")
+            input(type="txt", name="mytxt")
+            input(type="file", name="file")
+            input(type="submit" value="delete")
+
+
     //-
         .container
             h1.

@@ -52,6 +52,7 @@ UserSchema.statics.authenticate = function (email, password, callback) {
 //hashing a password before saving it to the database
 
 UserSchema.pre('save', function (next) {
+    'use strict';
     console.log("create hash password");
     var user = this;
     bcrypt.hash(user.password, 10, function (err, hash){
@@ -60,7 +61,7 @@ UserSchema.pre('save', function (next) {
         }
         user.password = hash;
         next();
-    })
+    });
 });
 
 // Notices that findoneandupdate ignore my pre middleware,
@@ -75,10 +76,12 @@ UserSchema.pre('update', function (next) {
 
 // Verify Password
 UserSchema.methods.verifyPassword = function(user, password) {
+    'use strict';
     return bcrypt.compareSync(password, user.password);
 };
 
 UserSchema.methods.resetPassword = function (user, password) {
+    'use strict';
     console.log("Reset Password to: " + password);
     user.password = password;
     user.save();
