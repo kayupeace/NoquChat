@@ -1,0 +1,17 @@
+extends layout
+block content
+  .container
+    #title
+      h1.
+        #{title}
+    form(method="post",action="/login")
+      p Email:
+        input(type="text", name="email")
+      p Password:
+        input(type="text", placeholder="ex. 123456", name="password")
+      div#formButton
+        button.btn(type="submit") submit
+        a(href="/")
+          button.btn#cancelButton(type="button") Cancel
+
+

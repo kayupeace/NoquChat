@@ -1,49 +1,82 @@
 extends layout
+block extraHeader
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css', integrity='sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M', crossorigin='anonymous')
 block content
-    .container.row.col-12
-        h1 Home Page
-        p
-            a(href="/registration") Registration Template Page
-        p
-            a(href="/user/login") Login
-        p
-            a(href="/user/profile") Profile
-        p
-            a(href="/user/logout") Logout
-        p
-            a(href="/auth/facebook") Facebook Login
-
+    // Page Content
     .container
-        h1.
-            Upload File
-        form(enctype="multipart/form-data",method="post",action="/user/files/upload")
-            input(type="txt", name="mytxt")
-            input(type="file", name="file")
-            input(type="submit" value="Upload")
+        // Heading Row
+        .row.my-4
+            .col-lg-8
+                img#headImage.img-fluid.rounded(src='https://s3-ap-southeast-2.amazonaws.com/noqubot/fallout.jpg', alt='')
+            // /.col-lg-8
+            .col-lg-4
+                h1 Our Business : Be Success
+                |
+                p
+                    |  What are you waiting for? join us right now, all registration and account are free to use!!!!
+                |
+                a.btn.btn-primary.btn-lg(href='/registration') Register
+            // /.col-md-4
+        // /.row
+        // Call to Action Well
+        .card.text-white.bg-secondary.my-4.text-center
+            .card-body
+                p.text-white.m-0
+                    | Noqu Bot
+        // Content Row
+        .row
+            .col-md-4.mb-4
+                .card.h-100
+                    .card-body
+                        h2.card-title Card One
+                        |
+                        p.card-text
+                            |
 
-    .container
-        h1.
-            Send File
-        form(method="post",action="/user/sendEmail")
-            input(type="txt", name="mytxt")
-            input(type="file", name="file")
-            input(type="submit" value="delete")
+                        p
+                            a(href="/registration") Registration Template Page
+                        p
+                            a(href="/login") Login
+                        p
+                            a(href="/user/profile") Profile
+                        p
+                            a(href="/user/logout") Logout
+                        p
+                            a(href="/auth/facebook") Facebook Login
+
+                        p
+                            a(href="/test") Testing Function Link
 
 
-    //-
+                    |
+                    .card-footer
+                        a.btn.btn-primary(href='#') More Info
+            // /.col-md-4
+            .col-md-4.mb-4
+                .card.h-100
+                    .card-body
+                        h2.card-title Card Two
+                        |
+                        p.card-text
+                            | zzzzzzzzz
+                    |
+                    .card-footer
+                        a.btn.btn-primary(href='#') More Info
+            // /.col-md-4
+            .col-md-4.mb-4
+                .card.h-100
+                    .card-body
+                        h2.card-title Card Three
+                        |
+                        p.card-text
+                            | zzzzzzzz
+                    |
+                    .card-footer
+                        a.btn.btn-primary(href='#') More Info
+            // /.col-md-4
+        // /.row
+    // /.container
+    // Footer
+    footer.py-5.bg-dark
         .container
-            h1.
-                Delete File
-            form(method="post",action="/user/files/remove/asd")
-                input(type="txt", name="mytxt")
-                input(type="file", name="file")
-                input(type="submit" value="delete")
-
-        .container
-            h1.
-                Download File
-            form(method="post",action="/user/files/download/asd")
-                input(type="txt", name="mytxt")
-                input(type="file", name="file")
-                input(type="submit" value="download")
-
+            p.m-0.text-center.text-white Copyright &copy; NoquBot 2017
