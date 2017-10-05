@@ -11,6 +11,11 @@ block content
         input(type="text", placeholder="123456", name="password")
       P#signUpMessage Don't have an account? &nbsp
         a(href='/registration') Sign up »
+      p
+          a.btn.btn-lg.btn-block.omb_btn-facebook(href='/auth/facebook')
+              i.fa.fa-facebook.visible-xs
+                  | &#x9;&#x9;&#x9;
+                  span.hidden-xs &nbsp Facebook
       div#formButton
         button.btn(type="submit") submit
         a(href="/")
