@@ -1,4 +1,4 @@
-extends layout
+extends ./share/layout
 block content
     .container
         #title
@@ -6,11 +6,13 @@ block content
                 #{title}
         form(name="addUser",method="post",action="/registration")
             div User Name:
-            input#inputName(type="text", placeholder="ex. John Smith", name="username")
+            input#inputName(type="text", placeholder="John Smith", name="username")
             div Password:
-                input#inputBadge(type="text", placeholder="ex. 123456", name="password")
+                input#inputBadge(type="text", placeholder="123456", name="password")
             div Email:
-                input#inputDob(type="text", name="email")
+                input#inputDob(type="text", placeholder="eample@gmail.com", name="email")
+            P#signUpMessage Have an account? &nbsp
+                a(href='/login') Log in »
             div#formButton
                 button.btn(type="submit") submit
                 a(href="/")

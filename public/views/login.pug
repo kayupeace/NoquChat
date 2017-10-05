@@ -1,4 +1,4 @@
-extends layout
+extends ./share/layout
 block content
   .container
     #title
@@ -6,9 +6,11 @@ block content
         #{title}
     form(method="post",action="/login")
       p Email:
-        input(type="text", name="email")
+        input(type="text", placeholder="eample@gmail.com", name="email")
       p Password:
-        input(type="text", placeholder="ex. 123456", name="password")
+        input(type="text", placeholder="123456", name="password")
+      P#signUpMessage Don't have an account? &nbsp
+        a(href='/registration') Sign up »
       div#formButton
         button.btn(type="submit") submit
         a(href="/")

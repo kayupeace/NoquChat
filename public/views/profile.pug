@@ -1,4 +1,4 @@
-extends layout
+extends ./share/layout
 block content
   .container
     .row
@@ -24,3 +24,18 @@ block content
         input(type="text", placeholder="Password Length should be >= 5", name="password")
       p
         button(type="submit") submit to reset password
+
+  .container
+    h1.
+      Change Password #{new Date().getUTCFullYear()}
+    form(name="ChangePassword",method="post",action="/user/editProfile")
+      p Date Of Birth
+        - var currentTime = new Date().toISOString().split('T')[0];
+        input(type="date", value=currentTime, name="dateOfBirth")
+      p Gender:
+        - var mygender = ["Female", "Male", "Other"];
+        select(style="display:block;" name="gender")
+          each val, index in mygender
+            option(value=val) #{val}
+      p
+        button(type="submit") submit to update

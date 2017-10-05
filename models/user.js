@@ -2,13 +2,24 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt');
 
+// if email specified with index, to modify index with spare to true,
+// you need
+//  db.users.dropIndex("email": 1)
+//  db.users.createIndex({ "email":1},{unique:true, sparse:true})
+// without index, just tye second command, otherwise,  plz refer to link:
+// https://docs.mongodb.com/v3.0/tutorial/modify-an-index/
+// https://docs.mongodb.com/v3.2/core/index-sparse/
 
+// sparse only work with table without the filed email,
+// does not work if filed contain same
 var UserSchema = new Schema({
     email: {
         type : String,
+        trim: true,
+        index: true,
         unique: true,
-        required: true,
-        trim: true
+        sparse: true //ensure
+        //required: true,
     },
     username: {
         type: String,
@@ -44,7 +55,7 @@ UserSchema.statics.authenticate = function (email, password, callback) {
                     console.log("invalid pass");
                     return callback();
                 }
-            })
+            });
         });
 };
 

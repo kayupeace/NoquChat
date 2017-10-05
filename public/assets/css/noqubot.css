@@ -68,3 +68,8 @@
 #headImage{
   height: 400px;
 }
+
+p#signUpMessage {
+  font-size: 12px;
+  text-align: -webkit-center;
+}

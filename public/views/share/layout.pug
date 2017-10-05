@@ -24,7 +24,7 @@ html(lang='en')
                     li
                         a(href='#') About
                     li
-                        a.button-collapse(href='#', data-activates='desktop-menu') Login
+                        a.button-collapse(href='#', data-activates='desktop-menu') My Account
                     li
                         a(href='#') Help
                 ul#desktop-menu.side-nav
@@ -38,6 +38,14 @@ html(lang='en')
                                 span.white-text.name John Doe
                             a(href='#!email')
                                 span.white-text.email jdandturk@gmail.com
+                    if session === false
+                        li
+                            a(href='/registration') Register
+                        li
+                            a(href='/login') Login
+                    else
+                        li
+                            a(href="/user/logout") Logout
                 ul#mobile-menu.side-nav
                     // .hide-on-med-and-up
                     li
@@ -51,10 +59,17 @@ html(lang='en')
                             a(href='#!email')
                                 span.white-text.email sample@gmail.com
                     li
-                        a(href='/registration') Register
-                    li
-                        a(href='/login') Login
+                        a(href='#') About
+                    if session === false
+                        li
+                            a(href='/registration') Register
+                        li
+                            a(href='/login') Login
+                    else
+                        li
+                            a(href="/user/logout") Logout
                     li
                         a(href='#') Help
+
         // loading block content
         block content

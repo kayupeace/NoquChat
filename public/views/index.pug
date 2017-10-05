@@ -1,10 +1,11 @@
-extends layout
+extends ./share/layout
 block extraHeader
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css', integrity='sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M', crossorigin='anonymous')
 block content
     // Page Content
     .container
         // Heading Row
+        h1(style="color:red;") site under maintain (网站还在开发）
         .row.my-4
             .col-lg-8
                 img#headImage.img-fluid.rounded(src='https://s3-ap-southeast-2.amazonaws.com/noqubot/fallout.jpg', alt='')
@@ -28,11 +29,9 @@ block content
             .col-md-4.mb-4
                 .card.h-100
                     .card-body
-                        h2.card-title Card One
+                        h2.card-title Card One #{session}
                         |
                         p.card-text
-                            |
-
                         p
                             a(href="/registration") Registration Template Page
                         p
@@ -45,7 +44,7 @@ block content
                             a(href="/auth/facebook") Facebook Login
 
                         p
-                            a(href="/test") Testing Function Link
+                            a(href="/test") Testing Function Link (only available if under dev environment)
 
 
                     |
@@ -58,7 +57,11 @@ block content
                         h2.card-title Card Two
                         |
                         p.card-text
-                            | zzzzzzzzz
+                            |
+                        if session === true
+                            p 可欣大笨蛋
+                        else
+                            p 可欣是天才
                     |
                     .card-footer
                         a.btn.btn-primary(href='#') More Info
