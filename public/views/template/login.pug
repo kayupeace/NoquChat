@@ -9,6 +9,27 @@ block content
         input(type="text", placeholder="eample@gmail.com", name="email")
         p.fa.fa-lock  Password:
         input#password(type="password", placeholder="Your Password", name="password")
+        script.
+            function show(){
+                var p = document.getElementById('password');
+                p.setAttribute('type', 'text');
+                document.getElementById('eye').className = 'fa fa-eye-slash';
+            };
+            function hide() {
+                var p = document.getElementById('password');
+                p.setAttribute('type', 'password');
+                document.getElementById('eye').className = 'fa fa-eye';
+            };
+            var isShow = 0;
+            function showHidePassword() {
+                if (isShow == 0) {
+                    isShow = 1;
+                    show();
+                } else {
+                    isShow = 0;
+                    hide();
+                }
+            };
         a.btn(href="#" onclick='showHidePassword()')
           div.fa.fa-eye#eye
         P#signUpMessage Don't have an account? &nbsp

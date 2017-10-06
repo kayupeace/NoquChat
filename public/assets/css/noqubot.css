@@ -66,10 +66,18 @@
   text-align: center;
 }
 #headImage{
-  height: 400px;
+  height: 250px;
 }
 
 p#signUpMessage {
   font-size: 12px;
   text-align: -webkit-center;
+}
+input[type="text"], input[type="password"]{
+  padding: 5px;
+  font-size: -webkit-xxx-large;
+}
+div#eye {
+  font-size: 25px;
+  margin-top: 5px;
 }

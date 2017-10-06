@@ -5,7 +5,7 @@ block content
     // Page Content
     .container
         // Heading Row
-        h1(style="color:red;") site under maintain (网站还在开发, 可欣大笨蛋）
+        h1(style="color:red;") site under maintain (网站还在开发）
         .row.my-4
             .col-lg-8
                 img#headImage.img-fluid.rounded(src='https://s3-ap-southeast-2.amazonaws.com/noqubot/fallout.jpg', alt='')
@@ -33,20 +33,7 @@ block content
                         |
                         p.card-text
                         p
-                            a(href="/registration") Registration Template Page
-                        p
-                            a(href="/login") Login
-                        p
                             a(href="/user/profile") Profile
-                        p
-                            a(href="/user/logout") Logout
-                        p
-                            a(href="/auth/facebook") Facebook Login
-
-                        p
-                            a(href="/test") Testing Function Link (only available if under dev environment)
-
-
                     |
                     .card-footer
                         a.btn.btn-primary(href='#') More Info
@@ -59,9 +46,9 @@ block content
                         p.card-text
                             |
                         if session === true
-                            p 可欣大笨蛋
+                            p show content
                         else
-                            p 可欣是天才
+                            p hide content （you need login to check out content)
                     |
                     .card-footer
                         a.btn.btn-primary(href='#') More Info
@@ -72,7 +59,10 @@ block content
                         h2.card-title Card Three
                         |
                         p.card-text
-                            | zzzzzzzz
+                            |
+                        p
+                            a(href="/test") Testing Function Link (only available if under dev environment)
+
                     |
                     .card-footer
                         a.btn.btn-primary(href='#') More Info
