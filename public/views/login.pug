@@ -5,20 +5,20 @@ block content
         h2 #{title}
       //input(type="text", pattern="[^ @]*@[^ @]*", placeholder="eample@gmail.com", name="email")
       form(method="post", action="/login")
-        p.fa.fa-envelope  Email:
+        p.fa.fa-envelope  Email
         input.fa.fa-lock(type="text", placeholder="eample@gmail.com", name="email")
-        p  Password:
-        input#password(type="password", placeholder="Your Password", name="password")
-        a.btn(href="#" onclick='showHidePassword()')
+        p.fa.fa-lock  Password &nbsp
+        a.btn#eyebutton(href="#" onclick='showHidePassword()')
           div.fa.fa-eye#eye
+        input#password(type="password", placeholder="Your Password", name="password")
         P#signUpMessage Don't have an account? &nbsp
           a(href='/registration') Sign up »
+        div#formButton
+          button.btn(type="submit") submit
+          a(href="/")
+            button.btn#cancelButton(type="button") Cancel
         p
             a.btn.btn-lg.btn-block.omb_btn-facebook(href='/auth/facebook')
                 i.fa.fa-facebook.visible-xs
                     | &#x9;&#x9;&#x9;
                     span.hidden-xs &nbsp Facebook
-        div#formButton
-          button.btn(type="submit") submit
-          a(href="/")
-            button.btn#cancelButton(type="button") Cancel

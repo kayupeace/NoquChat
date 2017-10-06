@@ -85,3 +85,7 @@ div#eye {
   font-size: 25px;
   margin-top: 5px;
 }
+a.btn#eyebutton {
+  vertical-align: text-bottom;
+  border-radius: 30px;
+}

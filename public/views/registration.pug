@@ -4,11 +4,13 @@ block content
         div#title
             h2 #{title}
         form(name="addUser",method="post",action="/registration")
-            p.fa.fa-user-o  User Name:
+            p.fa.fa-user-o  User Name
             input#inputName(type="text", placeholder="John Smith", name="username")
-            p.fa.fa-lock  Password:
-            input#inputBadge(type="text", placeholder="123456", name="password")
-            p.fa.fa-envelope  Email:
+            p.fa.fa-lock  Password &nbsp
+            a.btn#eyebutton(href="#" onclick='showHidePassword()')
+                div.fa.fa-eye#eye
+            input#password(type="password", placeholder="Your Password", name="password")
+            p.fa.fa-envelope  Email
             input#inputDob(type="text", placeholder="eample@gmail.com", name="email")
             P#signUpMessage Have an account? &nbsp
                 a(href='/login') Log in »
