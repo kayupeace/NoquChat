@@ -2,7 +2,7 @@ extends ./share/layout
 block content
     div.container
         div#title
-            h2 #{title}
+            h3 #{title}
         form(name="addUser",method="post",action="/registration")
             p.fa.fa-user-o  User Name
             input#inputName(type="text", placeholder="John Smith", name="username")

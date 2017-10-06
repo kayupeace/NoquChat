@@ -75,17 +75,19 @@ p#signUpMessage {
 }
 input[type="text"], input[type="password"]{
   padding: 5px;
-  font-size: -webkit-xxx-large;
+  font-size: medium;
 }
 
 p.fa.fa-lock, p.fa.fa-user-o, .fa.fa-envelope {
-  font-size: xx-large;
+  font-size: medium;
 }
 div#eye {
-  font-size: 25px;
+  font-size: 20px;
   margin-top: 5px;
 }
 a.btn#eyebutton {
-  vertical-align: text-bottom;
-  border-radius: 30px;
+  vertical-align: baseline;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 10px;
 }
