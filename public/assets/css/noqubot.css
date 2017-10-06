@@ -78,7 +78,7 @@ input[type="text"], input[type="password"]{
   font-size: -webkit-xxx-large;
 }
 
-p.fa.fa-lock, p.fa.fa-user-o {
+p.fa.fa-lock, p.fa.fa-user-o, .fa.fa-envelope {
   font-size: xx-large;
 }
 div#eye {

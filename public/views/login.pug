@@ -2,12 +2,12 @@ extends ./share/layout
 block content
     div.container
       div#title
-        h1 noQu
+        h2 #{title}
       //input(type="text", pattern="[^ @]*@[^ @]*", placeholder="eample@gmail.com", name="email")
       form(method="post", action="/login")
-        p.fa.fa-user-o  Email:
-        input(type="text", placeholder="eample@gmail.com", name="email")
-        p.fa.fa-lock  Password:
+        p.fa.fa-envelope  Email:
+        input.fa.fa-lock(type="text", placeholder="eample@gmail.com", name="email")
+        p  Password:
         input#password(type="password", placeholder="Your Password", name="password")
         a.btn(href="#" onclick='showHidePassword()')
           div.fa.fa-eye#eye

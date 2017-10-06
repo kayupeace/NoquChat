@@ -1,16 +1,15 @@
 extends ./share/layout
 block content
-    .container
-        #title
-            h1.
-                #{title}
+    div.container
+        div#title
+            h2 #{title}
         form(name="addUser",method="post",action="/registration")
-            div User Name:
+            p.fa.fa-user-o  User Name:
             input#inputName(type="text", placeholder="John Smith", name="username")
-            div Password:
-                input#inputBadge(type="text", placeholder="123456", name="password")
-            div Email:
-                input#inputDob(type="text", placeholder="eample@gmail.com", name="email")
+            p.fa.fa-lock  Password:
+            input#inputBadge(type="text", placeholder="123456", name="password")
+            p.fa.fa-envelope  Email:
+            input#inputDob(type="text", placeholder="eample@gmail.com", name="email")
             P#signUpMessage Have an account? &nbsp
                 a(href='/login') Log in »
             div#formButton
