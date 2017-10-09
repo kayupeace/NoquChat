@@ -28,8 +28,25 @@ block content
             input(type="txt", name="mytxt")
             input(type="file", name="file")
             input(type="submit" value="delete")
-
-
+    script.
+        start = new Date();
+        function a() {
+            setTimeout(function () {
+                d = new Date();
+                console.log("aaaaaaaaaaaaa " + (d.getTime() - start.getTime()));
+            }, 5000);
+        }
+        function b() {
+            setTimeout(function () {
+                d = new Date();
+                console.log("bbbbbbbbb " + (d.getTime() - start.getTime()));
+            }, 1000);
+        }
+        function c(){
+         a();
+         b();
+        }
+        c();
     //-
         .container
             h1.

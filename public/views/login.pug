@@ -3,6 +3,7 @@ block content
     div.container
       div#title
         h3 #{title}
+            h4 #{error}
       //input(type="text", pattern="[^ @]*@[^ @]*", placeholder="eample@gmail.com", name="email")
       form(method="post", action="/login")
         p.fa.fa-envelope  Email

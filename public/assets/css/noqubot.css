@@ -91,3 +91,12 @@ a.btn#eyebutton {
   padding-right: 15px;
   border-radius: 10px;
 }
+img#sticker{
+  right: 20px;
+  bottom: 20px;
+  position:fixed;
+  z-index:999;
+}
+a.btn.btn-primary.btn-lg {
+  line-height: initial;
+}
