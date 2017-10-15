@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "angular": "^1.6.4",
+    "asyncawait": "^1.0.6",
     "aws-sdk": "^2.119.0",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.17.2",
