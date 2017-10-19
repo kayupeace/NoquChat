@@ -23,7 +23,7 @@ var UserSchema = new Schema({
     },
     username: {
         type: String,
-        unique: false,
+        unique: false,  // db.users.dropIndex({"username":3})
         required: true,
         trim: true
     },
