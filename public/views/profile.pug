@@ -28,7 +28,7 @@ block content
   .container
     h1.
       Change Password #{new Date().getUTCFullYear()}
-    form(name="ChangePassword",method="post",action="/user/editProfile")
+    form(enctype="multipart/form-data", name="ChangePassword",method="post",action="/user/editProfile")
       p Date Of Birth
         - var currentTime = new Date().toISOString().split('T')[0];
         input(type="date", value=currentTime, name="dateOfBirth")
@@ -37,5 +37,7 @@ block content
         select(style="display:block;" name="gender")
           each val, index in mygender
             option(value=val) #{val}
+      p Image
+        input(type="file", name="file")
       p
         button(type="submit") submit to update
