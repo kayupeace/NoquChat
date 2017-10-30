@@ -4,8 +4,11 @@ block content
     .row
       .col-12
         h1 #{title}
-        p User Name: #{userName}
-        p Email: #{email}
+        p User Name: #{UserData[0].userName}
+        p Email: #{UserData[0].email}
+        p Gender: #{UserData[1].gender}
+        p Date Of Birth: #{UserData[1].DOB}
+        img(style="width: 400px; height: 250px;" src= UserData[1].imagePath)
 
   .container
     h1.
@@ -27,7 +30,7 @@ block content
 
   .container
     h1.
-      Change Password #{new Date().getUTCFullYear()}
+      Update Your Profile #{new Date().getUTCFullYear()}
     form(enctype="multipart/form-data", name="ChangePassword",method="post",action="/user/editProfile")
       p Date Of Birth
         - var currentTime = new Date().toISOString().split('T')[0];
