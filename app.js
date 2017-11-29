@@ -80,17 +80,17 @@ global.__base = __dirname + '/';
  *
  */
 
-
-
+// access control
+var accessContro = require('./lib/config/AccessControl');
+app.use(function(req, res, next){
+    accessContro.setHeader(process.env.NODE_ENV,req,res,next);
+});
 
 // Serve static files on /public
 app.use('/assets', express.static('./public/assets'));
 
 var router = require('./lib/router');
 router(app);
-
-
-
 
 //      expires: new Date(Date.now() + 60 * 10000),
 //      maxAge: 60*10000
