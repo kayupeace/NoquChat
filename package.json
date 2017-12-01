@@ -20,6 +20,7 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.15.3",
     "express-session": "^1.15.5",
+    "express-validator": "^4.3.0",
     "jade": "^1.11.0",
     "mailgun-js": "^0.13.1",
     "materialize-css": "^0.98.2",

@@ -7,6 +7,7 @@ var passport = require('passport');
 var Strategy = require('passport-facebook').Strategy;
 var cookieParser = require('cookie-parser');
 var config = require('./lib/config/config.js').get(process.env.NODE_ENV);
+var expressValidator = require('express-validator');
 
 //var databaseEnvironment = process.env.MONGODB_URI;
 //var db = mongoose.connect(process.env.MONGODB_URI);
@@ -56,6 +57,7 @@ passport.deserializeUser(function(obj, cb) {
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.listen((process.env.PORT || 5000));
+app.use(expressValidator()); // Add this after the bodyParser middlewares! for validation
 
 app.use(cookieParser());
 app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));

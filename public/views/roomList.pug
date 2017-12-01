@@ -1,0 +1,36 @@
+extends ./share/layout
+block content
+    div.container
+        div#title
+            h3 #{title}
+              h4 #{err}
+            div
+                - var counter = 0;
+                each room in rooms
+                    - counter ++
+                    div #{ counter }
+                    div #{ room._id } &nbsp&nbsp&nbsp #{ room.room_uuid }
+                    div #{ room.title } &nbsp&nbsp&nbsp #{ room.room_type }
+                    - var time = room.create_at.toISOString().split('T')[0];
+                    div #{ room.room_owner } &nbsp&nbsp&nbsp #{ time }
+                    br
+
+
+        //
+            form(name="addUser",method="post",action="/registration")
+                p.fa.fa-user-o  User Name
+                input#inputName(type="text", placeholder="John Smith", name="username")
+                p.fa.fa-lock  Password &nbsp
+                a.btn#eyebutton(href="#" onclick='showHidePassword()')
+                    div.fa.fa-eye#eye
+                input#password(type="password", placeholder="Your Password", name="password")
+                p.fa.fa-envelope  Email
+                input#inputDob(type="text", placeholder="eample@gmail.com", name="email")
+                P#signUpMessage Have an account? &nbsp
+                    a(href='/login') Log in »
+                div#formButton
+                    button.btn(type="submit") submit
+                    a(href="/")
+                        button.btn#cancelButton(type="button") Cancel
+
+

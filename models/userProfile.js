@@ -16,7 +16,7 @@ var Schema = mongoose.Schema;
 
 var GenderType = {
     values: ['Female', 'Male', 'Other'],
-    message: 'only choose female, male, or other for gender'
+    message: 'only choose female, male, or other for gender'  //error message  mongoose Custom Validators
 };
 
 var profileSchema = new Schema({
