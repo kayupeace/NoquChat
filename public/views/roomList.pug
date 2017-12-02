@@ -4,6 +4,7 @@ block content
         div#title
             h3 #{title}
               h4 #{err}
+            a(href="/user/room/newroom") create new room
             div
                 - var counter = 0;
                 each room in rooms
@@ -13,6 +14,7 @@ block content
                     div #{ room.title } &nbsp&nbsp&nbsp #{ room.room_type }
                     - var time = room.create_at.toISOString().split('T')[0];
                     div #{ room.room_owner } &nbsp&nbsp&nbsp #{ time }
+                    div #{ room.description }
                     br
 
 
