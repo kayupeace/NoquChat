@@ -1,0 +1,65 @@
+extends ../share/layout
+block extraHeader
+    style(type="text/css").
+        td, th {
+            border-style: solid;
+        }
+
+block content
+    div.container
+        div#title
+            .container
+                h1(style='text-align: center;')
+                    |  #{title}
+                    h4 #{err}
+                .row
+                    .col-md-10.col-md-offset-1
+                        .panel.panel-default.panel-table
+                            .panel-body
+                                table.table.table-striped.table-bordered.table-list
+                                    thead
+                                        tr
+                                            th#profile-chevron-up(width='20%;', style='display: table-cell; text-align: center;')
+                                                a.btn.btn-info(href='javascript:hideProfile();')
+                                                    i.fa.fa-chevron-up(aria-hidden='true')
+                                            th#profile-chevron-down(width='20%;', style='display: none; text-align: center;')
+                                                a.btn.btn-info(href='javascript:hideProfile();')
+                                                    i.fa.fa-chevron-down(aria-hidden='true')
+                                            th(width='40%;') User Profile
+                                            th(width='40%', style='text-align: center;')
+                                                a.btn.btn-default(style='', href="{% url 'user_profile' user_pk=user.pk%}")
+                                                    em.fa.fa-pencil
+                                table.table.table-striped.table-bordered.table-list
+                                    tbody#profile()
+                                        tr
+                                            td(width='60%;', style='display: table-cell; text-align: center; border-right-style: solid;')
+                                                table.table
+                                                    tbody
+                                                    div
+                                                    - var counter = 0;
+                                                    each room in rooms
+                                                        tr
+                                                            - counter ++
+                                                            div #{ counter }
+                                                            div #{ room._id } &nbsp&nbsp&nbsp #{ room.room_uuid }
+                                                            div #{ room.title } &nbsp&nbsp&nbsp #{ room.room_type }
+                                                            - var time = room.create_at.toISOString().split('T')[0];
+                                                            div #{ room.room_owner } &nbsp&nbsp&nbsp #{ time }
+                                                            div #{ room.description }
+                                                            div
+                                                                a.btn(href="/user/room/" + room._id + "/edit") edit room
+                                                            div
+                                                                form(name="newRoom",method="post",action="/user/room/" + room._id + "/delete")
+                                                                    button.btn(type="submit") delete
+                                                            br
+                                            td(width='40%;', style='display: table-cell; text-align: center; position: absolute;')
+                                                table.table
+                                                    tbody
+                                                    div
+                                                        tr
+                                                            a(href="/user/room/newroom") create new room
+
+
+
+
+

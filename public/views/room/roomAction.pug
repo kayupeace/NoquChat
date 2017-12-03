@@ -1,0 +1,28 @@
+extends ../share/layout
+block content
+    div.container
+        div#title
+            h3 #{title}
+                h4 #{error}
+        form(name="newRoom",method="post",action=action )
+            p Room Name
+            input(type="text", placeholder="New Room", name="title" value=room.title)
+            p Description
+            input(type="text", placeholder="Welcome to my room", name="description" value=room.description)
+            p Type: #{room.room_type}
+                - var myType = [];
+                if room.room_type === "Public"
+                   - myType = ["Public", "Private"];
+                else
+                   - myType = ["Private", "Public"];
+                select(style="display:block;" name="room_type")
+                    each val, index in myType
+                        if val === room.room_type
+                            option(value=val selected= true ) #{ val }
+                        else
+                            option(value=val selected= false) #{val}
+
+            div#formButton
+                button.btn(type="submit") submit
+                a(href="/user/room")
+                    button.btn#cancelButton(type="button") Cancel

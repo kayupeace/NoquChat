@@ -1,0 +1,38 @@
+.container(style='padding:100px 0px;')
+h1(style='text-align: center;')
+img(onload='edit()', src="{% static 'imgs/edit.png' %}", alt='edit', height='42', width='42')
+|  Edit My Resume
+.row
+.col-md-10.col-md-offset-1
+.panel.panel-default.panel-table
+.panel-body
+table.table.table-striped.table-bordered.table-list
+thead
+tr
+th#profile-chevron-up(width='20%;', style='display: table-cell; text-align: center;')
+a.btn.btn-info(href='javascript:hideProfile();')
+i.fa.fa-chevron-up(aria-hidden='true')
+th#profile-chevron-down(width='20%;', style='display: none; text-align: center;')
+a.btn.btn-info(href='javascript:hideProfile();')
+i.fa.fa-chevron-down(aria-hidden='true')
+th(width='40%;') User Profile
+th(width='40%', style='text-align: center;')
+a.btn.btn-default(style='', href="{% url 'user_profile' user_pk=user.pk%}")
+em.fa.fa-pencil
+table.table.table-striped.table-bordered.table-list
+tbody#profile(style='display: none;')
+tr
+td(style='text-align: center;')
+table.table
+tbody
+tr
+div(style='font-size: 18px;')
+b First Name:
+| {{ user.first_name}} &nbsp&nbsp
+b Last Name:
+| {{user.last_name}}
+img(width='300px;', height='300px;', src='{{ my_user_profile.picture.url }}')
+img(width='300px;', height='300px;"', src="{% static 'imgs/photo.jpg' %}")
+br
+hr
+br

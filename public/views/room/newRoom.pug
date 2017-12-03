@@ -4,7 +4,7 @@ block content
         div#title
             h3 #{title}
                 h4 #{error}
-        form(name="newRoom",method="post",action="/user/room/newroom")
+        form(name="newRoom",method="post",action=action )
             p Room Name
             input(type="text", placeholder="New Room", name="title")
             p Description
