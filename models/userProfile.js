@@ -30,6 +30,10 @@ var profileSchema = new Schema({
         type : String,
         trim: true
     },
+    imagePublicId: {
+        type : String,
+        trim: true
+    },
     DOB: {
         type: Date,
         default: Date.now,
