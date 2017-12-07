@@ -29,11 +29,11 @@ block content
             .col-md-4.mb-4
                 .card.h-100
                     .card-body
-                        h2.card-title Task TODO:
+                        h2.card-title User Profile
                         |
                         p.card-text
                         p
-                            a(href="/user/profile") Profile
+                            a(href="/user/profile") My Profile
                     |
                     .card-footer
                         a.btn.btn-primary(href='#') More Info
@@ -41,15 +41,17 @@ block content
             .col-md-4.mb-4
                 .card.h-100
                     .card-body
-                        h2.card-title Card Two
+                        h2.card-title My Service
                         |
                         p.card-text
                             |
                         if session === true
-                            a(href="/user/room") Exisitng Game Room
-                            a(href="/user/config") Exisitng Config Room
+                            div
+                                a(href="/user/room") My Game Room
+                            div
+                                a(href="/user/config") My Config Room
                         else
-                            p hide content （you need login to check out content)
+                            p you need login to check your services
                     |
                     .card-footer
                         a.btn.btn-primary(href='#') More Info
@@ -57,7 +59,7 @@ block content
             .col-md-4.mb-4
                 .card.h-100
                     .card-body
-                        h2.card-title Card Three
+                        h2.card-title Something else
                         |
                         p.card-text
                             |

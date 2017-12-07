@@ -25,9 +25,9 @@ block content
                                             th#profile-chevron-down(width='20%;', style='display: none; text-align: center;')
                                                 a.btn.btn-info(href='javascript:hideProfile();')
                                                     i.fa.fa-chevron-down(aria-hidden='true')
-                                            th(width='40%;') User Profile
+                                            th(width='40%;') Create New Room
                                             th(width='40%', style='text-align: center;')
-                                                a.btn.btn-default(style='', href="{% url 'user_profile' user_pk=user.pk%}")
+                                                a.btn.btn-default(style='', href="/user/room/newroom")
                                                     em.fa.fa-pencil
                                 table.table.table-striped.table-bordered.table-list
                                     tbody#profile()

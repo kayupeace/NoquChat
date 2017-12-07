@@ -25,10 +25,14 @@ block content
                                             th#profile-chevron-down(width='20%;', style='display: none; text-align: center;')
                                                 a.btn.btn-info(href='javascript:hideProfile();')
                                                     i.fa.fa-chevron-down(aria-hidden='true')
-                                            th(width='40%;') User Profile
+                                            th(width='40%;') Create Config
                                             th(width='40%', style='text-align: center;')
-                                                a.btn.btn-default(style='', href="{% url 'user_profile' user_pk=user.pk%}")
-                                                    em.fa.fa-pencil
+                                                div
+                                                    a.btn.btn-default(style='', href="/user/config/newconfig")
+                                                        em.fa.fa-pencil Create Config
+                                                div
+                                                    a.btn.btn-default(style='', href="/user/room/newconfig")
+                                                        em.fa.fa-pencil Create Room
                                 table.table.table-striped.table-bordered.table-list
                                     tbody#profile()
                                         tr
@@ -37,7 +41,7 @@ block content
                                                     tbody
                                                     div
                                                     - var counter = 0;
-                                                    each asset in assets
+                                                    each asset in configs
                                                         tr
                                                             - counter ++
                                                             div #{ counter }
@@ -57,5 +61,20 @@ block content
                                                 table.table
                                                     tbody
                                                     div
+                                                    - var counter = 0;
+                                                    each asset in rooms
                                                         tr
-                                                            a(href="/user/config/newconfig") create new config
+                                                            - counter ++
+                                                            div #{ counter }
+                                                            div Config Id: #{ asset._id } &nbsp&nbsp&nbsp
+                                                            div Title: #{ asset.title }
+                                                            - var time = asset.create_at.toISOString().split('T')[0];
+                                                            div Config Owner: #{ asset.owner } &nbsp&nbsp&nbsp
+                                                            div #{ time }
+                                                            div Config Description: #{ asset.description }
+                                                            div
+                                                                a.btn(href="/user/room/" + asset._id + "/edit") edit room
+                                                            div
+                                                                form(name="newCofig",method="post",action="/user/room/" + asset._id + "/delete")
+                                                                    button.btn(type="submit") delete
+                                                            br
