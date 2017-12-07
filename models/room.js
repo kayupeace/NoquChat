@@ -8,6 +8,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var User = require(__base + 'models/user.js');
+var config = require(__base + 'models/roomConfigRule.js');
 
 /*  1. Timed  2. OneWinner  3. Nolimit*/
 var RoomType = {
@@ -50,6 +51,9 @@ var roomSchema = new Schema({
     room_owner:{
         type: Schema.Types.ObjectId, ref: 'User',
         required: true
+    },
+    room_cofig:{
+        type: Schema.Types.ObjectId, ref: 'roomconfigrule'
     }
 });
 

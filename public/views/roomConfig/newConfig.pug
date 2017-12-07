@@ -1,0 +1,15 @@
+extends ../share/layout
+block content
+    div.container
+        div#title
+            h3 #{title}
+                h4 #{error}
+        form(name="newConfig", method="post", action=action )
+            p Room Name
+            input(type="text", placeholder="New Config Title", name="title")
+            p Description
+            input(type="text", placeholder="Welcome to my room", name="description")
+            div#formButton
+                button.btn(type="submit") submit
+                a(href="/user/config")
+                    button.btn#cancelButton(type="button") Cancel
