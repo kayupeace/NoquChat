@@ -9,7 +9,7 @@ block content
             input(type="text", placeholder="New Room", name="title" value=room.title)
             p Description
             input(type="text", placeholder="Welcome to my room", name="description" value=room.description)
-            p Type: #{room.room_type}
+            p Type:
                 - var myType = [];
                 if room.room_type === "Public"
                    - myType = ["Public", "Private"];
@@ -17,11 +17,22 @@ block content
                    - myType = ["Private", "Public"];
                 select(style="display:block;" name="room_type")
                     each val, index in myType
-                        if val === room.room_type
-                            option(value=val selected= true ) #{ val }
-                        else
-                            option(value=val selected= false) #{val}
-
+                        option(value=val) #{val}
+            p Room Config:
+                - var myType = configs;
+                - var optionList
+                if room.room_config
+                    - optionList = [room.room_config];
+                    each val in myType
+                        if val._id.toString() !== room.room_config.toString()
+                            - optionList.push(val._id);
+                else
+                    - optionList = [ null ];
+                    each val in myType
+                        - optionList.push(val._id);
+                select(style="display:block;" name="room_config")
+                    each option in optionList
+                        option(type="text", value=option) #{ option }
             div#formButton
                 button.btn(type="submit") submit
                 a(href="/user/room")

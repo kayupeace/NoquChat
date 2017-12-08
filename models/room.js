@@ -52,7 +52,7 @@ var roomSchema = new Schema({
         type: Schema.Types.ObjectId, ref: 'User',
         required: true
     },
-    room_cofig:{
+    room_config:{
         type: Schema.Types.ObjectId, ref: 'roomconfigrule'
     }
 });
