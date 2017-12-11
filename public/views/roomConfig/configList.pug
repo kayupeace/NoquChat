@@ -25,14 +25,15 @@ block content
                                             th#profile-chevron-down(width='20%;', style='display: none; text-align: center;')
                                                 a.btn.btn-info(href='javascript:hideProfile();')
                                                     i.fa.fa-chevron-down(aria-hidden='true')
-                                            th(width='40%;') Create Config
+                                            th(width='40%;')
+                                                div
+                                                    a.btn.btn-default(style='', href="/user/room/newroom")
+                                                        em.fa.fa-pencil Create Room
                                             th(width='40%', style='text-align: center;')
                                                 div
                                                     a.btn.btn-default(style='', href="/user/config/newconfig")
                                                         em.fa.fa-pencil Create Config
-                                                div
-                                                    a.btn.btn-default(style='', href="/user/room/newroom")
-                                                        em.fa.fa-pencil Create Room
+
                                 table.table.table-striped.table-bordered.table-list
                                     tbody#profile()
                                         tr
@@ -40,6 +41,8 @@ block content
                                                 table.table
                                                     tbody
                                                     div
+                                                        tr
+                                                            h2 My Config List
                                                     - var counter = 0;
                                                     each asset in configs
                                                         tr
@@ -61,12 +64,15 @@ block content
                                                 table.table
                                                     tbody
                                                     div
+                                                        tr
+                                                            h2 My Room List
                                                     - var counter = 0;
                                                     each asset in rooms
                                                         tr
                                                             - counter ++
                                                             div #{ counter }
                                                             div Config Id: #{ asset._id } &nbsp&nbsp&nbsp
+                                                            div room id: #{asset.room_uuid}
                                                             div Title: #{ asset.title }
                                                             - var time = asset.create_at.toISOString().split('T')[0];
                                                             div Config Owner: #{ asset.owner } &nbsp&nbsp&nbsp
