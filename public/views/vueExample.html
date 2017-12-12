@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ToDo List</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+<div id="example">
+    <Todo></Todo>
+</div>
+</body>
+</html>
+
+<script>
+
+    var data = {
+        todos: [{
+            title: 'Todo A',
+            project: 'Project A',
+            done: false,
+        }, {
+            title: 'Todo B',
+            project: 'Project B',
+            done: true,
+        }, {
+            title: 'Todo C',
+            project: 'Project C',
+            done: false,
+        }, {
+            title: 'Todo D',
+            project: 'Project D',
+            done: false,
+        }]
+    };
+
+    Vue.component('Todo', {
+        data: function() {
+        return data;
+    },
+        template: `
+            <div>
+    // JavaScript expressions in Vue are enclosed in double curly brackets.
+    <p>Completed Tasks: {{todos.filter(todo =&gt; {return todo.done === true}).length}}</p>
+    <p>Pending Tasks: {{todos.filter(todo =&gt; {return todo.done === false}).length}}</p>
+    <div class="ui centered card">
+      <div class="content">
+        <div class="header">
+          {{ todo.title }}
+        </div>
+        <div class="meta">
+          {{ todo.project }}
+        </div>
+        <div class="extra content">
+          <span>
+            <i></i>
+          </span>
+        </div>
+      </div>
+      <div class="ui bottom attached green basic button">
+        Completed
+      </div>
+      <div class="ui bottom attached red basic button">
+        Complete
+      </div>
+  </div>
+        `
+
+    });
+
+
+    new Vue({
+        el: '#example'
+    })
+
+
+</script>

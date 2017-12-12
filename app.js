@@ -56,7 +56,7 @@ passport.deserializeUser(function(obj, cb) {
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.listen((process.env.PORT || 5000));
+var server = app.listen((process.env.PORT || 5000));
 app.use(expressValidator()); // Add this after the bodyParser middlewares! for validation
 
 app.use(cookieParser());
@@ -90,6 +90,18 @@ app.use(function(req, res, next){
 
 // Serve static files on /public
 app.use('/assets', express.static('./public/assets'));
+
+var chatServer = require('./lib/services/chat.js');
+chatServer.chatServer(server);
+//var http = require('http').Server(app);
+//var io = require('socket.io').listen(server);
+//io.on('connection', function(socket){
+//    console.log('connect');
+//    socket.on('chat message', function(msg){
+//        io.emit('chat message', msg);
+        //console.log('message: ' + msg);
+//    });
+//});
 
 var router = require('./lib/router');
 router(app);

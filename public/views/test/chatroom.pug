@@ -1,0 +1,13 @@
+extends ../share/layout
+block content
+    div.container
+        div#title
+            h3 #{title}
+                h4 #{error}
+        form(name="newConfig", method="post", action='/user/chat/chatroom' )
+            p Enter Your Room Id
+            input(type="text", placeholder="5342", name="roomId")
+            div#formButton
+                button.btn(type="submit") submit
+                a(href="/user/config")
+                    button.btn#cancelButton(type="button") Cancel
