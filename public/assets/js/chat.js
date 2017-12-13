@@ -247,6 +247,22 @@ $(function() {
             }
         }
     });
+    $("#nickName").click(function(){
+        if (username) {
+            alert('Already had a nickName')
+        } else {
+            setUsername();
+        }
+    });
+    $("#message").click(function(){
+        if (username) {
+            sendMessage();
+            socket.emit('stop typing');
+            typing = false;
+        } else {
+            setUsername();
+        }
+    });
 
     $inputMessage.on('input', function() {
         updateTyping();

@@ -2,8 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Socket.IO Chat Example</title>
     <link rel="stylesheet" href="/assets/css/chat.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Noqu - Why wait when there's Noqu?</title>
+    <link rel="stylesheet" href="/assets/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/materialize.min.js"></script>
+
 </head>
 <body>
 <ul class="pages">
@@ -11,12 +19,14 @@
         <div class="chatArea">
             <ul class="messages"></ul>
         </div>
-        <input class="inputMessage" placeholder="Type here..."/>
+        <input id="inputMessage" class="inputMessage" placeholder="Type here..."/>
+        <button class="btn" id="message">Submit</button>
     </li>
     <li class="login page">
         <div class="form">
             <h3 class="title">What's your nickname?</h3>
             <input class="usernameInput" type="text" maxlength="14" />
+            <button class="btn" id="nickName">Submit</button>
         </div>
     </li>
 </ul>

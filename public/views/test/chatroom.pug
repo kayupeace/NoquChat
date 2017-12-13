@@ -5,8 +5,8 @@ block content
             h3 #{title}
                 h4 #{error}
         form(name="newConfig", method="post", action='/user/chat/chatroom' )
-            p Enter Your Room Id
-            input(type="text", placeholder="5342", name="roomId")
+            p Enter Your Room Id:
+            input(type="text", placeholder="eg: 5342", name="roomId")
             div#formButton
                 button.btn(type="submit") submit
                 a(href="/user/config")

@@ -68,7 +68,7 @@ ul {
     outline: none;
     padding-bottom: 15px;
     text-align: center;
-    width: 400px;
+    width: 60%;
 }
 
 .login.page .title {
@@ -145,4 +145,19 @@ ul {
     position: absolute;
     right: 0;
     width: 100%;
+}
+
+button#nickName {
+    width: 30%;
+}
+
+button#message {
+    width: 30%;
+    position: fixed;
+    bottom: 20px;
+    right: 10px;
+}
+
+input#inputMessage{
+    width: 60% !important;
 }
