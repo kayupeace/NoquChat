@@ -37,7 +37,6 @@ $(function() {
         return "";
     }
 
-
     var FADE_TIME = 150; // ms
     var TYPING_TIMER_LENGTH = 400; // ms
     var COLORS = [
@@ -80,13 +79,12 @@ $(function() {
 
         // If the username is valid
         if (username) {
-            $loginPage.fadeOut();
-            $chatPage.show();
-            $loginPage.off('click');
-            $currentInput = $inputMessage.focus();
-
             // Tell the server your username
-            socket.emit('add user', username);
+            var data = {
+                username: username,
+                chatroom: getCookie("chatRoom")
+            };
+            socket.emit('add user', data);
         }
     }
 
@@ -249,7 +247,7 @@ $(function() {
     });
     $("#nickName").click(function(){
         if (username) {
-            alert('Already had a nickName')
+            alert('Already had a nickName and seems like your have trouble, contact to site manager')
         } else {
             setUsername();
         }
@@ -284,6 +282,11 @@ $(function() {
 
     // Whenever the server emits 'login', log the login message
     socket.on('login', function (data) {
+        $loginPage.fadeOut();
+        $chatPage.show();
+        $loginPage.off('click');
+        $currentInput = $inputMessage.focus();
+
         connected = true;
         // Display the welcome message
         var message = "Welcome to kevin Chat – ";
@@ -291,6 +294,12 @@ $(function() {
             prepend: true
         });
         addParticipantsMessage(data);
+    });
+
+    socket.on('Invalid Room', function (data) {
+        console.log("invalid");
+        let $usernameInput = $('#hint'); // Input for username
+        $usernameInput.text('Invalid room id');
     });
 
     // Whenever the server emits 'new message', update the chat body

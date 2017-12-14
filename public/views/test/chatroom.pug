@@ -1,11 +1,12 @@
 extends ../share/layout
+block extraHeader
+    <script src="/socket.io/socket.io.js"></script>
 block content
     div.container
         div#title
-            h3 #{title}
-                h4 #{error}
+            h3 #{error}
         form(name="newConfig", method="post", action='/user/chat/chatroom' )
-            p Enter Your Room Id:
+            p Enter Your Room Id (Room Id " Hy4Rqryzf " is open for testing):
             input(type="text", placeholder="eg: 5342", name="roomId")
             div#formButton
                 button.btn(type="submit") submit

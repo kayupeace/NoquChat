@@ -8,23 +8,47 @@
 <body>
 <div id="example">
     <Todo></Todo>
+    <span v-if="seen">Now you see me</span>
+    <span v-else>
+        Now You see me 2
+    </span>
 </div>
+
+<aa>
+<div id="app-7">
+    <div v-bind:hello=text> {{hello}} </div>
+    <ol>
+        <!--
+          Now we provide each todo-item with the todo object
+          it's representing, so that its content can be dynamic.
+          We also need to provide each component with a "key",
+          which will be explained later.
+        -->
+        <todo-item
+                v-for="item in groceryList"
+                v-bind:todo="item"
+                >
+        </todo-item>
+    </ol>
+</div>
+</aa>
+
 </body>
 </html>
 
 <script>
 
-    var data = {
+    var mydata = {
         todos: [{
-            title: 'Todo A',
+            title: 'Learn JavaScript',
             project: 'Project A',
             done: false,
         }, {
-            title: 'Todo B',
+            title: 'Learn Vue',
             project: 'Project B',
             done: true,
         }, {
-            title: 'Todo C',
+            title: 'Build something awesome',
             project: 'Project C',
             done: false,
         }, {
@@ -34,44 +58,110 @@
         }]
     };
 
-    Vue.component('Todo', {
-        data: function() {
-        return data;
+
+    Vue.component('TodoList', {
+    data: function() {
+        return {
+            todos: mydata.todos
+        };
     },
-        template: `
-            <div>
+    template: `
+    <div v-for="todo in todos">
     // JavaScript expressions in Vue are enclosed in double curly brackets.
     <p>Completed Tasks: {{todos.filter(todo =&gt; {return todo.done === true}).length}}</p>
     <p>Pending Tasks: {{todos.filter(todo =&gt; {return todo.done === false}).length}}</p>
     <div class="ui centered card">
-      <div class="content">
+        <div class="content">
         <div class="header">
-          {{ todo.title }}
+        {{ todo.title }}
+    </div>
+    <div class="meta">
+        {{ todo.project }}
+    </div>
+    <div class="extra content">
+        <span>
+        <i></i>
+        </span>
         </div>
-        <div class="meta">
-          {{ todo.project }}
         </div>
-        <div class="extra content">
-          <span>
-            <i></i>
-          </span>
-        </div>
-      </div>
-      <div class="ui bottom attached green basic button">
+        <div class="ui bottom attached green basic button">
         Completed
-      </div>
-      <div class="ui bottom attached red basic button">
+        </div>
+        <div class="ui bottom attached red basic button">
         Complete
-      </div>
-  </div>
+        </div>
+        </div>
         `
-
     });
 
 
-    new Vue({
-        el: '#example'
-    })
+    Vue.component('Todo', {
+        data: function() {
+            return {
+                todos: mydata.todos,
+                message: 'You loaded this page on ' + new Date().toLocaleString(),
+                seen: false
+            };
+        },
+        methods: {
+            changeValue: function (todo) {
+                //console.log(this.todos);
+                todo.title = todo.title.split('').reverse().join('')
+            }
+        },
+        template: `
+        <div>
+            <div v-bind:title="message">
+                    some text here  {{message}}
+            </div>
+            <input style="width: 100%;" v-model="message">
+            <ol>
+                <li v-if="seen">
+                    Now you see me 1
+                </li>
+                <li v-else>
+                    Now You see me 2
+                </li>
+            </ol>
+            <ol>
+                <li v-for="todo in todos">
+                    {{ todo.title }}
+                    <button v-on:click="changeValue(todo)">Change Message</button>
+                </li>
+            </ol>
+        </div>
+        `
+    });
 
+
+    var app3 = new Vue({
+        el: '#example',
+        data: {
+            seen: true
+        }
+    });
+
+    Vue.component('todo-item', {
+        props: ['todo'],
+        template: '<li>{{ todo.text }}</li>'
+    });
+
+    Vue.component('aa', {
+        data:{
+            text: "aaaaaa"
+        }
+    });
+
+    var app7 = new Vue({
+        el: '#app-7',
+        props: ['hello'],
+        data: {
+            groceryList: [
+                { id: 0, text: 'Vegetables' },
+                { id: 1, text: 'Cheese' },
+                { id: 2, text: 'Whatever else humans are supposed to eat' }
+            ],
+        }
+    })
 
 </script>
