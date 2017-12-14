@@ -1,17 +1,22 @@
 
 $(function() {
+
     var roomid = "room1";
+    /**
     function switchRoom(room){
         roomid = room;
         socket.emit('switchRoom', room);
     }
+    **/
 
-    var e = document.getElementById("roomid");
-    s = e.options[e.selectedIndex].value;
+    //var e = document.getElementById("roomid");
+    //s = e.options[e.selectedIndex].value;
+
     //v = e.options[e.selectedIndex].label;
     //console.log(v);
     //j = e.options[e.selectedIndex].text;
-    console.log(s);
+    //console.log(s);
+    /**
     e.onchange = function() {
         s = e.options[e.selectedIndex].value;
         console.log(s);
@@ -21,6 +26,7 @@ $(function() {
         //j = e.options[e.selectedIndex].text;
         //console.log(j);
     };
+     **/
 
     function getCookie(cname) {
         var name = cname + "=";
@@ -78,6 +84,7 @@ $(function() {
         username = cleanInput($usernameInput.val().trim());
 
         // If the username is valid
+
         if (username) {
             // Tell the server your username
             var data = {
@@ -246,11 +253,11 @@ $(function() {
         }
     });
     $("#nickName").click(function(){
-        if (username) {
-            alert('Already had a nickName and seems like your have trouble, contact to site manager')
-        } else {
+        //if (username) {
+        //    alert('Already had a nickName and seems like your have trouble, contact to site manager')
+        //} else {
             setUsername();
-        }
+       // }
     });
     $("#message").click(function(){
         if (username) {
