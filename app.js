@@ -10,6 +10,7 @@ var cookieParser = require('cookie-parser');
 var config = require('./lib/config/config.js').get(process.env.NODE_ENV);
 var expressValidator = require('express-validator');
 var engines = require('consolidate');
+var ejs_local = require('ejs-locals');
 
 //var databaseEnvironment = process.env.MONGODB_URI;
 //var db = mongoose.connect(process.env.MONGODB_URI);
@@ -31,7 +32,7 @@ console.log("Current Environment is : " + process.env.NODE_ENV);
 // view engine setup
 app.set('views', path.join(__dirname, 'public/views'));
 app.set('controllers', path.join(__dirname, 'lib/controllers'));
-app.engine('html', engines.ejs);
+app.engine('html', ejs_local);
 app.set('view engine', 'pug');
 
 // serve static file   eg: /assets/css/example

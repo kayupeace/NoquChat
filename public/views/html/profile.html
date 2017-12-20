@@ -1,0 +1,68 @@
+<style>
+    body{padding-top:30px;}
+
+    .glyphicon {  margin-bottom: 10px;margin-right: 10px;}
+
+    small {
+        display: block;
+        line-height: 1.428571429;
+        color: #999;
+    }
+</style>
+<% layout('/html/share/layout.html') -%>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1></h1>
+            <p>User Name: <%= UserData.userName %> </p>
+            <p>Email:  <%= UserData.email %> </p>
+            <p>Gender: <%= UserData.gender %> </p>
+            <p>Date Of Birth: <%= UserData.DOB %></p>
+            <img style="width: 400px; height: 250px" src="<%= UserData.imagePath %>"/>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>User Information</h1>
+        <form name="EditProfile" method="post" action="/user/profile">
+            <p>User Name:
+                <input type="text" name="username"/>
+            </p>
+            <p>
+                <button type="submit">submit to edit profile page</button>
+            </p>
+        </form>
+    </div>
+
+    <div class="container">
+        <h1>Change Password </h1>
+            <form name="ChangePassword" method="post" action="/user/resetPassword">
+            <p>User Name:
+                <input type="text" placeholder="Password Length should be &gt;= 5" name="password"/>
+            </p>
+            <p>
+                <button type="submit">submit to reset password</button>
+            </p>
+        </form>
+    </div>
+
+    <div class="container">
+        <h1>Update Your Profile 2017</h1>
+        <form enctype="multipart/form-data" name="ChangePassword" method="post" action="/user/editProfile">
+            <p> Date Of Birth
+                <input type="date" value="2017-12-19" name="dateOfBirth"/>
+            </p>
+            <p>Gender:
+                <select style="display:block" name="gender"></select>
+            </p>
+            <option></option>
+            <p>Image
+                <input type="file" name="file"/>
+            </p>
+            <p>
+                <button type="submit">submit to update</button>
+            </p>
+        </form>
+    </div>
+</div>

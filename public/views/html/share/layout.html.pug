@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Noqu - Why wait when there's Opportunity</title>
+    <!-- Stylesheets-->
+    <link rel="stylesheet" href="/assets/css/materialize.min.css">
+    <link rel="stylesheet" href="/assets/css/noqubot.css">
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Scripts-->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/materialize.min.js"></script>
+    <script src="/assets/js/noqubot.js"></script>
+    <%-blocks.header%>
+</head>
+<body>
+<nav>
+    <div class="nav-wrapper grey darken-4"><a class="brand-logo" href="/">noQu</a><a href="/"><img id="sticker" src="/assets/img/cat.gif"></a><a class="button-collapse right" href="#" data-activates="mobile-menu"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down" id="nav-mobile">
+            <li><a href="#">About</a></li>
+            <li><a class="button-collapse" href="#" data-activates="desktop-menu">My Account</a></li>
+            <li><a href="#">Help</a></li>
+        </ul>
+        <ul class="side-nav" id="desktop-menu">
+            <li>
+                <div class="userView">
+                    <div class="background"><img src="/assets/img/bg.jpg"></div><a href="#!user"><img class="circle user-logo" src="/assets/img/user.png"></a><a href="#!name"><span class="white-text name">John Doe</span></a><a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
+                </div>
+            </li>
+            <li><a href="/user/profile">Profile</a></li>
+            <li><a href="/user/logout">Logout</a></li>
+        </ul>
+        <ul class="side-nav" id="mobile-menu">
+            <!-- .hide-on-med-and-up-->
+            <li>
+                <div class="userView">
+                    <div class="background"><img src="/assets/img/bg.jpg"></div><a href="#!user"><img class="circle user-logo" src="/assets/img/user.png"></a><a href="#!name"><span class="white-text name">John Doe</span></a><a href="#!email"><span class="white-text email">sample@gmail.com</span></a>
+                </div>
+            </li>
+            <li><a href="#">About</a></li>
+            <li><a href="/user/profile">Profile</a></li>
+            <li><a href="/user/logout">Logout</a></li>
+            <li><a href="#">Help</a></li>
+        </ul>
+    </div>
+</nav>
+<!-- loading block content-->
+<%-body -%>
+</body>
+</html>
