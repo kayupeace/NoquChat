@@ -144,3 +144,11 @@ app.use(function(req, res, next) {
 
 // Router
 require('./app/router')(app);
+
+
+function stop() {
+    server.close();
+}
+
+module.exports = server;
+module.exports.stop = stop;
