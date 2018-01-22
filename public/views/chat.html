@@ -1,35 +1,32 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="/assets/css/chat.css">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Noqu - Why wait when there's Noqu?</title>
-    <link rel="stylesheet" href="/assets/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="/assets/js/jquery.min.js"></script>
-    <script src="/assets/js/materialize.min.js"></script>
+<link rel="stylesheet" href="/assets/css/chat.css">
+<link rel="stylesheet" href="/assets/css/materialize.min.css">
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/materialize.min.js"></script>
 
-</head>
-<body>
-<ul class="pages">
-    <li class="chat page">
-        <div class="chatArea">
-            <ul class="messages"></ul>
-        </div>
-        <input id="inputMessage" class="inputMessage" placeholder="Type here..."/>
-        <button class="btn" id="message">Submit</button>
-    </li>
-    <li class="login page">
-        <div class="form">
-            <h3 class="title">What's your nickname?</h3>
-            <input class="usernameInput" type="text" maxlength="14" />
-            <button class="btn" id="nickName">Submit</button>
-            <h3 class="title" id="hint"></h3>
-        </div>
-    </li>
-</ul>
+<style>
+    body{
+        overflow: hidden;
+    }
+</style>
+<% layout('/html/share/layout.html') -%>
+    <ul class="pages">
+        <li class="chat page">
+            <div class="chatArea">
+                <ul class="messages"></ul>
+            </div>
+            <input id="inputMessage" class="inputMessage" placeholder="Type here..."/>
+            <button class="btn" id="message">Submit</button>
+        </li>
+        <li class="login page">
+            <div class="form">
+                <h3 class="title">What's your nickname?</h3>
+                <input class="usernameInput" type="text" maxlength="14" />
+                <button class="btn" id="nickName">Submit</button>
+                <h3 class="title" id="hint"></h3>
+            </div>
+        </li>
+    </ul>
 <!--
     <select id="roomid" style="position: fixed;top: 10px; height:2rem; width: 80px; display: -webkit-box;">
         <option value="room1">Room 1</option>
@@ -37,8 +34,5 @@
         <option value="room3">Room 3</option>
     </select>
 -->
-<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/assets/js/chat.js"></script>
-</body>
-</html>
