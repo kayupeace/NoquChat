@@ -333,7 +333,9 @@ $(function() {
     });
 
     socket.on('Invalid Room', function (data) {
-        console.log("invalid");
+        setCookie("chatRoomError", getCookie("chatRoom"), new Date() + 9999);
+        //res.cookie('chatRoomError', room_id, {expire: new Date() + 9999});
+        //console.log(getCookie("chatRoom"));
         let $usernameInput = $('#hint'); // Input for username
         $usernameInput.text('Invalid room id');
     });
