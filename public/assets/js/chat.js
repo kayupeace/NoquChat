@@ -42,6 +42,15 @@ $(function() {
         }
         return "";
     }
+    function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        var expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+    //console.log(getCookie("chatRoom"));
+    //setCookie("nickName", "kevin", new Date() + 9999);
+    //console.log(getCookie("nickName"));
 
     var FADE_TIME = 150; // ms
     var TYPING_TIMER_LENGTH = 400; // ms
@@ -62,6 +71,7 @@ $(function() {
 
     // Prompt for setting a username
     var username;
+
     var connected = false;
     var typing = false;
     var lastTypingTime;
@@ -81,17 +91,24 @@ $(function() {
 
     // Sets the client's username
     function setUsername () {
-        username = cleanInput($usernameInput.val().trim());
-
-        // If the username is valid
-
-        if (username) {
-            // Tell the server your username
+        if(username){
             var data = {
                 username: username,
                 chatroom: getCookie("chatRoom")
             };
             socket.emit('add user', data);
+        }else {
+            username = cleanInput($usernameInput.val().trim());
+            // If the username is valid
+            if (username) {
+                // Tell the server your username
+                var data = {
+                    username: username,
+                    chatroom: getCookie("chatRoom")
+                };
+                setCookie("nickName", username, new Date() + 9999);
+                socket.emit('add user', data);
+            }
         }
     }
 
@@ -233,6 +250,18 @@ $(function() {
         var index = Math.abs(hash % COLORS.length);
         return COLORS[index];
     }
+
+    // pre-load event
+
+
+    var nickName = getCookie("nickName");
+    if(nickName === ""){
+
+    }else {
+        username = nickName;
+        setUsername();
+    }
+    //console.log(getCookie("nickName"));
 
     // Keyboard events
 

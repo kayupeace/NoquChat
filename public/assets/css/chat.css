@@ -123,6 +123,12 @@ ul {
     padding: 10px 20px 10px 20px;
 }
 
+.message {
+    width: 70%;
+    max-height: 50%;
+    overflow-y: scroll;
+}
+
 .message.typing .messageBody {
     color: gray;
 }
@@ -163,3 +169,29 @@ input#inputMessage{
     width: 60% !important;
     margin-left: 10px; !important;
 }
+
+
+/*
+    customer scroll bar style
+ */
+
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    /* Track */
+    /**
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+    **/
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
