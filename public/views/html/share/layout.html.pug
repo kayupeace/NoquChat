@@ -44,8 +44,14 @@
                 </div>
             </li>
             <li><a href="#">About</a></li>
-            <li><a href="/user/profile">Profile</a></li>
-            <li><a href="/user/logout">Logout</a></li>
+            <%if (session === false) { %>
+            <li><a href="/registration">Registration</a></li>
+            <li><a href="/login">Login</a></li>
+            <% } else {%>
+                <li><a href="/user/profile">Profile</a></li>
+                <li><a href="/user/logout">Logout</a></li>
+            <% } %>
+
             <li><a href="#">Help</a></li>
         </ul>
     </div>

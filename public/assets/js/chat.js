@@ -375,6 +375,7 @@ $(function() {
 
     socket.on('reconnect', function () {
         log('you have been reconnected');
+
         if (username) {
             socket.emit('add user', username);
         }
