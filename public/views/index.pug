@@ -11,10 +11,10 @@ block content
                 img#headImage.img-fluid.rounded(src='http://res.cloudinary.com/he3vux9xr/image/upload/v1512625477/site/fallout_fbwuvq.jpg', alt='')
             // /.col-lg-8
             .col-lg-4
-                h1 Our Business : Be Success
+                h1 Our Goal : Better
                 |
                 p
-                    |  What are you waiting for? join us right now, all registration and account are free to use!!!!
+                    |  What are you waiting for? join us right now, all services are free!!!
                 |
                 a.btn.btn-primary.btn-lg(href='/registration') Register
             // /.col-md-4
@@ -23,20 +23,31 @@ block content
         .card.text-white.bg-secondary.my-4.text-center
             .card-body
                 p.text-white.m-0
-                    | Noqu Bot
+                    | Noqu Bot: a Real-Time online chat web application
         // Content Row
         .row
             .col-md-4.mb-4
                 .card.h-100
                     .card-body
-                        h2.card-title User Profile
+                        h2.card-title User Services
                         |
                         p.card-text
-                        p
-                            a(href="/user/profile") My Profile
-                    |
+                        if session === true
+                            div
+                                a.btn.btn-primary.service(href="/user/profile") My Profile
+                            div
+                                a.btn.btn-primary.service(href="/user/room") My Game Room
+                            div
+                                a.btn.btn-primary.service(href="/user/config") My Config Room
+                        else
+                            //p you need login to check other services
+                            div
+                                a.btn.btn-primary.service(href='/registration') Register
+                            div
+                                a.btn.btn-primary.service(href='/login') Login
+
                     .card-footer
-                        a.btn.btn-primary(href='#') More Info
+                        //a.btn.btn-primary(href='#') More Info
             // /.col-md-4
             .col-md-4.mb-4
                 .card.h-100
@@ -45,20 +56,12 @@ block content
                         |
                         p.card-text
                             |
-                        if session === true
-                            div
-                                a(href="/user/room") My Game Room
-                            div
-                                a(href="/user/config") My Config Room
-                            div
-                                a(href="/user/chat") My chat room
-                        else
-                            div
-                                a(href="/user/chat") My chat room
-                            p you need login to check other services
+                        div
+                            a.btn.btn(href="/user/chat") My chat room
+
                     |
                     .card-footer
-                        a.btn.btn-primary(href='#') More Info
+                        //a.btn.btn-primary(href='#') More Info
             // /.col-md-4
             .col-md-4.mb-4
                 .card.h-100
@@ -68,11 +71,12 @@ block content
                         p.card-text
                             |
                         p
-                            a(href="/test") Testing Function Link (only available if under dev environment)
+                            div 👈 My Chat Room Does not require login/Registration, Try it free
+                            //a(href="/test") Testing Function Link (only available if under dev environment)
 
                     |
                     .card-footer
-                        a.btn.btn-primary(href='#') More Info
+                        //a.btn.btn-primary(href='#') More Info
             // /.col-md-4
         // /.row
     // /.container

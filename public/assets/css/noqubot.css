@@ -100,3 +100,7 @@ img#sticker{
 a.btn.btn-primary.btn-lg {
   line-height: initial;
 }
+a.btn.btn-primary.service {
+  width: 100%;
+  margin-bottom: 10px;
+}
