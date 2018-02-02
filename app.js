@@ -96,18 +96,6 @@ app.use('/assets', express.static('./public/assets'));
 
 var chatServer = require('./lib/services/chat.js');
 chatServer.chatServer(server);
-//var http = require('http').Server(app);
-//var io = require('socket.io').listen(server);
-//io.on('connection', function(socket){
-//    console.log('connect');
-//    socket.on('chat message', function(msg){
-//        io.emit('chat message', msg);
-        //console.log('message: ' + msg);
-//    });
-//});
-
-var router = require('./lib/router');
-router(app);
 
 //      expires: new Date(Date.now() + 60 * 10000),
 //      maxAge: 60*10000
@@ -143,12 +131,36 @@ app.use(function(req, res, next) {
 **/
 
 // Router
+var router = require('./lib/router');
+router(app);
+
 require('./app/router')(app);
 
 
+/** 404 **/
+app.use(function(req, res, next){
+    res.status(404);
+
+    // respond with html page
+    if (req.accepts('html')) {
+        res.render('error-pages/404', { url: req.url });
+        return;
+    }
+
+    // respond with json
+    if (req.accepts('json')) {
+        res.send({ error: 'Not found' });
+        return;
+    }
+
+    // default to plain-text. send()
+    res.type('txt').send('Not found');
+});
+
+
+/***  for mocha to stop server running  ***/
 function stop() {
     server.close();
 }
-
 module.exports = server;
 module.exports.stop = stop;
