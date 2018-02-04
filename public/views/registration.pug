@@ -1,21 +1,57 @@
 extends ./share/layout
+block extraHeader
+    //link(href='//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css', rel='stylesheet'
+    style(type='text/css').
+        .col-xs-12.col-sm-8.col-md-8.col-sm-offset-2.col-md-offset-3 {
+            margin-left: 20%;
+        }
+        div#my-hint {
+            text-align: center;
+            line-height: 300%;
+        }
 block content
-    div.container
-        div#title
-            h3 #{title}
-                h4 #{error}
-        form(name="addUser",method="post",action="/registration")
-            p.fa.fa-user-o  User Name
-            input#inputName(type="text", placeholder="John Smith", name="username")
-            p.fa.fa-lock  Password &nbsp
-            a.btn#eyebutton(href="#" onclick='showHidePassword()')
-                div.fa.fa-eye#eye
-            input#password(type="password", placeholder="Your Password", name="password")
-            p.fa.fa-envelope  Email
-            input#inputDob(type="text", placeholder="eample@gmail.com", name="email")
-            P#signUpMessage Have an account? &nbsp
-                a(href='/login') Log in »
-            div#formButton
-                button.btn(type="submit") submit
-                a(href="/")
-                    button.btn#cancelButton(type="button") Cancel
+    .container
+        .row
+            .col-xs-12.col-sm-8.col-md-8.col-sm-offset-2.col-md-offset-3
+                form(role='form',name="addUser",method="post",action="/registration")
+                    .omb_login
+                        h3.omb_authTitle
+                            | Please Sign Up
+                            small  It&apos;s free and always will be.
+                        | &#x9;&#x9;&#x9;
+                    hr.colorgraph
+                    | &#x9;&#x9;&#x9;
+                    //.row
+                        .col-xs-12.col-sm-6.col-md-6
+                            .form-group
+                                input#first_name.form-control.input-lg(type='text', name='first_name', placeholder='First Name', tabindex='1')
+                        | &#x9;&#x9;&#x9;&#x9;
+                        .col-xs-12.col-sm-6.col-md-6
+                            .form-group
+                                input#last_name.form-control.input-lg(type='text', name='last_name', placeholder='Last Name', tabindex='2')
+                    | &#x9;&#x9;&#x9;
+                    .form-group
+                        input#display_name.form-control.input-lg(type='text', name='username', placeholder='Display Name')
+                    | &#x9;&#x9;&#x9;
+                    .form-group
+                        input#email.form-control.input-lg(type='text', name='email', placeholder='Eample@gmail.com')
+                    | &#x9;&#x9;&#x9;
+                    .row
+                        .col-xs-12.col-sm-6.col-md-6
+                            .form-group
+                                input#id_password.form-control.input-lg(type='password', name='password', placeholder='Password')
+                        | &#x9;&#x9;&#x9;&#x9;
+                        .col-xs-12.col-sm-6.col-md-6
+                            .form-group
+                                input#id_confirm_password.form-control.input-lg(type='password', name='password_confirmation', placeholder='Confirm Password')
+                    | &#x9;&#x9;&#x9;
+                    hr.colorgraph
+                    | &#x9;&#x9;&#x9;
+                    .row
+                        .col-xs-12.col-md-6
+                            input.btn.btn-primary.btn-block.btn-lg#submit_form(type='submit', value='Register', disabled="disabled",tabindex='7')
+                        | &#x9;&#x9;&#x9;&#x9;
+                        .col-xs-12.col-md-6
+                            a.btn.btn-success.btn-block.btn-lg(href='/login') Sign In
+                    div#my-hint &nbsp
+                    div#error(style="color:red;") &nbsp #{error}

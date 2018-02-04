@@ -1,83 +1,58 @@
 doctype html
 html(lang='en')
     head
-        meta(charset='UTF-8')
-        meta(name='viewport', content='width=device-width, initial-scale=1')
+        meta(charset='utf-8')
+        |
+        meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+        |
+        meta(name='description', content='Real-time chat application')
+        |
+        meta(name='author', content='kaibin yu')
+        |
         title Noqu - Why wait when there's Opportunity
-        // Stylesheets
-        link(rel='stylesheet', href='/assets/css/materialize.min.css')
+        // Bootstrap core CSS
+        link(href='assets/theme/vendor/bootstrap/css/bootstrap.min.css', rel='stylesheet')
         link(rel='stylesheet', href='/assets/css/noqubot.css')
         link(rel='stylesheet', href='/assets/css/font-awesome.min.css')
-        link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
-        // Scripts
-        script(src='/assets/js/jquery.min.js')
-        script(src='/assets/js/materialize.min.js')
-        script(src='/assets/js/noqubot.js')
+        // Custom styles for this template
+        link(href='assets/css/small-business.css', rel='stylesheet')
+
         block extraHeader
-
+    |
     body
-        nav
-            .nav-wrapper.grey.darken-4
-                a.brand-logo(href='/') noQu
+        // Navigation
+        a(href='/')
+            img#sticker(src='/assets/img/cat.gif')
+        nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
+            .container
+                a.navbar-brand(href='/') noQu
+                |
+                button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarResponsive', aria-controls='navbarResponsive', aria-expanded='false', aria-label='Toggle navigation')
+                    span.navbar-toggler-icon
+                |
+                #navbarResponsive.collapse.navbar-collapse
+                    ul.navbar-nav.ml-auto
+                        if session === false
+                            li.nav-item
+                                a.nav-link(href='/registration') Register
+                            |
+                            li.nav-item
+                                a.nav-link(href='/login') Login
+                        else
+                            li.nav-item
+                                a.nav-link(href="/user/profile") Profile
+                            |
+                            li.nav-item
+                                a.nav-link(href="/user/logout") Logout
 
-                a(href='/')
-                    img#sticker(style="" src= '/assets/img/cat.gif')
-                a.button-collapse.right(href='#', data-activates='mobile-menu')
-                    i.material-icons menu
-                ul#nav-mobile.right.hide-on-med-and-down
-                    li
-                        a(href='#') About
-                    li
-                        a.button-collapse(href='#', data-activates='desktop-menu') My Account
-                    li
-                        a(href='#') Help
-                ul#desktop-menu.side-nav
-                    li
-                        .userView
-                            .background
-                                img(src='/assets/img/bg.jpg')
-                            a(href='#!user')
-                                img.circle.user-logo(src='/assets/img/user.png')
-                            a(href='#!name')
-                                span.white-text.name John Doe
-                            a(href='#!email')
-                                span.white-text.email jdandturk@gmail.com
-                    if session === false
-                        li
-                            a(href='/registration') Register
-                        li
-                            a(href='/login') Login
-                    else
-                        li
-                            a(href="/user/profile") Profile
-                        li
-                            a(href="/user/logout") Logout
-                ul#mobile-menu.side-nav
-                    // .hide-on-med-and-up
-                    li
-                        .userView
-                            .background
-                                img(src='/assets/img/bg.jpg')
-                            a(href='#!user')
-                                img.circle.user-logo(src='/assets/img/user.png')
-                            a(href='#!name')
-                                span.white-text.name John Doe
-                            a(href='#!email')
-                                span.white-text.email sample@gmail.com
-                    li
-                        a(href='#') About
-                    if session === false
-                        li
-                            a(href='/registration') Register
-                        li
-                            a(href='/login') Login
-                    else
-                        li
-                            a(href="/user/profile") Profile
-                        li
-                            a(href="/user/logout") Logout
-                    li
-                        a(href='#') Help
+        // Block Content
 
-        // loading block content
         block content
+            // /.container
+        // Bootstrap core JavaScript
+        script(src='assets/theme/vendor/jquery/jquery.min.js')
+        |
+        script(src='assets/theme/vendor/bootstrap/js/bootstrap.bundle.min.js')
+        |
+        script(src='/assets/js/noqubot.js')
+
