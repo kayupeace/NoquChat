@@ -9,6 +9,16 @@ block extraHeader
             text-align: center;
             line-height: 300%;
         }
+
+        @media (max-width: 576px) {
+            .col-xs-12.col-sm-8.col-md-8.col-sm-offset-2.col-md-offset-3 {
+                margin-left: 0%;
+            }
+        }
+        .col-xs-12.col-md-6 {
+            padding-bottom: 1%;
+        }
+
 block content
     .container
         .row
@@ -55,3 +65,4 @@ block content
                             a.btn.btn-success.btn-block.btn-lg(href='/login') Sign In
                     div#my-hint &nbsp
                     div#error(style="color:red;") &nbsp #{error}
+    script(src='/assets/js/password-confirm.js')

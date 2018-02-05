@@ -11,11 +11,13 @@ html(lang='en')
         |
         title Noqu - Why wait when there's Opportunity
         // Bootstrap core CSS
-        link(href='assets/theme/vendor/bootstrap/css/bootstrap.min.css', rel='stylesheet')
+        link(href='/assets/theme/vendor/bootstrap/css/bootstrap.min.css', rel='stylesheet')
         link(rel='stylesheet', href='/assets/css/noqubot.css')
         link(rel='stylesheet', href='/assets/css/font-awesome.min.css')
         // Custom styles for this template
-        link(href='assets/css/small-business.css', rel='stylesheet')
+        link(href='/assets/css/small-business.css', rel='stylesheet')
+
+        script(src='/assets/theme/vendor/jquery/jquery.min.js')
 
         block extraHeader
     |
@@ -50,9 +52,8 @@ html(lang='en')
         block content
             // /.container
         // Bootstrap core JavaScript
-        script(src='assets/theme/vendor/jquery/jquery.min.js')
         |
-        script(src='assets/theme/vendor/bootstrap/js/bootstrap.bundle.min.js')
+        script(src='/assets/theme/vendor/bootstrap/js/bootstrap.bundle.min.js')
         |
         script(src='/assets/js/noqubot.js')
 

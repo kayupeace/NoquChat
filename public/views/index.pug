@@ -1,5 +1,12 @@
 extends ./share/layout
 block extraHeader
+
+    style(type='text/css').
+        .card .card-title{
+            font-size:1.5em;
+            font-weight:300;
+        }
+
 block content
     // Page Content
     .container
@@ -13,6 +20,8 @@ block content
                     |
                 p
                     |  What are you waiting for? join us right now, all services are free!!!
+                p
+                    |  👇Try Out Our New Feature
                 a.btn.btn-primary.btn-lg(href="/user/chat") My chat room
         .card.text-white.bg-secondary.my-4.text-center
             .card-body
@@ -22,7 +31,7 @@ block content
             .col-md-4.mb-4
                 .card.h-100
                     .card-body
-                        h2.card-title User Services
+                        h2.card-title User Service
                             |
                             p.card-text
                             if session === true
@@ -50,7 +59,7 @@ block content
             .col-md-4.mb-4
                 .card.h-100
                     .card-body
-                        h2.card-title Something else
+                        h2.card-title Others
                         |
                         p.card-text
                             | 👈 My Chat Room Does not require login/Registration, Try it free
