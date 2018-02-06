@@ -6,54 +6,58 @@ block extraHeader
         }
 
 block content
-    div.container
-        div#title
-            .container
-                h1(style='text-align: center;')
-                    |  #{title}
-                    h4 #{err}
-                .row
-                    .col-md-10.col-md-offset-1
-                        .panel.panel-default.panel-table
-                            .panel-body
-                                table.table.table-striped.table-bordered.table-list
-                                    thead
-                                        tr
-                                            th#profile-chevron-up(width='20%;', style='display: table-cell; text-align: center;')
-                                                a.btn.btn-info(href='javascript:hideProfile();')
-                                                    i.fa.fa-chevron-up(aria-hidden='true')
-                                            th#profile-chevron-down(width='20%;', style='display: none; text-align: center;')
-                                                a.btn.btn-info(href='javascript:hideProfile();')
-                                                    i.fa.fa-chevron-down(aria-hidden='true')
-                                            th(width='40%;')
-                                                div
-                                                    a.btn.btn-info(style='', href="/user/room/newroom")
-                                                        em.fa.fa-pencil Create Room
-                                            th(width='40%', style='text-align: center;')
-                                                div
-                                                    a.btn.btn-info(style='', href="/user/config/newconfig")
-                                                        em.fa.fa-pencil Create Config
 
-                                table.table.table-striped.table-bordered.table-list
-                                    tbody#profile()
-                                        tr
-                                            td(width='40%;', style='display: table-cell; text-align: center; position: absolute;')
-                                                table.table
-                                                    tbody
-                                                    div
-                                                        tr
-                                                            h2 My Room List
-                                                    - var counter = 0;
-                                                    each asset in rooms
-                                                        tr
-                                                            - counter ++
-                                                            div #{ counter }
-                                                            div Config Id: #{ asset._id } &nbsp&nbsp&nbsp
-                                                            div room id: #{asset.room_uuid}
-                                                            div room owner: #{asset.username }
-                                                            div Title: #{ asset.title }
-                                                            - var time = asset.create_at.toISOString().split('T')[0];
-                                                            div Config Owner: #{ asset.owner } &nbsp&nbsp&nbsp
-                                                            div #{ time }
-                                                            div Config Description: #{ asset.description }
-                                                            br
+    div.container
+        div
+            h1#title
+                |  #{title}
+                h4 #{err}
+            .row
+                .col-md-12.col-md-offset-1
+                    .panel.panel-default.panel-table
+                        .panel-body
+                            table.table.table-bordered.table-hover.table-sortable
+                                thead
+                                    tr
+                                        th(width='40%;')
+                                            div
+                                                a.btn.btn-info(style='', href="/user/room/newroom")
+                                                    em.fa.fa-pencil Create Room
+                                        th(width='40%', style='text-align: center;')
+                                            div
+                                                a.btn.btn-info(style='', href="/user/config/newconfig")
+                                                    em.fa.fa-pencil Create Config
+
+                    table.table.table-bordered.table-hover.table-sortable
+                        thead
+                            tr
+                                th
+                                    | #
+                                th
+                                    h2 My Room List
+                        tbody
+                            - var counter = 0;
+                                each asset in rooms
+                                    tr
+                                        - counter ++
+                                        th #{ counter }
+                                        td
+                                            div.row
+                                                div.col
+                                                    | Config Id: #{ asset._id } &nbsp&nbsp&nbsp
+                                                div.col
+                                                    | room id: #{asset.room_uuid}
+                                            div.row
+                                                div.col
+                                                    | room owner: #{asset.username }
+                                                div.col
+                                                    | Title: #{ asset.title }
+                                            - var time = asset.create_at.toISOString().split('T')[0];
+                                            div.row
+                                                div.col
+                                                    | Config Owner: #{ asset.owner } &nbsp&nbsp&nbsp
+                                                div.col
+                                                    | #{ time }
+                                                div.col
+                                                    Config Description: #{ asset.description }
+                                            br
