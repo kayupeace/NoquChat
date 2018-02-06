@@ -19,8 +19,7 @@ block extraHeader
 
         input.btn.btn-lg,
         input.btn.btn-lg:focus {
-            outline: none;
-            width: 60%;
+            width: 100%;
             height: 60px;
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
@@ -38,6 +37,9 @@ block extraHeader
         .promise {
             color: #999;
         }
+        button.btn-info.btn-lg {
+            margin: 5px auto;
+        }
 
 block content
     h3#title &nbsp#{error}
@@ -52,7 +54,7 @@ block content
                 .input-group
                     input#room_id.btn.btn-lg(name='roomId', type='text', placeholder='Eg: Hy4Rqryzf', maxlength="9", required='')
                     |
-                    button.btn.btn-info.btn-lg(type='submit') Submit
+                    button.btn-info.btn-lg(type='submit') Submit
         |
         small.promise
             em If your want create your room
