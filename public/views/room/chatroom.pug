@@ -37,7 +37,9 @@ block extraHeader
         .promise {
             color: #999;
         }
-        button.btn-info.btn-lg {
+        input#room_id {
+            font-size:1.25rem;
+            width: 70%;
             margin: 5px auto;
         }
 
@@ -52,7 +54,7 @@ block content
         .well
             form(name="SearchRoom", method="post", action='/user/chat/chatroom' )
                 .input-group
-                    input#room_id.btn.btn-lg(name='roomId', type='text', placeholder='Eg: Hy4Rqryzf', maxlength="9", required='')
+                    input#room_id(name='roomId', type='text', placeholder='Eg: Hy4Rqryzf', maxlength="9")
                     |
                     button.btn-info.btn-lg(type='submit') Submit
         |
