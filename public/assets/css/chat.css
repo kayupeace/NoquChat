@@ -93,8 +93,8 @@ ul {
 
 /* Font */
 
-.messages {
-    font-size: 150%;
+.message {
+    font-size: 14px;
 }
 
 .inputMessage {
@@ -103,7 +103,7 @@ ul {
 
 .log {
     color: gray;
-    font-size: 70%;
+    font-size: 100%;
     margin: 5px;
     text-align: center;
 }
@@ -111,9 +111,9 @@ ul {
 /* Messages */
 
 .chatArea {
-    height: 100%;
-    padding-bottom: 60px;
-    padding-left: 10px;
+    height: 80%;
+    margin-left: 10px;
+
 }
 
 .messages {
@@ -124,7 +124,6 @@ ul {
 }
 
 .message {
-    width: 70%;
     max-height: 50%;
     overflow-y: scroll;
 }
@@ -137,21 +136,23 @@ ul {
     font-weight: 700;
     overflow: hidden;
     padding-right: 15px;
-    text-align: right;
+    text-align: left;
+    width:20%;
 }
 
 /* Input */
 
 .inputMessage {
-    border: 2px solid #000;
-    bottom: 0;
-    height: 60px;
-    left: 0;
-    outline: none;
+    border: 2px solid #ced4db;
+    bottom: 4rem;
+    max-height: 90px;
+    overflow-y: scroll;
+    overflow-x: hidden;
     padding-left: 10px;
-    position: absolute;
-    right: 0;
-    width: 100%;
+    left:10px;
+    position: fixed;
+    width: 80%;
+    background-color: white;
 }
 
 button#nickName {
@@ -159,9 +160,9 @@ button#nickName {
 }
 
 button#message {
-    width: 30%;
     position: fixed;
-    bottom: 40px;
+    font-size: 80%;
+    bottom: 4rem;
     right: 10px;
 }
 
@@ -202,4 +203,46 @@ input#inputMessage{
 
 a.btn.btn-info.btn-lg{
     font-size: 1rem;
+}
+
+/** chat text box **/
+
+.direct-chat-text::after, .direct-chat-text::before {
+
+    border-color: transparent #dfece7 transparent transparent;
+
+}
+.direct-chat-text::after, .direct-chat-text::before {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: transparent #d2d6de transparent transparent;
+    border-image: none;
+    border-style: solid;
+    border-width: medium;
+    content: " ";
+    height: 0;
+    pointer-events: none;
+    position: absolute;
+    right: 100%;
+    top: 15px;
+    width: 0;
+}
+.direct-chat-text::after {
+    border-width: 5px;
+    margin-top: -5px;
+}
+.direct-chat-text {
+    background: #dfece7 none repeat scroll 0 0;
+    border-radius: 2px;
+    color: #1f2121;
+}
+.direct-chat-text {
+    background: #d2d6de none repeat scroll 0 0;
+    border-radius: 10px;
+    color: #444;
+    margin: 5px 0 0 50px;
+    padding: 5px 10px;
+    position: relative;
 }

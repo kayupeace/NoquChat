@@ -3,11 +3,11 @@ $(function() {
 
     var roomid = "room1";
     /**
-    function switchRoom(room){
+     function switchRoom(room){
         roomid = room;
         socket.emit('switchRoom', room);
     }
-    **/
+     **/
 
     //var e = document.getElementById("roomid");
     //s = e.options[e.selectedIndex].value;
@@ -17,7 +17,7 @@ $(function() {
     //j = e.options[e.selectedIndex].text;
     //console.log(s);
     /**
-    e.onchange = function() {
+     e.onchange = function() {
         s = e.options[e.selectedIndex].value;
         console.log(s);
         switchRoom(s);
@@ -114,12 +114,16 @@ $(function() {
 
     // Sends a chat message
     function sendMessage () {
-        var message = $inputMessage.val();
+        //var message = $inputMessage.val();
+        var message = $('#inputMessage').text();
+        console.log(message);
         // Prevent markup from being injected into the message
-        message = cleanInput(message);
+        // no need to prevent as input convert into text already
+        //message = cleanInput(message);
         // if there is a non-empty message and a socket connection
+        $('#inputMessage').text('');
         if (message && connected) {
-            $inputMessage.val('');
+            //$inputMessage.val('');
             //addChatMessage({
             //    username: username,
             //    message: message
@@ -147,17 +151,20 @@ $(function() {
             $typingMessages.remove();
         }
 
-        var $usernameDiv = $('<span class="username"/>')
+        var $usernameDiv = $('<td class="username"/>')
             .text(data.username)
             .css('color', getUsernameColor(data.username));
-        var $messageBodyDiv = $('<span class="messageBody">')
+        var $messageBodyDiv = $('<td class="messageBody direct-chat-text">')
             .text(data.message);
 
         var typingClass = data.typing ? 'typing' : '';
-        var $messageDiv = $('<li class="message"/>')
+        var $layout = $('<table class="table"/>')
+            .append($usernameDiv, $messageBodyDiv);
+
+        var $messageDiv = $('<div class="message"/>')
             .data('username', data.username)
             .addClass(typingClass)
-            .append($usernameDiv, $messageBodyDiv);
+            .append($layout);
 
         addMessageElement($messageDiv, options);
     }
@@ -285,8 +292,8 @@ $(function() {
         //if (username) {
         //    alert('Already had a nickName and seems like your have trouble, contact to site manager')
         //} else {
-            setUsername();
-       // }
+        setUsername();
+        // }
     });
     $("#message").click(function(){
         if (username) {
@@ -305,14 +312,14 @@ $(function() {
     // Click events
 
     // Focus input when clicking anywhere on login page
-    $loginPage.click(function () {
-        $currentInput.focus();
-    });
+    //$loginPage.click(function () {
+    //    $currentInput.focus();
+    //});
 
     // Focus input when clicking on the message input's border
-    $inputMessage.click(function () {
-        $inputMessage.focus();
-    });
+    //$inputMessage.click(function () {
+    //    $inputMessage.focus();
+    //});
 
     // Socket events
 
@@ -342,7 +349,7 @@ $(function() {
 
     // Whenever the server emits 'new message', update the chat body
     socket.on('new message', function (data) {
-    //socket.on(roomid, function (data) {
+        //socket.on(roomid, function (data) {
         addChatMessage(data);
     });
 
@@ -383,6 +390,26 @@ $(function() {
 
     socket.on('reconnect_error', function () {
         log('attempt to reconnect has failed');
+    });
+
+    var limit = 1024;
+    $('div[contenteditable]').keypress(function(event) {
+        if(event.which == 13){  //prevent "enter" event on keyboard insert input
+            return false;
+        }
+        return this.innerHTML.length < limit;
+    }).on({
+        'paste': function(e) {
+            var len = this.innerHTML.length,
+                cp = e.originalEvent.clipboardData.getData('text');
+            if (len < limit)
+                this.innerHTML += cp.substring(0, limit - len);
+            return false;
+        },
+        'drop': function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
     });
 
 });

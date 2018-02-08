@@ -11,26 +11,42 @@
 
 </style>
 <% layout('/html/share/layout.html') -%>
-    <div id="my_top_menu">
-        <a href="/user/chat/quit" class="btn btn-info btn-lg">Quit Room</a>
-    </div>
-    <ul class="pages">
-        <li class="chat page">
-            <div class="chatArea">
-                <ul class="messages"></ul>
+<div id="my_top_menu">
+    <a href="/user/chat/quit" class="btn btn-info btn-lg">Quit Room</a>
+</div>
+
+<ul class="pages">
+    <li class="chat page">
+
+        <div class="chatArea">
+            <div class="table messages">
             </div>
-            <input id="inputMessage" class="inputMessage" placeholder="Type here..."/>
+        </div>
+
+            <div class="direct-chat-text">
+                Hey bro, how’s everything going ?
+            </div>
+
+
+
+        <div class="col-xs-9">
+            <div id="inputMessage" contenteditable="true" class="inputMessage"> </div>
+        </div>
+        <div class="col-xs-3">
             <button class="btn btn-info btn-lg" id="message">Submit</button>
-        </li>
-        <li class="login page">
-            <div class="form">
-                <h3 class="title">What's your nickname?</h3>
-                <input class="usernameInput" type="text" maxlength="14" />
-                <button class="btn btn-info btn-lg" id="nickName">Submit</button>
-                <h3 class="title" id="hint"></h3>
-            </div>
-        </li>
-    </ul>
+        </div>
+
+    </li>
+
+    <li class="login page">
+        <div class="form">
+            <h3 class="title">What's your nickname?</h3>
+            <input class="usernameInput" type="text" maxlength="14" />
+            <button class="btn btn-info btn-lg" id="nickName">Submit</button>
+            <h3 class="title" id="hint"></h3>
+        </div>
+    </li>
+</ul>
 
 <!--
     <select id="roomid" style="position: fixed;top: 10px; height:2rem; width: 80px; display: -webkit-box;">
