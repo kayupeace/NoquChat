@@ -94,7 +94,7 @@ app.use(function(req, res, next){
 // Serve static files on /public
 app.use('/assets', express.static('./public/assets'));
 
-var chatServer = require('./lib/services/chat.js');
+var chatServer = require('./lib/services/SocketChat/ChatServer.js');
 chatServer.chatServer(server);
 
 //      expires: new Date(Date.now() + 60 * 10000),

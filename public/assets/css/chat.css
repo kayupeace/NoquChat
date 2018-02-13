@@ -126,6 +126,7 @@ ul {
 .message {
     max-height: 50%;
     overflow-y: scroll;
+    overflow-wrap: break-word;
 }
 
 .message.typing .messageBody {

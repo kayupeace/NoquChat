@@ -112,6 +112,10 @@ $(function() {
         }
     }
 
+    $("#test").click(function(){
+        socket.emit('disconnect');
+    });
+
     // Sends a chat message
     function sendMessage () {
         //var message = $inputMessage.val();
@@ -384,7 +388,7 @@ $(function() {
         log('you have been reconnected');
 
         if (username) {
-            socket.emit('add user', username);
+            setUsername();
         }
     });
 
