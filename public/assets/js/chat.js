@@ -1,7 +1,5 @@
 
 $(function() {
-
-    var roomid = "room1";
     /**
      function switchRoom(room){
         roomid = room;
@@ -29,58 +27,58 @@ $(function() {
      **/
 
     function getCookie(cname) {
-        var name = cname + "=";
-        var ca = document.cookie.split(';');
-        for(var i = 0; i < ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) == ' ') {
+        let name = cname + "=";
+        let ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') {
                 c = c.substring(1);
             }
-            if (c.indexOf(name) == 0) {
+            if (c.indexOf(name) === 0) {
                 return c.substring(name.length, c.length);
             }
         }
         return "";
     }
     function setCookie(cname, cvalue, exdays) {
-        var d = new Date();
+        let d = new Date();
         d.setTime(d.getTime() + (exdays*24*60*60*1000));
-        var expires = "expires="+ d.toUTCString();
+        let expires = "expires="+ d.toUTCString();
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
     //console.log(getCookie("chatRoom"));
     //setCookie("nickName", "kevin", new Date() + 9999);
     //console.log(getCookie("nickName"));
 
-    var FADE_TIME = 150; // ms
-    var TYPING_TIMER_LENGTH = 400; // ms
-    var COLORS = [
+    let FADE_TIME = 150; // ms
+    let TYPING_TIMER_LENGTH = 400; // ms
+    let COLORS = [
         '#e21400', '#91580f', '#f8a700', '#f78b00',
         '#58dc00', '#287b00', '#a8f07a', '#4ae8c4',
         '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
     ];
 
     // Initialize variables
-    var $window = $(window);
-    var $usernameInput = $('.usernameInput'); // Input for username
-    var $messages = $('.messages'); // Messages area
-    var $inputMessage = $('.inputMessage'); // Input message input box
+    let $window = $(window);
+    let $usernameInput = $('.usernameInput'); // Input for username
+    let $messages = $('.messages'); // Messages area
+    let $inputMessage = $('.inputMessage'); // Input message input box
 
-    var $loginPage = $('.login.page'); // The login page
-    var $chatPage = $('.chat.page'); // The chatroom page
+    let $loginPage = $('.login.page'); // The login page
+    let $chatPage = $('.chat.page'); // The chatroom page
 
     // Prompt for setting a username
-    var username;
+    let username;
 
-    var connected = false;
-    var typing = false;
-    var lastTypingTime;
-    var $currentInput = $usernameInput.focus();
+    let connected = false;
+    let typing = false;
+    let lastTypingTime;
+    let $currentInput = $usernameInput.focus();
 
-    var socket = io();
+    let socket = io();
 
     function addParticipantsMessage (data) {
-        var message = '';
+        let message = '';
         if (data.numUsers === 1) {
             message += "there's 1 participant";
         } else {
@@ -92,17 +90,18 @@ $(function() {
     // Sets the client's username
     function setUsername () {
         if(username){
-            var data = {
+            let data = {
                 username: username,
                 chatroom: getCookie("chatRoom")
             };
+            setCookie("nickName", username, new Date() + 9999);
             socket.emit('add user', data);
         }else {
             username = cleanInput($usernameInput.val().trim());
             // If the username is valid
             if (username) {
                 // Tell the server your username
-                var data = {
+                let data = {
                     username: username,
                     chatroom: getCookie("chatRoom")
                 };
@@ -110,24 +109,23 @@ $(function() {
                 socket.emit('add user', data);
             }
         }
-    }
 
-    $("#test").click(function(){
-        socket.emit('disconnect');
-    });
+
+    }
 
     // Sends a chat message
     function sendMessage () {
         //var message = $inputMessage.val();
-        var message = $('#inputMessage').text();
-        console.log(message);
+        let message = $('#inputMessage').val();
+        //console.log(message);
         // Prevent markup from being injected into the message
         // no need to prevent as input convert into text already
         //message = cleanInput(message);
         // if there is a non-empty message and a socket connection
-        $('#inputMessage').text('');
         if (message && connected) {
-            //$inputMessage.val('');
+            $inputMessage.val('');
+            // Clean user input filed
+            //$inputMessage.text('');
             //addChatMessage({
             //    username: username,
             //    message: message
@@ -141,34 +139,67 @@ $(function() {
 
     // Log a message
     function log (message, options) {
-        var $el = $('<li>').addClass('log').text(message);
-        addMessageElement($el, options);
+        /**
+            let $el = $('<li>').addClass('log').text(message);
+            addMessageElement($el, options);
+        **/
+        let $el = $('<div class="alert alert-info msg-information">').text(message)
+            addMessageElement($el, options);
     }
 
     // Adds the visual chat message to the message list
     function addChatMessage (data, options) {
         // Don't fade the message in if there is an 'X was typing'
-        var $typingMessages = getTypingMessages(data);
+        let $typingMessages = getTypingMessages(data);
         options = options || {};
         if ($typingMessages.length !== 0) {
             options.fade = false;
             $typingMessages.remove();
         }
 
-        var $usernameDiv = $('<td class="username"/>')
+        let $usernameDiv = $('<h6 class="media-heading"/>')
             .text(data.username)
             .css('color', getUsernameColor(data.username));
-        var $messageBodyDiv = $('<td class="messageBody direct-chat-text">')
+
+        let $messageBodyContent = $('<small class="col-lg-10">')
             .text(data.message);
 
-        var typingClass = data.typing ? 'typing' : '';
-        var $layout = $('<table class="table"/>')
-            .append($usernameDiv, $messageBodyDiv);
+        let $profileImage= $('<img class="media-object" style="width: 32px; height: 32px;" src="/assets/img/profile_1.jpg">');
+        let $profileBody = $('<a class="pull-left" href="#">')
+            .append($profileImage);
 
-        var $messageDiv = $('<div class="message"/>')
+            /**
+        <a class="pull-left" href="#">
+            <img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 32px; height: 32px;" src="/assets/img/profile_1.jpg">
+        </a>
+            **/
+
+        let $messageBodyDiv = $('<div class="media-body message">')
+            .append($usernameDiv,$messageBodyContent);
+
+        let typingClass = data.typing ? 'typing' : '';
+        //let $layout = $('<div class="media msg"/>')
+        //    .append($messageBodyContent);
+
+        let $messageDiv = $('<div class="media msg message msg-linebreak"/>')
             .data('username', data.username)
             .addClass(typingClass)
-            .append($layout);
+            .append($profileBody,$messageBodyDiv);
+
+
+/**
+        <div class="media msg">
+            <a class="pull-left" href="#">
+                <img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 32px; height: 32px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACqUlEQVR4Xu2Y60tiURTFl48STFJMwkQjUTDtixq+Av93P6iBJFTgg1JL8QWBGT4QfDX7gDIyNE3nEBO6D0Rh9+5z9rprr19dTa/XW2KHl4YFYAfwCHAG7HAGgkOQKcAUYAowBZgCO6wAY5AxyBhkDDIGdxgC/M8QY5AxyBhkDDIGGYM7rIAyBgeDAYrFIkajEYxGIwKBAA4PDzckpd+322243W54PJ5P5f6Omh9tqiTAfD5HNpuFVqvFyckJms0m9vf3EY/H1/u9vb0hn89jsVj8kwDfUfNviisJ8PLygru7O4TDYVgsFtDh9Xo9NBrNes9cLgeTybThgKenJ1SrVXGf1WoVDup2u4jFYhiPx1I1P7XVBxcoCVCr1UBfTqcTrVYLe3t7OD8/x/HxsdiOPqNGo9Eo0un02gHkBhJmuVzC7/fj5uYGXq8XZ2dnop5Mzf8iwMPDAxqNBmw2GxwOBx4fHzGdTpFMJkVzNB7UGAmSSqU2RoDmnETQ6XQiOyKRiHCOSk0ZEZQcUKlU8Pz8LA5vNptRr9eFCJQBFHq//szG5eWlGA1ywOnpqQhBapoWPfl+vw+fzweXyyU+U635VRGUBOh0OigUCggGg8IFK/teXV3h/v4ew+Hwj/OQU4gUq/w4ODgQrkkkEmKEVGp+tXm6XkkAOngmk4HBYBAjQA6gEKRmyOL05GnR99vbW9jtdjEGdP319bUIR8oA+pnG5OLiQoghU5OElFlKAtCGr6+vKJfLmEwm64aosd/XbDbbyIBSqSSeNKU+HXzlnFAohKOjI6maMs0rO0B20590n7IDflIzMmdhAfiNEL8R4jdC/EZIJj235R6mAFOAKcAUYApsS6LL9MEUYAowBZgCTAGZ9NyWe5gCTAGmAFOAKbAtiS7TB1Ng1ynwDkxRe58vH3FfAAAAAElFTkSuQmCC">
+            </a>
+            <div class="media-body">
+                <small class="pull-right time"><i class="fa fa-clock-o"></i> 12:10am</small>
+                <h6 class="media-heading">Naimish Sakhpara</h6>
+
+                <small class="col-lg-10">Arnab Goswami: "Some people close to Congress Party and close to the government had a #secret #meeting in a farmhouse in Maharashtra in which Anna Hazare send some representatives and they had a meeting in the discussed how to go about this all fast and how eventually this will end."</small>
+            </div>
+        </div>
+**/
 
         addMessageElement($messageDiv, options);
     }
@@ -176,7 +207,7 @@ $(function() {
     // Adds the visual chat typing message
     function addChatTyping (data) {
         data.typing = true;
-        data.message = 'is typing';
+        data.message = "is typing";
         addChatMessage(data);
     }
 
@@ -193,7 +224,7 @@ $(function() {
     // options.prepend - If the element should prepend
     //   all other messages (default = false)
     function addMessageElement (el, options) {
-        var $el = $(el);
+        let $el = $(el);
 
         // Setup default options
         if (!options) {
@@ -210,6 +241,7 @@ $(function() {
         if (options.fade) {
             $el.hide().fadeIn(FADE_TIME);
         }
+
         if (options.prepend) {
             $messages.prepend($el);
         } else {
@@ -233,8 +265,8 @@ $(function() {
             lastTypingTime = (new Date()).getTime();
 
             setTimeout(function () {
-                var typingTimer = (new Date()).getTime();
-                var timeDiff = typingTimer - lastTypingTime;
+                let typingTimer = (new Date()).getTime();
+                let timeDiff = typingTimer - lastTypingTime;
                 if (timeDiff >= TYPING_TIMER_LENGTH && typing) {
                     socket.emit('stop typing');
                     typing = false;
@@ -253,19 +285,20 @@ $(function() {
     // Gets the color of a username through our hash function
     function getUsernameColor (username) {
         // Compute hash code
-        var hash = 7;
-        for (var i = 0; i < username.length; i++) {
+        let hash = 7;
+        for (let i = 0; i < username.length; i++) {
             hash = username.charCodeAt(i) + (hash << 5) - hash;
         }
         // Calculate color
-        var index = Math.abs(hash % COLORS.length);
-        return COLORS[index];
+        let index = Math.abs(hash % COLORS.length);
+        return "#003bb3";
+        //return COLORS[index];
     }
 
     // pre-load event
 
 
-    var nickName = getCookie("nickName");
+    let nickName = getCookie("nickName");
     if(nickName === ""){
 
     }else {
@@ -308,6 +341,17 @@ $(function() {
             setUsername();
         }
     });
+    $("#HideChat").click(function(){
+        let isvisible = $("#ChatWindow").is(":visible");
+        console.log(isvisible);
+        if(isvisible){
+            $("#ChatWindow").slideUp("slow");
+        }else{
+            $("#ChatWindow").slideDown("slow");
+        }
+
+    });
+
 
     $inputMessage.on('input', function() {
         updateTyping();
@@ -336,7 +380,7 @@ $(function() {
 
         connected = true;
         // Display the welcome message
-        var message = "Welcome to kevin Chat – ";
+        let message = "Welcome";
         log(message, {
             prepend: true
         });
@@ -393,18 +437,18 @@ $(function() {
     });
 
     socket.on('reconnect_error', function () {
-        log('attempt to reconnect has failed');
+        log('attempt to reconnect has failed, if error still occur, try refresh page');
     });
 
-    var limit = 1024;
-    $('div[contenteditable]').keypress(function(event) {
-        if(event.which == 13){  //prevent "enter" event on keyboard insert input
+    let limit = 1024;
+    $('#inputMessage').keypress(function(event) {
+        if(event.which === 13){  //prevent "enter" event on keyboard insert input
             return false;
         }
         return this.innerHTML.length < limit;
     }).on({
         'paste': function(e) {
-            var len = this.innerHTML.length,
+            let len = this.innerHTML.length,
                 cp = e.originalEvent.clipboardData.getData('text');
             if (len < limit)
                 this.innerHTML += cp.substring(0, limit - len);
