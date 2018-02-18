@@ -8,19 +8,33 @@
     li.login.page{
         height: 90%;
     }
+    .panel-primary>.panel-heading{
+        color: #fff;
+        background-color: #428bca;
+        border-color: #428bca;
+    }
 </style>
 <% layout('/html/share/layout.html') -%>
 
 <div id="my_top_menu">
-    <a href="/user/chat/quit" class="btn btn-info btn-lg">Quit Room</a>
-    <a href="#" id="HideChat" class="btn btn-info btn-lg">Hide Chat</a>
 </div>
 
 
 <ul class="pages">
 
     <li class="chat page">
-
+        <div class="container">
+            <div class="row">
+                <div class="message-wrap col-lg-8">
+                    <a href="/user/chat/quit" class="btn btn-info btn-lg">
+                        <span>Quit Room</span>
+                    </a>
+                    <a href="#" id="HideChat" class="btn btn-info btn-lg">
+                            <i class="fa fa-chevron-down"> </i>
+                        </a>
+                </div>
+            </div>
+        </div>
         <div class="container" id="ChatWindow">
             <div class="row">
 
