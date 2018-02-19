@@ -333,9 +333,11 @@ small.col-lg-10{
 .media.msg.message.msg-linebreak{
     padding-bottom: 0.5rem;
 }
-div#my_top_menu{
-    margin-bottom: 0.5rem;
-}
+
 a#HideChat{
     float: right;
+}
+
+li.chat.page{
+    padding-top: 10px;
 }

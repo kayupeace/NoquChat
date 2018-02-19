@@ -1,72 +1,261 @@
 <style>
     body{padding-top:30px;}
-
-    .glyphicon {  margin-bottom: 10px;margin-right: 10px;}
-
-    small {
-        display: block;
-        line-height: 1.428571429;
-        color: #999;
+    .fixed-top{
+        position: relative;
     }
+
+    .panel-info > .panel-heading {
+        color: #31708f;
+        background-color: #d9edf7;
+        border-color: #bce8f1;
+    }
+
+    .panel-heading {
+        padding: 10px 15px;
+        border-bottom: 1px solid transparent;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+    }
+    .panel {
+        margin-bottom: 20px;
+        background-color: #fff;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+        box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    }
+    .panel-info {
+        margin-top:0.5rem;
+        border-color: #bce8f1;
+    }
+    .col-sm-4, .col-sm-12{
+        padding-left: 0px;
+    }
+    @media (min-width: 576px){
+        .col-sm-4{
+            float:left;
+            text-align:right;
+        }
+        .col-sm-12{
+            padding-left: 15px;
+        }
+    }
+    .col-sm-6{
+        float:left;
+        margin-bottom: 1rem;
+        padding: 0.5rem;
+        border-radius: 0.2rem;
+        border: 1px solid #ced4db;
+    }
+
+    .profile-image{
+        width:300px;
+        height:200px;
+    }
+
+
+
+    .btn-file {
+        position: relative;
+        overflow: hidden;
+    }
+    .btn-file input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;
+        background: white;
+        cursor: inherit;
+        display: block;
+    }
+
+    #img-upload{
+        width: 300px;
+        height:200px;
+    }
+
 </style>
 <% layout('/html/share/layout.html') -%>
 
 <div class="container">
-    <div class="row">
-        <div class="col-12">
-            <h1></h1>
-            <p>User Name: <%= UserData.userName %> </p>
-            <p>Email:  <%= UserData.email %> </p>
-            <p>Gender: <%= UserData.gender %> </p>
-            <p>Date Of Birth: <%= UserData.DOB %></p>
-            <img style="width: 400px; height: 250px" src="<%= UserData.imagePath %>"/>
-        </div>
-    </div>
 
     <div class="container">
-        <h1>User Information</h1>
-        <form name="EditProfile" method="post" action="/user/profile">
-            <p>User Name:
-                <input type="text" name="username"/>
-            </p>
-            <p>
-                <button type="submit">submit to edit profile page</button>
-            </p>
-        </form>
-    </div>
+        <div class=".col-xs-4 .col-md-offset-2">
+            <div class="panel panel-default panel-info Profile">
+                <div class="panel-heading"> My Profile </div>
+                <!--
+                <div class="alert alert-success">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    Account Information
+                </div>
+                <div class="alert alert-warning">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Oops!</strong> Profile not saved. Try later.
+                </div>
+                -->
+
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-12 control-label"><h3>Account Settings</h3> </label>
+                                <label class="col-sm-4 control-label">User Name: </label>
+                                <div class="col-sm-6">
+                                    <%= UserData.userName %>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Email: </label>
+                                <div class="col-sm-6">
+                                    <%= UserData.email %>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myAccountModal">
+                                        Edit Settings
+                                    </button>
+                                </div>
+                            </div>
+
+                            <label class="col-sm-12 control-label"><h3>Profile Settings</h3> </label>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Profile Image: </label>
+                                <div class="col-sm-6">
+                                    <img class="profile-image" src="<%= UserData.imagePath %>"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">On Chat Display: </label>
+                                <div class="col-sm-6">
+                                    <img style="width: 32px; height: 32px" src="<%= UserData.imagePath %>"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Gender: </label>
+                                <div class="col-sm-6">
+                                    <%= UserData.gender %>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Date Of Birth:</label>
+                                <div class="col-sm-6">
+                                    <%= UserData.DOB %>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myProfileModal">
+                                        Edit Settings
+                                    </button>
+                                </div>
+                            </div>
+                    </div>  <!-- end form-horizontal -->
+                </div> <!-- end panel-body -->
+
+            </div> <!-- end panel -->
+
+
+        </div> <!-- end size -->
+    </div> <!-- end container-fluid -->
 
     <div class="container">
-        <h1>Change Password </h1>
+        <h3>Change Password </h3>
             <form name="ChangePassword" method="post" action="/user/resetPassword">
-            <p>User Name:
+            <p>Reset Password:
                 <input type="text" placeholder="Password Length should be &gt;= 5" name="password"/>
             </p>
             <p>
-                <button type="submit">submit to reset password</button>
-            </p>
-        </form>
-    </div>
-
-    <div class="container">
-        <h1>Update Your Profile 2017</h1>
-        <form enctype="multipart/form-data" name="ChangePassword" method="post" action="/user/editProfile">
-            <p> Date Of Birth
-                <input type="date" value="2017-12-19" name="dateOfBirth"/>
-            </p>
-            <p>Gender:
-                <select style="display:block" name="gender" id="selectGender">
-                    <option value="Female">Female</option>
-                    <option value="Male">Male</option>
-                    <option value="Other">Other</option>
-                </select>
-            </p>
-
-            <p>Image
-                <input type="file" name="file"/>
-            </p>
-            <p>
-                <button type="submit">submit to update</button>
+                <button type="submit" class="btn btn-primary">submit to reset password</button>
             </p>
         </form>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="myAccountModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Update User Name</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <form name="EditProfile" method="post" action="/user/profile">
+                    <div class="form-group">
+                        <label class="control-label">User Name:</label>
+                        <input type="text" name="username" class="form-control" value="<%= UserData.userName %>">
+                    </div>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="form-group">
+                    <label class="control-label">Edit Email Function Will Update Soon</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myProfileModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" >Update Profile</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <form enctype="multipart/form-data" name="ChangePassword" method="post" action="/user/editProfile">
+                    <div class="form-group">
+                        <label class="control-label">User Name:</label>
+                        <input type="date" name="dateOfBirth" class="form-control" value="2017-12-19">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Gender:</label>
+                        <select style="display:block" name="gender" id="selectGender" class="form-control">
+                            <option value="Female">Female</option>
+                            <option value="Male">Male</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <!-- Upload  -->
+                    <div class="form-group">
+                        <label>Profile Image:</label>
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <span class="btn btn-outline-primary btn-file">
+                                    Update Image <input name="file" type="file" accept="image/png, image/jpeg, image/gif" id="imgInp">
+                                </span>
+                            </span>
+                            <input id='urlname'type="text" class="form-control" readonly>
+                        </div>
+                        <a id="clear" class="btn btn-outline-primary">Clear</a>
+                        <img class="profile-image" id='img-upload'/>
+                    </div>
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="form-group">
+                    <label class="control-label">Edit Email Function Will Update Soon</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/assets/js/imageUpload.js"></script>
