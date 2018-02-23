@@ -62,6 +62,11 @@ app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveU
 app.use(passport.initialize());
 app.use(passport.session());
 
+var morgan = require('morgan');
+if (process.env.NODE_ENV !== 'production'){
+    app.use(morgan('dev'));
+}
+
 
 // to avoid relative paths in calls
 global.__base = __dirname + '/';
