@@ -1,25 +1,74 @@
 extends ./share/layout
+block extraHeader
+    //link(href='//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css', rel='stylesheet')
 block content
-    div.container
-      div#title
-        h3 #{title}
-            h4 #{error}
-      //input(type="text", pattern="[^ @]*@[^ @]*", placeholder="eample@gmail.com", name="email")
-      form(method="post", action="/login")
-        p.fa.fa-envelope  Email
-        input.fa.fa-lock(type="text", placeholder="eample@gmail.com", name="email")
-        p.fa.fa-lock  Password &nbsp
-        a.btn#eyebutton(href="#" onclick='showHidePassword()')
-          div.fa.fa-eye#eye
-        input#password(type="password", placeholder="Your Password", name="password")
-        P#signUpMessage Don't have an account? &nbsp
-          a(href='/registration') Sign up »
-        div#formButton
-          button.btn(type="submit") submit
-          a(href="/")
-            button.btn#cancelButton(type="button") Cancel
-        p
-            a.btn.btn-lg.btn-block.omb_btn-facebook(href='/auth/facebook')
-                i.fa.fa-facebook.visible-xs
-                    | &#x9;&#x9;&#x9;
-                    span.hidden-xs &nbsp Facebook
+    .container
+        .omb_login
+            h3.omb_authTitle
+                | Login with
+            | &#x9;&#x9;
+            .row.omb_row-sm-offset-3.omb_socialButtons
+                .col-xs-4.col-sm-6
+                    a.btn.btn-lg.btn-block.omb_btn-facebook(href='/auth/facebook')
+                        i.fa.fa-facebook.visible-xs
+                        | &#x9;&#x9;&#x9;
+                        span.hidden-xs Facebook
+                |         &#x9;
+                //.col-xs-4.col-sm-2
+                    a.btn.btn-lg.btn-block.omb_btn-twitter(href='#')
+                        i.fa.fa-twitter.visible-xs
+                        | &#x9;&#x9;&#x9;
+                        span.hidden-xs Twitter
+                //| &#x9;
+                //|         &#x9;
+                //.col-xs-4.col-sm-2
+                    a.btn.btn-lg.btn-block.omb_btn-google(href='#')
+                        i.fa.fa-google-plus.visible-xs
+                        | &#x9;&#x9;&#x9;
+                        span.hidden-xs Google+
+            | &#x9;&#x9;
+            .row.omb_row-sm-offset-3.omb_loginOr
+                .col-xs-12.col-sm-6
+                    hr.omb_hrOr
+                    | &#x9;&#x9;&#x9;&#x9;
+                    span.omb_spanOr or
+            | &#x9;&#x9;
+            .row.omb_row-sm-offset-3
+                .col-xs-12.col-sm-6
+                    form.omb_loginForm(action='/login', autocomplete='off', method='post')
+                        .input-group
+                            .input-group-addon.sign-up
+                                i.fa.fa-envelope  Email
+                            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                            input.form-control(type='text', name='email', placeholder='Eample@gmail.com')
+                        | &#x9;&#x9;&#x9;&#x9;&#x9;
+                        span.help-block
+                        | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                        | &#x9;&#x9;&#x9;&#x9;&#x9;
+                        .input-group
+                            span.input-group-addon.sign-up
+                                i.fa.fa-lock  Password
+                            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                            input.form-control#password(type='password', name='password', placeholder='Password')
+                            span.input-group-addon
+                                i.btn#eyebutton(href="#" onclick='showHidePassword()')
+                                    span.fa.fa-eye#eye
+                        |
+                        span.help-block &nbsp #{error}
+                        | &#x9;&#x9;&#x9;&#x9;&#x9;
+                        button.btn.btn-lg.btn-primary.btn-block(type='submit') Login
+            | &#x9;&#x9;
+            br
+            |
+            P#signUpMessage Don't have an account? &nbsp
+                a(href='/registration') Sign up »
+            //.row.omb_row-sm-offset-3
+                .col-xs-12.col-sm-3
+                    label.checkbox
+                        input(type='checkbox', value='remember-me')
+                        | Remember Me
+                | &#x9;&#x9;&#x9;
+                //.col-xs-12.col-sm-3
+                    p.omb_forgotPwd
+                        a(href='#') Forgot password?
+

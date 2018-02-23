@@ -1,0 +1,132 @@
+extends ../share/layout
+block content
+    div.container
+        div#title
+            h3 #{title}
+                h4 #{error}
+        .container
+            .row.clearfix
+                .col-md-12.table-responsive
+                    form(name="newRoom",method="post",action=action )
+                        table#tab_logic.table.table-bordered.table-hover.table-sortable
+                            thead.thead-light
+                                tr
+                                    th.text-center
+                                        | Room Name:
+                                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                                    th.text-center
+                                        | Description:
+                                    |     &#x9;&#x9;&#x9;&#x9;&#x9;
+
+                            tbody
+                                tr
+                                    td(data-name='name')
+                                        input.form-control(type='text', name='title', placeholder='New Name', value=room.title)
+                                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                                    td(data-name='desc')
+                                        textarea.form-control(name='description', placeholder='New Description')
+                                            | #{room.description}
+                            thead.thead-light
+                                tr
+                                    th.text-center
+                                        | Select Type:
+                                    |         &#x9;&#x9;&#x9;&#x9;
+                                    th.text-center
+                                        | Select Config:
+                                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+
+                            tbody
+                                tr
+                                    td(data-name='sel')
+                                        - var myType = [];
+                                            if room.room_type === "Public"
+                                                - myType = ["Public", "Private"];
+                                            else
+                                                - myType = ["Private", "Public"];
+                                            select.custom-select(style="display:block;" name="room_type")
+                                                each val, index in myType
+                                                    option(value=val) #{val}
+                                    td
+                                        - var myType = configs;
+                                        - var optionList
+                                        - var valueList
+                                        - var listAsset
+                                        if room.room_config
+                                            - valueList = [room.room_config._id];
+                                            - optionList = [room.room_config.title];
+                                            - listAsset = [room.room_config];
+                                            each val in myType
+                                                if val._id.toString() !== room.room_config._id.toString()
+                                                    - valueList.push(val._id);
+                                                    - optionList.push(val.title);
+                                                    - listAsset.push(val);
+                                        else
+                                            - optionList = [ null ];
+                                            - valueList = [ null ];
+                                            - listAsset = [ null ];
+                                            each val in myType
+                                                - valueList.push(val._id);
+                                                - optionList.push(val.title);
+                                                - listAsset.push(val);
+
+                                        select.custom-select(style="display:block;" name="room_config")
+                                            - for(var i =0; i <= valueList.length -1; i++)
+                                                option(label=optionList[i], type="text", value=valueList[i]) #{ listAsset[i] }
+
+                        ul.list-group
+                            li.list-group-item.active.text-center Your Selected Config Information:
+                            li.list-group-item.d-flex.justify-content-between.align-items-center
+                                | Title:
+                                span#idText
+                                    | You Haven't Select One
+                            li.list-group-item.d-flex.justify-content-between.align-items-center
+                                | Description:
+                                span#idDescription
+                                    | You Haven't Select One
+                            li.list-group-item.d-flex.justify-content-between.align-items-center
+                                | Full Detail:
+                                span#idFullDetail
+                                    | You Haven't Select One
+                        div.text-center
+                            button.btn.btn-success.btn-lg(type="submit") submit
+                            a(href="/user/room")
+                                button.btn.btn-success.btn-lg#cancelButton(type="button") Cancel
+                                // https://bootsnipp.com/snippets/featured/dynamic-sortable-tables
+
+                script.
+                    var templocal = !{JSON.stringify(room)};
+                    var e = document.getElementById("id");
+                    s = e.options[e.selectedIndex].value;
+                    v = e.options[e.selectedIndex].label;
+                    //console.log(v);
+                    j = e.options[e.selectedIndex].text;
+                    console.log(j);
+                    if(templocal === null) {
+                        $('#idText').text(templocal.room_config.title);
+                        $('#idDescription').text(templocal.room_config.description);
+                        $('#idFullDetail').text(JSON.stringify(templocal.room_config));
+                    }
+                    //console.log(s);
+                    e.onchange = function() {
+                        s = e.options[e.selectedIndex].value;
+                        //console.log(s);
+                        v = e.options[e.selectedIndex].label;
+                        //console.log(v);
+                        j = e.options[e.selectedIndex].text;
+                        //console.log(j);
+                        var temp = !{JSON.stringify(configs)};
+                        var index = temp.findIndex(function (item, i){
+                            return item._id === s;
+                        });
+                        if(index === -1){
+                            $('#idText').text("empty");
+                            $('#idDescription').text("empty");
+                            $('#idFullDetail').text("empty");
+                        }else {
+                            $('#idText').text(temp[index].title);
+                            $('#idDescription').text(temp[index].description);
+                            $('#idFullDetail').text(JSON.stringify(temp[index]));
+                            //console.log(index);
+                        }
+                    }
+

@@ -1,0 +1,32 @@
+extends ../share/layout
+block content
+    div.container
+        div#title
+            h3 #{title}
+                h4 #{error}
+
+    .container
+        .row.clearfix
+            .col-md-12.table-responsive
+                form(name="newConfig", method="post", action=action )
+                    table#tab_logic.table.table-bordered.table-hover.table-sortable
+                        thead.thead-light
+                            tr
+                                th.text-center
+                                    | Config Name
+                                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                                th.text-center
+                                    | Description
+                        tbody
+                            tr#addr0.hidden(data-id='0')
+                                td(data-name='name')
+                                    input.form-control(type='text', name='title', placeholder='New Name',value=asset.title)
+                                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                                td(data-name='desc')
+                                    textarea.form-control(type='text', name='description', placeholder='New Description')
+                                        | #{asset.description}
+                    div.text-center
+                        button.btn.btn-success.btn-lg(type="submit") submit
+                        a(href="/user/room")
+                            button.btn.btn-success.btn-lg#cancelButton(type="button") Cancel
+

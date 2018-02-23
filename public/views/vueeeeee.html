@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+<div id="app">
+    {{ message }}
+</div>
+<modal v-if="statusNotMatch" @close="closeModal()" title="Select Action Status" width="30%" :height="height" :overflow="true">
+    <system-message type="info">Cannot find matching status, please select a status for the Corporate module action progress update</system-message>\
+    <div class="form-group">
+        <strong>Action Status:</strong><br/>
+        <chosen v-model="currentActionStatus" :name-field="\'Name\'" :value-field="\'ID\'" :list="actionStatuses"></chosen>
+    </div>
+    <input type="button" class="button btn-primary" value="Update" @click="makeUpdate()" />
+    <input type="button" class="button btn-default" value="Cancel" @click="closeModal()" />
+</modal>
+</body>
+</html>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        }
+    });
+
+    Vue.component('modal', {
+        data: function () {
+            return {
+                isMaximised: false,
+                windowWidth: window.innerWidth,
+                styleElement: null
+            }
+        },
+        template: '\
+        <transition name="modal">\
+            <div class="modal-mask">\
+                <div class="modal-wrapper">\
+                    <div class="modal-container" :style="containerStyle">\
+                        <div class="commands no-print">\
+                            <h4 v-if="showNextArrows || showPreviousArrows" style="display: inline-block; margin-top: 15px;" v-html="numberOutOfNumber"></h4>&nbsp;\
+                            <a v-if="showPreviousArrows && !loading" class="icon-arrow-up" v-tooltip="{text:\'Previous \' + typeName, placement: \'bottom\'}" @click="$emit(\'showPrevious\')"></a>\
+                            <a v-if="showNextArrows && !loading" class="icon-arrow-down" v-tooltip="{text:\'Next \' + typeName, placement: \'bottom\'}" @click="$emit(\'showNext\')"></a>&nbsp;\
+                            <slot name="commands"></slot>\
+                            <a v-if="loading" class="icon-spinner icon-pulse"></a>\
+                            <a v-if="windowWidth > 767" :class="maximiseStyle" @click="isMaximised = !isMaximised"></a>\
+                            <a class="icon-window-close" @click="$emit(\'close\')"></a>\
+                        </div>\
+                        <div class="modal-header" @dblclick="isMaximised = !isMaximised">\
+                            <h4 style="margin: 6px 0 !important" v-html="title"></h4>\
+                        </div>\
+                        <div class="modal-body" :style="bodyStyle">\
+                            <slot></slot>\
+                        </div>\
+                    </div>\
+                </div>\
+            </div>\
+        </transition>\
+        ',
+        props: {
+                title: {
+                type: String,
+                default: ''
+            },
+            width: {
+                type: String,
+                default: '90vw'
+            },
+            height: {
+                type: String,
+                default: '80vh'
+            },
+            minHeight: {
+                type: String
+            },
+            moveUp: {
+                type: String,
+                default: '0px'
+            },
+            maximised: {
+                type: Boolean,
+                default: false
+            },
+            iframe: {
+                type: Boolean,
+                default: false
+            },
+            overflow: {
+                type: Boolean,
+                default: false
+            },
+            showPreviousArrows: {
+                type: Boolean,
+                default: false
+            },
+            showNextArrows: {
+                type: Boolean,
+                default: false
+            },
+            loading:{
+                type: Boolean,
+                default: false
+            },
+            numberOutOfNumber: {
+                type: String,
+                default: ''
+            },
+            typeName: {
+                type: String,
+                default: ''
+            }
+        },
+        computed: {
+            containerStyle: function () {
+                return {
+                width: this.isMaximised || this.windowWidth < 768 ? '100vw' : this.width,
+                height: this.isMaximised || this.windowWidth < 768 ? '100vh' : this.height,
+                minHeight: this.minHeight,
+                position: this.moveUp && !(this.isMaximised || this.windowWidth < 768) ? 'relative' : 'initial',
+                top: this.moveUp && !(this.isMaximised || this.windowWidth < 768) ? this.moveUp : '0px'
+            }
+            },
+            bodyStyle: function () {
+                return this.iframe ? {
+                    padding: '0',
+                    overflow: 'hidden',
+                    height: '100%',
+                    'max-height': 'calc(100vh - 50px)'
+                } : {
+                    'max-height': this.isMaximised || this.windowWidth < 768 ? 'calc(100vh - 50px)' : 'calc(100vh - 80px)',
+                    overflow: this.overflow ? 'visible' : 'auto'
+                }
+            },
+            maximiseStyle: function () {
+                return {
+                    'icon-window-maximise': !this.isMaximised,
+                    'icon-window-restore': this.isMaximised
+                };
+            }
+        },
+        methods: {
+            onResize: function () {
+                this.windowWidth = window.innerWidth;
+            }
+        },
+        created: function () {
+            this.isMaximised = this.maximised;
+            $('body').css('overflow', 'hidden');
+        },
+        mounted: function () {
+            this.styleElement = document.createElement('style');
+
+            this.styleElement.type = 'text/css';
+            this.styleElement.media = 'print';
+            this.styleElement.innerHTML = '\
+                body { visibility: hidden; overflow: hidden; }\
+                .modal-container, .modal-body { visibility: visible; overflow: visible !important; }\
+                ';
+
+            document.head.appendChild(this.styleElement);
+
+            window.addEventListener('resize', this.onResize);
+        },
+        destroyed: function () {
+            $('body').css('overflow', 'auto');
+            document.head.removeChild(this.styleElement);
+
+            window.removeEventListener('resize', this.onResize);
+        }
+    });
+</script>

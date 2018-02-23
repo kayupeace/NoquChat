@@ -1,4 +1,5 @@
 var express = require("express");
+var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var path = require('path');
@@ -7,6 +8,9 @@ var passport = require('passport');
 var Strategy = require('passport-facebook').Strategy;
 var cookieParser = require('cookie-parser');
 var config = require('./lib/config/config.js').get(process.env.NODE_ENV);
+var expressValidator = require('express-validator');
+var engines = require('consolidate');
+var ejs_local = require('ejs-locals');
 
 //var databaseEnvironment = process.env.MONGODB_URI;
 //var db = mongoose.connect(process.env.MONGODB_URI);
@@ -22,13 +26,13 @@ var db = mongoose.connect(config.database, {
     /* other options */
 });
 
-var app = express();
 
 console.log("Current Environment is : " + process.env.NODE_ENV);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'public/views'));
 app.set('controllers', path.join(__dirname, 'lib/controllers'));
+app.engine('html', ejs_local);
 app.set('view engine', 'pug');
 
 // serve static file   eg: /assets/css/example
@@ -55,7 +59,8 @@ passport.deserializeUser(function(obj, cb) {
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.listen((process.env.PORT || 5000));
+var server = app.listen((process.env.PORT || 5000));
+app.use(expressValidator()); // Add this after the bodyParser middlewares! for validation
 
 app.use(cookieParser());
 app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
@@ -94,8 +99,8 @@ app.use(function(req, res, next){
 // Serve static files on /public
 app.use('/assets', express.static('./public/assets'));
 
-var router = require('./lib/router');
-router(app);
+var chatServer = require('./lib/services/SocketChat/ChatServer.js');
+chatServer.chatServer(server);
 
 //      expires: new Date(Date.now() + 60 * 10000),
 //      maxAge: 60*10000
@@ -131,4 +136,36 @@ app.use(function(req, res, next) {
 **/
 
 // Router
+var router = require('./lib/router');
+router(app);
+
 require('./app/router')(app);
+
+
+/** 404 **/
+app.use(function(req, res, next){
+    res.status(404);
+
+    // respond with html page
+    if (req.accepts('html')) {
+        res.render('error-pages/404', { url: req.url });
+        return;
+    }
+
+    // respond with json
+    if (req.accepts('json')) {
+        res.send({ error: 'Not found' });
+        return;
+    }
+
+    // default to plain-text. send()
+    res.type('txt').send('Not found');
+});
+
+
+/***  for mocha to stop server running  ***/
+function stop() {
+    server.close();
+}
+module.exports = server;
+module.exports.stop = stop;

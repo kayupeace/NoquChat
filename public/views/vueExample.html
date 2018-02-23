@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>todo-app</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css">
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+<div id="example">
+    <span v-if="seen">Now you see me</span>
+    <span v-else>
+        Now You see me 2
+    </span>
+</div>
+
+<div id="app-7">
+    <ol>
+        <todo-item
+                v-for="item in groceryList"
+                v-bind:todo="item"
+                >
+        </todo-item>
+    </ol>
+</div>
+
+<div id="app-1">
+    <h1 class="ui dividing centered header">Vue.js Todo App</h1>
+    <div class='ui three column centered grid'>
+        <div class='column'>
+            <div>
+                <todo-list v-bind:todos="todos"></todo-list>
+                <todo v-on:delete-todo="deleteTodo" v-on:complete-todo="completeTodo" v-for="todo in todos" :todo.sync="todo"></todo>
+            </div>
+            <create-todo v-on:create-todo="createTodo"></create-todo>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<script>
+
+    var mydata = {
+        todos: [{
+            title: 'Learn JavaScript',
+            project: 'Project A',
+            done: false,
+        }, {
+            title: 'Learn Vue',
+            project: 'Project B',
+            done: true,
+        }, {
+            title: 'Build something awesome',
+            project: 'Project C',
+            done: false,
+        }, {
+            title: 'Todo D',
+            project: 'Project D',
+            done: false,
+        }]
+    };
+
+
+    Vue.component('my-todo-list', {
+        data: function() {
+            return {
+                todos: mydata.todos,
+            };
+        },
+        template: `
+        <div>
+            <div v-for="todo in todos">
+                <p>Completed Tasks: {{todos.filter(todo =&gt; {return todo.done === true}).length}}</p>
+                <p>Pending Tasks: {{todos.filter(todo =&gt; {return todo.done === false}).length}}</p>
+            </div>
+            <div v-for="todo in todos">
+                <div class="ui centered card">
+                <div class="content">
+                    <div class="header">
+                      {{ todo.title }}
+                    </div>
+                    <div class="meta">
+                      {{ todo.project }}
+                    </div>
+                    <div class="extra content">
+                      <span>
+                      <i></i>
+                    </span>
+                    </div>
+                    </div>
+                    <div class="content">
+                    <div class="ui form">
+                    <div class="field">
+                      Title
+                      </div>
+                    <div class="field">
+                      Project
+                      </div>
+                    <div class="ui two button attached buttons">
+
+                        Close X
+
+                    </div>
+                    </div>
+                    </div>
+                    <div class="ui bottom attached green basic button">
+                    Completed
+                    </div>
+                    <div class="ui bottom attached red basic button">
+                    Pending
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        `
+    });
+
+
+    Vue.component('Todo-p', {
+        data: function() {
+            return {
+                todos: mydata.todos,
+                message: 'You loaded this page on ' + new Date().toLocaleString(),
+                seen: false
+            };
+        },
+        methods: {
+            changeValue: function (todo) {
+                //console.log(this.todos);
+                todo.title = todo.title.split('').reverse().join('')
+            }
+        },
+        template: `
+        <div>
+            <div v-bind:title="message">
+                    some text here  {{message}}
+            </div>
+            <input style="width: 100%;" v-model="message">
+            <ol>
+                <li v-if="seen">
+                    Now you see me 1
+                </li>
+                <li v-else>
+                    Now You see me 2
+                </li>
+            </ol>
+            <ol>
+                <li v-for="todo in todos">
+                    {{ todo.title }}
+                    <button v-on:click="changeValue(todo)">Change Message</button>
+                </li>
+            </ol>
+
+        </div>
+
+        `
+    });
+
+
+    var app3 = new Vue({
+        el: '#example',
+        data: {
+            seen: true
+        }
+    });
+
+
+
+    Vue.component('todo-item', {
+        props: ['todo'],
+        template: '<li>{{ todo.text }}</li>'
+    });
+
+    Vue.component('aa', {
+        data:{
+            text: "aaaaaa"
+        }
+    });
+
+    var app7 = new Vue({
+        el: '#app-7',
+        data: {
+            groceryList: [
+                { id: 0, text: 'Vegetables' },
+                { id: 1, text: 'Cheese' },
+                { id: 2, text: 'Whatever else humans are supposed to eat' }
+            ],
+        }
+    });
+
+
+    Vue.component("todo", {
+        props: ['todo'],
+        data() {
+            return {
+                isEditing: false,
+            };
+        },
+        methods: {
+            completeTodo(todo) {
+                this.$parent.completeTodo(todo);
+            },
+            deleteTodo(todo) {
+                this.$parent.deleteTodo(todo);
+            },
+            showForm() {
+                this.isEditing = true;
+            },
+            hideForm() {
+                this.isEditing = false;
+            },
+        },
+        template: `
+<div>
+          <div class='ui centered card'>
+    <div class="content" v-show="!isEditing">
+      <div class='header'>
+          {{ todo.title }}
+      </div>
+      <div class='meta'>
+          {{ todo.project }}
+      </div>
+      <div class='extra content'>
+          <span class='right floated edit icon' v-on:click="showForm">
+          <i class='edit icon'></i>
+        </span>
+        <span class='right floated trash icon' v-on:click="deleteTodo(todo)">
+          <i class='trash icon'></i>
+        </span>
+      </div>
+    </div>
+    <div class="content" v-show="isEditing">
+      <div class='ui form'>
+        <div class='field'>
+          <label>Title</label>
+          <input type='text' v-model="todo.title" >
+        </div>
+        <div class='field'>
+          <label>Project</label>
+          <input type='text' v-model="todo.project" >
+        </div>
+        <div class='ui two button attached buttons'>
+          <button class='ui basic blue button' v-on:click="hideForm">
+            Close X
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class='ui bottom attached green basic button' v-show="!isEditing &&todo.done" disabled>
+        Completed
+    </div>
+    <div class='ui bottom attached red basic button' v-on:click="completeTodo(todo)" v-show="!isEditing && !todo.done">
+        Pending
+    </div>
+  </div>
+</div>
+        `
+    });
+
+    var app1 = new Vue({
+        el: '#app-1',
+        data() {
+            return {
+                todos: [{
+                    title: 'Todo A',
+                    project: 'Project A',
+                    done: false,
+                }, {
+                    title: 'Todo B',
+                    project: 'Project B',
+                    done: true,
+                }, {
+                    title: 'Todo C',
+                    project: 'Project C',
+                    done: false,
+                }, {
+                    title: 'Todo D',
+                    project: 'Project D',
+                    done: false,
+                }],
+            };
+        },
+        methods: {
+            createTodo(newTodo) {
+                this.todos.push(newTodo);
+                swal('Success!', 'To-Do created!', 'success');
+            },
+            deleteTodo(todo) {
+                swal({
+                        title: 'Are you sure?',
+                        text: 'This To-Do will be permanently deleted!',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#DD6B55',
+                        confirmButtonText: 'Yes, delete it!',
+                        closeOnConfirm: false,
+                    },
+                    () => {
+                        const todoIndex = this.todos.indexOf(todo);
+                        this.todos.splice(todoIndex, 1);
+                        swal('Deleted!', 'Your To-Do has been deleted.', 'success');
+                    });
+            },
+            completeTodo(todo) {
+                const todoIndex = this.todos.indexOf(todo);
+                this.todos[todoIndex].done = true;
+                swal('Success!', 'To-Do completed!', 'success');
+            },
+
+        },
+
+    });
+
+</script>

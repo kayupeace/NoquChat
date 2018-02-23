@@ -1,0 +1,63 @@
+extends ../share/layout
+block extraHeader
+    style(type="text/css").
+        td, th {
+            border-style: solid;
+        }
+
+block content
+
+    div.container
+        div
+            h1#title
+                |  #{title}
+                h4 #{err}
+            .row
+                .col-md-12.col-md-offset-1
+                    .panel.panel-default.panel-table
+                        .panel-body
+                            table.table.table-bordered.table-hover.table-sortable
+                                thead
+                                    tr
+                                        th(width='40%;')
+                                            div
+                                                a.btn.btn-info(style='', href="/user/room/newroom")
+                                                    em.fa.fa-pencil Create Room
+                                        th(width='40%', style='text-align: center;')
+                                            div
+                                                a.btn.btn-info(style='', href="/user/config/newconfig")
+                                                    em.fa.fa-pencil Create Config
+
+                    table.table.table-bordered.table-hover.table-sortable
+                        thead
+                            tr
+                                th
+                                    | #
+                                th
+                                    h2 My Room List
+                        tbody
+                            - var counter = 0;
+                                each asset in rooms
+                                    tr
+                                        - counter ++
+                                        th #{ counter }
+                                        td
+                                            div.row
+                                                div.col
+                                                    | Config Id: #{ asset._id } &nbsp&nbsp&nbsp
+                                                div.col
+                                                    | room id: #{asset.room_uuid}
+                                            div.row
+                                                div.col
+                                                    | room owner: #{asset.username }
+                                                div.col
+                                                    | Title: #{ asset.title }
+                                            - var time = asset.create_at.toISOString().split('T')[0];
+                                            div.row
+                                                div.col
+                                                    | Config Owner: #{ asset.owner } &nbsp&nbsp&nbsp
+                                                div.col
+                                                    | #{ time }
+                                                div.col
+                                                    Config Description: #{ asset.description }
+                                            br

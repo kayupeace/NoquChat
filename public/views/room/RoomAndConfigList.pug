@@ -1,0 +1,81 @@
+extends ../share/layout
+block extraHeader
+    style(type="text/css").
+        td, th {
+            border-style: solid;
+        }
+        li.nav-item {
+            padding-right: 10px;
+        }
+
+block content
+    div.container
+        div
+            .container
+                h1(style='text-align: center;')
+                    |  #{title}
+                    h4 #{err}
+        ul.nav.nav-tabs(role='tablist')
+            li.nav-item
+                a.nav-link.active(data-toggle='tab', href='#Room', role='tab') My Room List
+            |
+            li.nav-item
+                a.nav-link(data-toggle='tab', href='#Config', role='tab') My Config List
+            |
+            li.nav-item
+                a.btn.btn-info(style='', href="/user/room/newroom")
+                    em.fa.fa-pencil Create Room
+            |
+            li.nav-item
+                a.btn.btn-info(style='', href="/user/config/newconfig")
+                    em.fa.fa-pencil Create Config
+        // Tab panes
+        .tab-content
+            #Room.tab-pane.active(role='tabpanel')
+                table.table
+                    tbody
+                    div
+                        tr
+                            h3 My Room List
+                    - var counter = 0;
+                    each asset in rooms
+                        tr
+                            - counter ++
+                            div #{ counter }
+                            div Config Id: #{ asset._id } &nbsp&nbsp&nbsp
+                            div room id: #{asset.room_uuid}
+                            div Title: #{ asset.title }
+                            - var time = asset.create_at.toISOString().split('T')[0];
+                            div Owner: #{ asset.room_owner.username } &nbsp&nbsp&nbsp
+                            div #{ time }
+                            div Config Description: #{ asset.description }
+                            div
+                                a.btn(href="/user/room/" + asset._id + "/edit") edit config
+                            div
+                                form(name="newCofig",method="post",action="/user/room/" + asset._id + "/delete")
+                                    button.btn(type="submit") delete
+                            br
+            |
+            #Config.tab-pane(role='tabpanel')
+                table.table
+                    tbody
+                    div
+                        tr
+                            h3 My Config List
+                    - var counter = 0;
+                    each asset in configs
+                        tr
+                            - counter ++
+                            div #{ counter }
+                            div Config Id: #{ asset._id } &nbsp&nbsp&nbsp
+                            div Title: #{ asset.title }
+                            - var time = asset.create_at.toISOString().split('T')[0];
+                            div Config Owner: #{ asset.owner } &nbsp&nbsp&nbsp
+                            div #{ time }
+                            div Config Description: #{ asset.description }
+                            div
+                                a.btn(href="/user/config/" + asset._id + "/edit") edit room
+                            div
+                                form(name="newCofig",method="post",action="/user/config/" + asset._id + "/delete")
+                                    button.btn(type="submit") delete
+                            br

@@ -1,0 +1,73 @@
+extends ../share/layout
+block extraHeader
+    <script src="/socket.io/socket.io.js"></script>
+    style(type='text/css').
+        h3#title{
+            color: red;
+        }
+        section {
+            padding: 100px 0;
+            text-align: center;
+        }
+        input#room_id{
+            border: solid 1px lightblue;
+        }
+        .input-group {
+            margin: 20px auto;
+            width: 100%;
+        }
+
+        input.btn.btn-lg,
+        input.btn.btn-lg:focus {
+            width: 100%;
+            height: 60px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        button.btn {
+            width: 40%;
+            height: 60px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        .container {
+            text-align: center;
+        }
+        .promise {
+            color: #999;
+        }
+        input#room_id {
+            font-size:1.25rem;
+            width: 70%;
+            margin: 5px auto;
+        }
+
+block content
+    h3#title &nbsp#{error}
+    .container
+        h3.search_title
+            | Enter Your Room Id (room id "
+            span(style="color:red;") Hy4Rqryzf
+            | " is open for testing):
+        |     &#x9;
+        .well
+            form(name="SearchRoom", method="post", action='/user/chat/chatroom' )
+                .input-group
+                    input#room_id(name='roomId', type='text', placeholder='Eg: Hy4Rqryzf', maxlength="9")
+                    |
+                    button.btn-info.btn-lg(type='submit') Submit
+        |
+        small.promise
+            em If your want create your room
+                |
+            br
+            em
+                | 1. login and create new room with private set
+            br
+            em
+                | 2. copy room uuid
+            br
+            em
+                | Go to link &nbsp
+                a(href="/user/room") My Room & Config
