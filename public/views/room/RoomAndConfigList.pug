@@ -4,8 +4,8 @@ block extraHeader
         td, th {
             border-style: solid;
         }
-        li.nav-item {
-            padding-right: 10px;
+        li.nav-item.room_header{
+            padding-left: 10px;
         }
 
 block content
@@ -16,17 +16,17 @@ block content
                     |  #{title}
                     h4 #{err}
         ul.nav.nav-tabs(role='tablist')
-            li.nav-item
+            li.nav-item.room_header
                 a.nav-link.active(data-toggle='tab', href='#Room', role='tab') My Room List
             |
-            li.nav-item
+            li.nav-item.room_header
                 a.nav-link(data-toggle='tab', href='#Config', role='tab') My Config List
             |
-            li.nav-item
+            li.nav-item.room_header
                 a.btn.btn-info(style='', href="/user/room/newroom")
                     em.fa.fa-pencil Create Room
             |
-            li.nav-item
+            li.nav-item.room_header
                 a.btn.btn-info(style='', href="/user/config/newconfig")
                     em.fa.fa-pencil Create Config
         // Tab panes
