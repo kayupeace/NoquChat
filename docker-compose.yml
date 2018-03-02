@@ -1,0 +1,22 @@
+# create a docker-compose.yml file
+version: "2"
+services:
+  app:
+    container_name: noqubot
+    build: .
+    environment:
+         - MONGO_URI=mongodb://localhost/noqubot
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongodb
+    environment:
+      - NODE_ENV=staging
+
+  mongodb:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
