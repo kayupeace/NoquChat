@@ -1,0 +1,151 @@
+
+<link rel="stylesheet" href="/assets/css/chat.css">
+
+<style>
+    .fixed-top{
+        position: relative;
+    }
+    li.login.page{
+        height: 90%;
+    }
+    .panel-primary>.panel-heading{
+        color: #fff;
+        background-color: #428bca;
+        border-color: #428bca;
+    }
+
+    div#root {
+        margin-top: 1rem;
+    }
+
+    ol, ul {
+        padding-left: 30px;
+    }
+
+    li{
+        display: list-item;
+    }
+    .board-row:after {
+        clear: both;
+        content: "";
+        display: table;
+    }
+
+    .status {
+        margin-bottom: 10px;
+    }
+
+    .square {
+        background: #fff;
+        border: 1px solid #999;
+        float: left;
+        font-size: 24px;
+        font-weight: bold;
+        line-height: 34px;
+        height: 34px;
+        margin-right: -1px;
+        margin-top: -1px;
+        padding: 0;
+        text-align: center;
+        width: 34px;
+    }
+
+    .square:focus {
+        outline: none;
+    }
+
+    .kbd-navigation .square:focus {
+        background: #ddd;
+    }
+
+    .game {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .game-info {
+        margin-left: 20px;
+    }
+
+</style>
+<% layout('/html/share/layout.html') -%>
+
+<ul class="pages">
+
+    <li class="chat page">
+        <div class="container">
+            <div class="row">
+                <div class="message-wrap col-lg-8">
+                    <a href="/user/chat/quit" class="btn btn-info btn-lg">
+                        <span>Quit Room</span>
+                    </a>
+                    <a href="#" id="HideChat" class="btn btn-info btn-lg">
+                            <i class="fa fa-chevron-down"> </i>
+                        </a>
+                </div>
+            </div>
+        </div>
+        <div class="container" id="ChatWindow">
+            <div class="row">
+
+                <div class="message-wrap col-lg-8">
+                    <div class="msg-wrap messages">
+
+                        <div class="media msg">
+                            <a class="pull-left" href="#">
+                                <img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 32px; height: 32px;" src="/assets/img/profile_1.jpg">
+                            </a>
+                            <div class="media-body">
+                                <small class="pull-right time"><i class="fa fa-clock-o"></i> 12:10am</small>
+                                <h6 class="media-heading">Developer</h6>
+
+                                <small class="col-lg-10">
+                                    This project is under develop, <br />
+                                    we will support customer select nickName color and profile image feature soon
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="send-wrap ">
+                        <textarea id="inputMessage" class="form-control send-message inputMessage" rows="3" placeholder="Write a reply..."></textarea>
+                    </div>
+                    <div class="btn-panel">
+                        <!--
+                        <a href="#" class=" col-lg-3 btn send-message-btn" role="button"><i class="fa fa-cloud-upload"></i> Add Image</a>
+                        -->
+                        <a href="#" id="message" class=" col-lg-4 text-right btn send-message-btn pull-right" role="button"><i class="fa fa-plus"></i> Send Message</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="root"></div>
+
+    </li>
+
+    <li class="login page">
+        <div class="form">
+            <h3 class="title">What's your nickname?</h3>
+            <input class="usernameInput" type="text" maxlength="14" />
+            <button class="btn btn-info btn-lg" id="nickName">Submit</button>
+            <h3 class="title" id="hint"></h3>
+        </div>
+    </li>
+</ul>
+
+<!--
+    <select id="roomid" style="position: fixed;top: 10px; height:2rem; width: 80px; display: -webkit-box;">
+        <option value="room1">Room 1</option>
+        <option value="room2">Room 2</option>
+        <option value="room3">Room 3</option>
+    </select>
+-->
+<script src="/socket.io/socket.io.js"></script>
+<script src="/assets/js/chat.js"></script>
+
+<!-- react component -->
+
+<script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+<script src="/assets/React/tictactoe.js" type="text/babel"></script>
