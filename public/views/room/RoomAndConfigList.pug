@@ -32,50 +32,82 @@ block content
         // Tab panes
         .tab-content
             #Room.tab-pane.active(role='tabpanel')
-                table.table
+                table.table.table-bordered.table-hover.table-sortable
+                    thead
+                        tr
+                            th
+                                | #
+                            th
+                                h2 My Room List
                     tbody
-                    div
-                        tr
-                            h3 My Room List
-                    - var counter = 0;
-                    each asset in rooms
-                        tr
-                            - counter ++
-                            div #{ counter }
-                            div Config Id: #{ asset._id } &nbsp&nbsp&nbsp
-                            div room id: #{asset.room_uuid}
-                            div Title: #{ asset.title }
-                            - var time = asset.create_at.toISOString().split('T')[0];
-                            div Owner: #{ asset.room_owner.username } &nbsp&nbsp&nbsp
-                            div #{ time }
-                            div Config Description: #{ asset.description }
-                            div
-                                a.btn(href="/user/room/" + asset._id + "/edit") edit config
-                            div
-                                form(name="newCofig",method="post",action="/user/room/" + asset._id + "/delete")
-                                    button.btn(type="submit") delete
-                            br
+                        - var counter = 0;
+                            each asset in rooms
+                                tr
+                                    - counter ++
+                                    th #{ counter }
+                                    td
+                                        div.row
+                                            div.col
+                                                | Config Id: #{ asset._id } &nbsp&nbsp&nbsp
+                                        div.row
+                                            div.col
+                                                | Room Id: #{ asset.room_uuid }
+                                        div.row
+                                            div.col
+                                                | Title: #{ asset.title }
+                                        - var time = asset.create_at.toISOString().split('T')[0];
+                                        div.row
+                                            div.col
+                                                | Owner: #{ asset.room_owner.username } &nbsp&nbsp&nbsp
+                                        div.row
+                                            div.col
+                                                | Room Create Date: #{ time }
+                                        div.row
+                                            div.col
+                                                | Room Description: #{ asset.description }
+                                    td
+                                        div
+                                            a.btn.btn-info(href="/user/room/" + asset._id + "/edit") edit config
+                                        br
+                                        div
+                                            form(name="newCofig",method="post",action="/user/room/" + asset._id + "/delete")
+                                                button.btn.btn-info(type="submit") delete
             |
             #Config.tab-pane(role='tabpanel')
-                table.table
+                table.table.table-bordered.table-hover.table-sortable
+                    thead
+                        tr
+                            th
+                                | #
+                            th
+                                h2 My Config List
                     tbody
-                    div
-                        tr
-                            h3 My Config List
-                    - var counter = 0;
-                    each asset in configs
-                        tr
-                            - counter ++
-                            div #{ counter }
-                            div Config Id: #{ asset._id } &nbsp&nbsp&nbsp
-                            div Title: #{ asset.title }
-                            - var time = asset.create_at.toISOString().split('T')[0];
-                            div Config Owner: #{ asset.owner } &nbsp&nbsp&nbsp
-                            div #{ time }
-                            div Config Description: #{ asset.description }
-                            div
-                                a.btn(href="/user/config/" + asset._id + "/edit") edit room
-                            div
-                                form(name="newCofig",method="post",action="/user/config/" + asset._id + "/delete")
-                                    button.btn(type="submit") delete
-                            br
+                        - var counter = 0;
+                            each asset in configs
+                                tr
+                                    - counter ++
+                                    th #{ counter }
+                                    td
+                                        div.row
+                                            div.col
+                                                | Config Id: #{ asset._id } &nbsp&nbsp&nbsp
+                                        div.row
+                                            div.col
+                                                | Title: #{ asset.title }
+                                        - var time = asset.create_at.toISOString().split('T')[0];
+                                        div.row
+                                            div.col
+                                                | Config Owner: #{ asset.owner } &nbsp&nbsp&nbsp
+                                        div.row
+                                            div.col
+                                                | Config Create Date: #{ time }
+                                        div.row
+                                            div.col
+                                                | Config Description: #{ asset.description }
+                                    td
+                                        div
+                                            a.btn.btn-info(href="/user/config/" + asset._id + "/edit") edit room
+                                        br
+                                        div
+                                            form(name="newCofig",method="post",action="/user/config/" + asset._id + "/delete")
+                                                button.btn.btn-info(type="submit") delete
