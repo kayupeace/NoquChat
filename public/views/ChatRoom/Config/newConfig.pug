@@ -1,4 +1,4 @@
-extends ../share/layout
+extends ../../share/layout
 block content
     div.container
         div#title
@@ -20,13 +20,11 @@ block content
                         tbody
                             tr#addr0.hidden(data-id='0')
                                 td(data-name='name')
-                                    input.form-control(type='text', name='title', placeholder='New Name',value=asset.title)
+                                    input.form-control(type='text', name='title', placeholder='New Name')
                                 | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
                                 td(data-name='desc')
-                                    textarea.form-control(type='text', name='description', placeholder='New Description')
-                                        | #{asset.description}
+                                    textarea.form-control(name='description', placeholder='New Description')
                     div.text-center
-                        button.btn.btn-success.btn-lg(type="submit") submit
+                        button.btn.btn-success.btn-lg(type="submit") &nbsp&nbspSave&nbsp&nbsp
                         a(href="/user/room")
                             button.btn.btn-success.btn-lg#cancelButton(type="button") Cancel
-
