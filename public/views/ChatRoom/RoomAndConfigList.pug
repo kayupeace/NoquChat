@@ -67,11 +67,11 @@ block content
                                                 | Room Description: #{ asset.description }
                                     td
                                         div
-                                            a.btn.btn-info(href="/user/room/" + asset._id + "/edit") edit config
+                                            a.btn.btn-info(href="/user/room/" + asset._id + "/edit") &nbsp&nbspEdit&nbsp&nbsp
                                         br
                                         div
                                             form(name="newCofig",method="post",action="/user/room/" + asset._id + "/delete")
-                                                button.btn.btn-info(type="submit") delete
+                                                button.btn.btn-info(type="submit") Delete
             |
             #Config.tab-pane(role='tabpanel')
                 table.table.table-bordered.table-hover.table-sortable
@@ -106,8 +106,8 @@ block content
                                                 | Config Description: #{ asset.description }
                                     td
                                         div
-                                            a.btn.btn-info(href="/user/config/" + asset._id + "/edit") edit room
+                                            a.btn.btn-info(href="/user/config/" + asset._id + "/edit") &nbspEdit&nbsp
                                         br
                                         div
                                             form(name="newCofig",method="post",action="/user/config/" + asset._id + "/delete")
-                                                button.btn.btn-info(type="submit") delete
+                                                button.btn.btn-info(type="submit") Delete

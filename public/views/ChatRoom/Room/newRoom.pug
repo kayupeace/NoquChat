@@ -1,22 +1,25 @@
-extends ../share/layout
+extends ../../share/layout
 block content
     div.container
         div#title
             h3 #{title}
                 h4 #{error}
-
     .container
         .row.clearfix
             .col-md-12.table-responsive
-                form(name="newConfig", method="post", action=action )
+                form(name="newRoom",method="post",action=action )
                     table#tab_logic.table.table-bordered.table-hover.table-sortable
                         thead.thead-light
                             tr
                                 th.text-center
-                                    | Config Name
+                                    | Room Name
                                 | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
                                 th.text-center
                                     | Description
+                                |     &#x9;&#x9;&#x9;&#x9;&#x9;
+                                th.text-center
+                                    | Select Type
+                                |         &#x9;&#x9;&#x9;&#x9;
                         tbody
                             tr#addr0.hidden(data-id='0')
                                 td(data-name='name')
@@ -24,7 +27,14 @@ block content
                                 | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
                                 td(data-name='desc')
                                     textarea.form-control(name='description', placeholder='New Description')
+                                |     &#x9;&#x9;&#x9;&#x9;&#x9;
+                                td(data-name='sel')
+                                    - var myType = ["Public", "Private"];
+                                        select.custom-select(style="display:block;" name="room_type")
+                                            each val, index in myType
+                                                option(value=val) #{val} Type
                     div.text-center
-                        button.btn.btn-success.btn-lg(type="submit") submit
+                        button.btn.btn-success.btn-lg(type="submit") &nbsp&nbspSave&nbsp&nbsp
                         a(href="/user/room")
                             button.btn.btn-success.btn-lg#cancelButton(type="button") Cancel
+                            // https://bootsnipp.com/snippets/featured/dynamic-sortable-tables

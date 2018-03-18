@@ -49,13 +49,13 @@ block content
                                                     | room id: #{asset.room_uuid}
                                             div.row
                                                 div.col
-                                                    | room owner: #{asset.username }
+                                                    | room owner: #{asset.room_owner.username }
                                                 div.col
-                                                    | Title: #{ asset.title }
+                                                    | Room Title: #{ asset.title }
                                             - var time = asset.create_at.toISOString().split('T')[0];
                                             div.row
                                                 div.col
-                                                    | Config Owner: #{ asset.owner } &nbsp&nbsp&nbsp
+                                                    | Config Title: #{ asset.room_config.title } &nbsp&nbsp&nbsp
                                                 div.col
                                                     | #{ time }
                                                 div.col
