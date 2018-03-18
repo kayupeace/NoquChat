@@ -34,7 +34,7 @@ block content
                                 th
                                     | #
                                 th
-                                    h2 My Room List
+                                    h2 All Public Room List
                         tbody
                             - var counter = 0;
                                 each asset in rooms
@@ -55,7 +55,10 @@ block content
                                             - var time = asset.create_at.toISOString().split('T')[0];
                                             div.row
                                                 div.col
-                                                    | Config Title: #{ asset.room_config.title } &nbsp&nbsp&nbsp
+                                                    if asset.room_config
+                                                        | Config Title: #{ asset.room_config.title } &nbsp&nbsp&nbsp
+                                                    else
+                                                        | Config Title: None
                                                 div.col
                                                     | #{ time }
                                                 div.col
