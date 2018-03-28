@@ -214,3 +214,47 @@ i#eyebutton {
 ::-ms-input-placeholder { /* Microsoft Edge */
   opacity: 0.3;
 }
+
+/**
+  animation flash action
+ */
+@-webkit-keyframes flash {
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes flash {
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+.flash {
+  -webkit-animation-name: flash;
+  animation-name: flash;
+}
+
+.typed-cursor {
+  display: inline-block;
+  margin: 0 10px;
+  color: #00a8ff;
+  -webkit-animation-name: flash; /** refer to keyframes flash action above **/
+  animation-name: flash;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+.typed{
+  display: inline-block;
+}

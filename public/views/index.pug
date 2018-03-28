@@ -1,5 +1,6 @@
 extends ./share/layout
 block extraHeader
+    script(src='/assets/js/animateType/typewriter.js')
 
     style(type='text/css').
         .card .card-title{
@@ -106,17 +107,18 @@ block content
                             | Get Room ID from your friend
             // /.col-lg-8
             .col-lg-4
-                h1 Our Goal : Better
-                    |
+                h1
+                    | New Update !!!
                 p
-                    |  What are you waiting for? join us right now, all services are free!!!
+                    | Try out our new features👇
                 p
-                    |  👇Try Out Our New Feature
-                a.btn.btn-primary.btn-lg(href="/user/chat") My chat room
+                    a.btn.btn-primary.btn-lg(href="/user/chat") My chat room
         .card.text-white.bg-secondary.my-4.text-center
             .card-body
-                p.text-white.m-0
-                    | Noqu Bot: a Real-Time online chat web application
+                p.text-white.m-0.typed
+                    | NoquBot: a Real-Time online bidirectional communication application
+                span.typed-cursor
+                    | |
         .row
             .col-md-4.mb-4
                 .card.h-100
@@ -158,3 +160,14 @@ block content
     footer.py-5.bg-dark
         .container
             p.m-0.text-center.text-white Copyright &copy; NoquBot 2017
+
+    // Type Animation scripts
+    script.
+        jQuery(function ($) {
+            "use strict";
+            // Typing Intro Init
+            $(".typed").typewriter({
+                speed: 100
+                //150
+            });
+        });
