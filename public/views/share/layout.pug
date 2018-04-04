@@ -10,6 +10,8 @@ html(lang='en')
         meta(name='author', content='kaibin yu')
         |
         title Noqu - Why wait when there's Opportunity
+        link(rel="icon" type="image/png" href="/assets/img/icon.png" sizes="32x32")
+
         // Bootstrap core CSS
         link(href='/assets/theme/vendor/bootstrap/css/bootstrap.min.css', rel='stylesheet')
         link(rel='stylesheet', href='/assets/css/noqubot.css')
@@ -27,7 +29,8 @@ html(lang='en')
             img#sticker(src='/assets/img/cat.gif')
         nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
             .container
-                a.navbar-brand(href='/') noQu
+                a.navbar-brand(href='/')
+                    img(src='/assets/img/logo.png', style="height:45px; width:120px;")
                 |
                 button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarResponsive', aria-controls='navbarResponsive', aria-expanded='false', aria-label='Toggle navigation')
                     span.navbar-toggler-icon
