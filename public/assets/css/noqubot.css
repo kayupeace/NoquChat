@@ -66,7 +66,7 @@
   text-align: center;
 }
 
-p#signUpMessage {
+p#signUpMessage, p#forgetPassMessage{
   font-size: 12px;
   text-align: -webkit-center;
 }
@@ -163,7 +163,7 @@ opacity:0.9;
 .omb_login .omb_loginForm .input-group.i {
   width: 2em;
 }
-.omb_login .omb_loginForm  .help-block {
+.omb_login .omb_loginForm  .help-block, span.help-block {
   color: red;
 }
 
