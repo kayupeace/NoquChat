@@ -60,6 +60,11 @@
   margin-top: 10%;
   text-align: center;
 }
+#room_title{
+  margin-top: 5%;
+  text-align: center;
+}
+
 #cancelButton{
   margin-left: 30px;
 }

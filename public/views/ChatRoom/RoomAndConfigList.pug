@@ -12,7 +12,7 @@ block content
     div.container
         div
             .container
-                h1(style='text-align: center;')
+                h1#room_title
                     |  #{title}
                     h4 #{err}
         ul.nav.nav-tabs(role='tablist')
@@ -62,6 +62,9 @@ block content
                                         div.row
                                             div.col
                                                 | Room Create Date: #{ time }
+                                        div.row
+                                            div.col
+                                                | Room Type: #{ asset.room_type }
                                         div.row
                                             div.col
                                                 | Room Description: #{ asset.description }
