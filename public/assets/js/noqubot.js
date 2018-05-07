@@ -1,14 +1,20 @@
 
 function show(){
     'use strict';
-    var p = document.getElementById('password');
-    p.setAttribute('type', 'text');
+    var p = document.getElementsByClassName('password');
+    let i;
+    for(i=0; i < p.length; i++) {
+        p[i].setAttribute('type', 'text');
+    }
     document.getElementById('eye').className = 'fa fa-eye-slash';
 }
 function hide() {
     'use strict';
-    var p = document.getElementById('password');
-    p.setAttribute('type', 'password');
+    var p = document.getElementsByClassName('password');
+    let i;
+    for(i=0; i < p.length; i++) {
+        p[i].setAttribute('type', 'password');
+    }
     document.getElementById('eye').className = 'fa fa-eye';
 }
 var isShow = 0;

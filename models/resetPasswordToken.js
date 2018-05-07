@@ -12,6 +12,7 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 let User = require(__base + 'models/user.js');
+const oneDay = 1000 * 60 * 60 * 24 * 1;
 
 /*  0. not reset password  1. reset password */
 let done = {
@@ -32,22 +33,22 @@ let restPasswordSchema = new Schema({
     },
     expired_at: {
         type: Date,
-        default: Date.now + 1,
+        default: Date.now() + oneDay * 10,
         min: new Date('1900-1-1')
         //max: new Date()
     },
     done:{
         type: Number,
-        enum: RoomType,
+        enum: done,
         required: true,
-        min: -1,
-        max: 2
+        min: 0,
+        max: 1
     },
     numberOfConfirm: {
         type: Number,
-        default: 0,
+        default: 1,
         required: true,
-        min: -1,
+        min: 0,
         max: 3
     },
     owner:{
@@ -56,6 +57,6 @@ let restPasswordSchema = new Schema({
     }
 });
 
-let RestPassword = mongoose.model('resetPassword', restPasswordSchema);
+let RestPasswordToken = mongoose.model('resetPassword', restPasswordSchema);
 
-module.exports = RestPassword;
+module.exports = RestPasswordToken;

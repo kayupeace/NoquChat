@@ -1,30 +1,14 @@
 extends ../share/layout
 block content
-    .container.row.col-12
-        h1 Home Page
-        p
-            a(href="/registration") Registration Template Page
-        p
-            a(href="/login") Login
-        p
-            a(href="/user/profile") Profile
-        p
-            a(href="/user/logout") Logout
-        p
-            a(href="/auth/facebook") Facebook Login
-
     .container
-        h1.
-            Upload File
-        form(enctype="multipart/form-data",method="post",action="/user/files/upload")
-            input(type="txt", name="mytxt")
-            input(type="file", name="file")
-            input(type="submit" value="Upload")
+        br
+        br
 
     .container
         h1.
             Send Emaill
-        form(method="post", action="/user/sendEmail")
+        form(method="post", action="/service/resetPassword/sendEmail")
+            input(type="txt", name="mytxt")
             input(type="submit" value="send")
 
     script.
