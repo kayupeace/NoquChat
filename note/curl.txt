@@ -1,0 +1,8 @@
+https://stackoverflow.com/questions/14978411/http-post-and-get-using-curl-in-linux
+
+    curl --data "param1=value1&param2=value2" http://localhost:5000/test
+
+    curl http://localhost:5000/user/allRooms -X GET -H "x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MjYwMTQ2NzcsInN1YiI6IjVhNjQ3Yzc1ZWU4ZWI2MjYwZTQzY2VmNyIsImV4cCI6MTUyNjAxODI3N30.N-4WIz7txfDywLzpBxIKvIaZi0yXAloPXbgB7UYB7J0" -H "Accept: application/json" -H "Content-Type: application/json"
+
+    curl -i -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:5000/test
+
