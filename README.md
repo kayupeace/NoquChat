@@ -1,6 +1,6 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This Project is currently onlive, host on Heroku, here is the link: https://my-noqubot.herokuapp.com/
 
 ### What is this repository for? ###
 
